@@ -1,0 +1,19 @@
+{
+	"build_systems":
+	[
+		{
+		}
+	],
+	"folders":
+	[
+		{
+			"follow_symlinks": true,
+			"path": "."
+		},
+		
+	],
+	"settings":
+	{
+		"tab_size": 2
+	}
+}
