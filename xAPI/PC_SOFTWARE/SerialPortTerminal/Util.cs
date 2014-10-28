@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 
 namespace SerialPortTerminal
 {
@@ -174,6 +175,99 @@ namespace SerialPortTerminal
 
         //*********************************************************
         //*********************************************************
+        // Helper function to create a LCD Service TUN packet passing string
+        public int create_LCD_TUN_packet(int packet_type, string payload, out string buff)
+        {
+            int total_sz = 0;
+            int x;
+            int y;
+            string msg;
+            List<string> values = payload.Split(',').ToList<string>();
+            x = Int32.Parse(values[0]);
+            y = Int32.Parse(values[1]);
+            msg = values[2];
+
+            Debug.WriteLine(LogMsgType.Outgoing, "packet x:" + x + "\n");
+            Debug.WriteLine(LogMsgType.Outgoing, "packet y:" + y + "\n");
+            Debug.WriteLine(LogMsgType.Outgoing, "packet msg:" + msg + "\n");
+
+            byte[] b_payload;
+            byte[] b_buff;
+
+            // do the normal call using bytes
+            total_sz = construct_lcd_payload(x, y, msg, msg.Length, out b_payload, 4+msg.Length);
+         
+            Debug.WriteLine(LogMsgType.Outgoing, "packet payload:" + b_payload.Length + "\n");
+            Debug.WriteLine(LogMsgType.Outgoing, "return size:" + total_sz + "\n");
+            //total_sz = create_TUN_packet(packet_type, b_payload, out b_buff);
+            total_sz = create_TUN_packet(packet_type, b_payload, out b_buff);
+            Debug.WriteLine(LogMsgType.Outgoing, "packet:" + b_buff.Length + "\n");
+            Debug.WriteLine(LogMsgType.Outgoing, "return size:" + total_sz + "\n");
+
+            // convert the bytes to a string
+            buff = GetString(b_buff);
+            Debug.WriteLine(LogMsgType.Outgoing, "correct chcksm:" + get_TUN_checksum(buff) + "\n");
+            //Debug.WriteLine(LogMsgType.Outgoing, "packet as string:" + buff + "\n");
+
+
+            return total_sz;
+        }
+        //*********************************************************
+        //*********************************************************
+        // Function to create a LCD Service TUN packet passing string, x, y
+        public int construct_lcd_payload(	int x, 
+										int y, 
+										string str, 
+										int str_sz,
+										out byte[] buff,
+										int buff_sz)
+        {
+	        // storage for total size
+	        int total_sz = 0;
+            byte[] string_payload = GetBytes(str);
+            byte[] conv_buff;
+            buff = new byte[buff_sz];
+	        // clean given buffer
+	        
+
+	        // tmp storage for conversions
+            conv_buff = new byte[(int)BUFF_sizes.SMALL_BUFF_SZ];
+	        //clean_packet(conv_buff, SMALL_BUFF_SZ);
+	
+	        // index into buff
+	        int buff_index = 0;
+	
+	        // first calculate the size and ensure the 
+	        // caller supplied a big enough buffer
+	        total_sz += (int)MISC_values.MISC_8BIT_HEX_SZ;
+	        total_sz += (int)MISC_values.MISC_8BIT_HEX_SZ;
+	        total_sz += str.Length;
+	
+	        // only continue if buff size is big enough
+	        if(total_sz <= buff_sz)
+	        {
+		        // convert the x and store it
+		        int_to_hex(x, (int)MISC_values.MISC_8BIT_HEX_SZ, out conv_buff);
+		        buff[buff_index++] = conv_buff[0];
+		        buff[buff_index++] = conv_buff[1];
+		
+		        // convert the y and store it
+		        int_to_hex(y, (int)MISC_values.MISC_8BIT_HEX_SZ, out conv_buff);
+		        buff[buff_index++] = conv_buff[0];
+		        buff[buff_index++] = conv_buff[1];
+		
+		        // store the rest of the string
+		        for(int i=0; i < str_sz; i++)
+			        buff[buff_index++] = string_payload[i];
+	        }
+	        else
+		        total_sz = 0;
+	
+	        return total_sz;
+        }
+
+        //*********************************************************
+        //*********************************************************
         // Helper function to create a TUN packet passing string
         public int create_TUN_packet(int packet_type, string payload, out string buff)
         {
@@ -193,6 +287,7 @@ namespace SerialPortTerminal
         //*********************************************************
         //*********************************************************
         // Helper function to create a TUN packet
+        //NOTE REMOVED START AND END BYTES FROM PACKET! ONLY FOR EXTERNAL!
         public int create_TUN_packet(int packet_type, byte[] payload, out byte[] buff)
         {
             int total_sz = 0;
@@ -216,7 +311,6 @@ namespace SerialPortTerminal
 	        total_sz += 2; // payload size
 	        total_sz += 2; // start and end bytes
             total_sz += payload.Length; // the size of the incoming payload
-
             // ensure the buffer is large enough
             if (total_sz < buff.Length)
             {

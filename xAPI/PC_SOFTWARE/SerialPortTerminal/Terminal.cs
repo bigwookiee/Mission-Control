@@ -525,6 +525,50 @@ namespace SerialPortTerminal
             txtSendData.SelectAll();
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //*******************************************************************
         //*******************************************************************
         // This routine creates a simple TUN packet to display
@@ -534,16 +578,24 @@ namespace SerialPortTerminal
 
             // storage for the packet
             string packet;
-            
-            // create the packet
-            m_util.create_TUN_packet((int)TUN_types.TUN_TYPE_LOCAL_SIMPLE_LCD_MSG, txtSendData.Text, out packet);
 
+            string raw_text = txtSendData.Text.Replace("\0", string.Empty);
+
+
+
+            // create the packet
+            int returnSz = m_util.create_LCD_TUN_packet((int)TUN_types.TUN_TYPE_LOCAL_LCD_MSG, raw_text, out packet);
+            Log(LogMsgType.Outgoing, "packet created\n");
+            if (returnSz == 0)
+            {
+                Log(LogMsgType.Outgoing, "packet 0 len\n");
+            }
             // must remove null bytes from string
             string result = packet.Replace("\0", string.Empty);
-
+            Log(LogMsgType.Outgoing, "packet null replaced\n");
             // Send the user's text straight out the port
             comport.Write(result);
-
+            Log(LogMsgType.Outgoing, "packet written\n");
             // display the packet
             Log(LogMsgType.Outgoing, result + "\n");
 

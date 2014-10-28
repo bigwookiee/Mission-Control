@@ -60,3 +60,19 @@ C:\Dropbox\ARDUINO\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.P
 C:\Dropbox\ARDUINO\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPort Terminal.exe.manifest
 C:\Dropbox\ARDUINO\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPort Terminal.application
 C:\Dropbox\ARDUINO\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.csproj.GenerateResource.Cache
+C:\Users\Taylor Trabun\Desktop\xAPI DVD\XAPI_CDROM\PC_SOFTWARE\SerialPortTerminal\bin\Debug\SerialPort Terminal.exe.config
+C:\Users\Taylor Trabun\Desktop\xAPI DVD\XAPI_CDROM\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPort Terminal.exe
+C:\Users\Taylor Trabun\Desktop\xAPI DVD\XAPI_CDROM\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPort Terminal.pdb
+C:\Users\Taylor Trabun\Desktop\xAPI DVD\XAPI_CDROM\PC_SOFTWARE\SerialPortTerminal\bin\Debug\SerialPort Terminal.exe.manifest
+C:\Users\Taylor Trabun\Desktop\xAPI DVD\XAPI_CDROM\PC_SOFTWARE\SerialPortTerminal\bin\Debug\SerialPort Terminal.application
+C:\Users\Taylor Trabun\Desktop\xAPI DVD\XAPI_CDROM\PC_SOFTWARE\SerialPortTerminal\bin\Debug\SerialPort Terminal.exe
+C:\Users\Taylor Trabun\Desktop\xAPI DVD\XAPI_CDROM\PC_SOFTWARE\SerialPortTerminal\bin\Debug\SerialPort Terminal.pdb
+C:\Users\Taylor Trabun\Desktop\xAPI DVD\XAPI_CDROM\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.frmAbout.resources
+C:\Users\Taylor Trabun\Desktop\xAPI DVD\XAPI_CDROM\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.hud.resources
+C:\Users\Taylor Trabun\Desktop\xAPI DVD\XAPI_CDROM\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.frmTerminal.resources
+C:\Users\Taylor Trabun\Desktop\xAPI DVD\XAPI_CDROM\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.Properties.Resources.resources
+C:\Users\Taylor Trabun\Desktop\xAPI DVD\XAPI_CDROM\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPort Terminal.exe.manifest
+C:\Users\Taylor Trabun\Desktop\xAPI DVD\XAPI_CDROM\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPort Terminal.application
+C:\Users\Taylor Trabun\Desktop\xAPI DVD\XAPI_CDROM\PC_SOFTWARE\SerialPortTerminal\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Taylor Trabun\Desktop\xAPI DVD\XAPI_CDROM\PC_SOFTWARE\SerialPortTerminal\obj\Debug\ResGen.read.1.tlog
+C:\Users\Taylor Trabun\Desktop\xAPI DVD\XAPI_CDROM\PC_SOFTWARE\SerialPortTerminal\obj\Debug\ResGen.write.1.tlog

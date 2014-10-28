@@ -80,6 +80,12 @@ void LCD_service::process_local_TUN_packet()
 	// see if there is a packet waiting
 	if(m_xapi.CONNECT_local_TUN_get_type() == TUN_TYPE_LOCAL_LCD_MSG)
 	{	
+		clear_line(10);
+		clear_line(3);
+		clear_line(4);
+		clear_line(5);
+		clear_line(6);
+		clear_line(7);
 		// allocate the space
 		uint8_t TUN_packet[MED_BUFF_SZ];
 	
