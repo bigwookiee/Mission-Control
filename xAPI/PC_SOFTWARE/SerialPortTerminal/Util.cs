@@ -287,7 +287,6 @@ namespace SerialPortTerminal
         //*********************************************************
         //*********************************************************
         // Helper function to create a TUN packet
-        //NOTE REMOVED START AND END BYTES FROM PACKET! ONLY FOR EXTERNAL!
         public int create_TUN_packet(int packet_type, byte[] payload, out byte[] buff)
         {
             int total_sz = 0;

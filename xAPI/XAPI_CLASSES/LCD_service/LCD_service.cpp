@@ -308,7 +308,7 @@ m_xapi(_xapi)
 	m_prev_lcd_key = LCD_btnNONE;
 	m_lcd->begin(16, 2);             
 	lcd_setCursor(0,0);
-	lcd_print("HOW DO YOU FEEL?"); 
+	lcd_print("COW DO YOU FEEL"); 
 }
 
 //***************************************************

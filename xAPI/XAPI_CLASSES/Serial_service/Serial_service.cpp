@@ -130,6 +130,14 @@ boolean Serial_service::process_TUN_packet(	uint8_t* buff,
 			case TUN_TYPE_LOCAL_SIMPLE_LCD_MSG:
 				simple_local_LCD_msg(buff, buff_sz);
 			break;	
+
+			//incoming request to use the external
+			//LCD screen to display a message.
+			case TUN_TYPE_EXTERNAL_LCD_MSG:
+				m_xapi.CONNECT_local_TUN_set_packet(buff, buff_sz); // debugging
+				m_xapi.snd_packet(buff, buff_sz);
+			break;
+
 		}
 	
 		success = true;
