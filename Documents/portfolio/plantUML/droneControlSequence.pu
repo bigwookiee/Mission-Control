@@ -1,0 +1,46 @@
+@startuml
+	title Simplified Drone Communication Sequence
+
+	control "Mission\nComputer" 			as mc
+  control "Arduino\nComputer" 					as xc
+  entity "XBee\nComputer" 					as bc
+  entity "XBee\nDrone" 							as bd
+  control "Arduino\nDrone" 						as xd
+  control "Flight Control\nService\nDrone"	as dm
+	participant "Drone"   						as dr
+
+
+
+	mc -> xc :command\npacket\nover\serial
+
+	xc -> bc :XAPI\nservice
+
+
+	bc -> bd :radio\nexchange
+	activate bc
+	bd -> xd :XAPI\nservice
+  xd -> dm :command\npacket
+  bd <[#blue]- xd
+  bc <[#blue]- bd
+  deactivate bc
+	 
+  dm --> dr :issues flight\ncommands
+  
+  xd <[#blue]- dm :data\npacket
+	
+
+
+	
+	bd <[#blue]- xd 
+	activate bd
+	bc <[#blue]- bd 
+
+  bc -> bd	
+	bd -> xd
+  deactivate bd
+  xc <[#blue]- bc
+	mc <[#blue]- xc :data\npacket
+
+	
+
+@enduml

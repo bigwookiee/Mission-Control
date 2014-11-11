@@ -1,0 +1,6 @@
+PWD C:/Users/David/Dropbox/CS480/LatexDocuments/Portfolio/plantUML
+INPUT c:/texlive/2014/texmf.cnf
+INPUT c:/texlive/2014/texmf-dist/web2c/texmf.cnf
+INPUT c:/texlive/2014/texmf-var/web2c/pdftex/pdflatex.fmt
+INPUT c:/Users/David/Dropbox/CS480/LatexDocuments/Portfolio/plantUML/droneControlSequence.tex
+OUTPUT C:/Users/David/Dropbox/CS480/LatexDocuments/Portfolio/plantUML/droneControlSequence.log
