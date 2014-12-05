@@ -584,7 +584,7 @@ namespace SerialPortTerminal
 
 
             // create the packet
-            int returnSz = m_util.create_LCD_TUN_packet((int)TUN_types.TUN_TYPE_EXTERNAL_LCD_MSG, raw_text, out packet);
+            int returnSz = m_util.create_LCD_TUN_packet((int)TUN_types.TUN_TYPE_LOCAL_LCD_MSG, raw_text, out packet);
             Log(LogMsgType.Outgoing, "packet created\n");
             if (returnSz == 0)
             {

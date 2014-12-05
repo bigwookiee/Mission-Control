@@ -130,14 +130,29 @@ boolean Serial_service::process_TUN_packet(	uint8_t* buff,
 			case TUN_TYPE_LOCAL_SIMPLE_LCD_MSG:
 				simple_local_LCD_msg(buff, buff_sz);
 			break;	
-
-			//incoming request to use the external
-			//LCD screen to display a message.
+			
 			case TUN_TYPE_EXTERNAL_LCD_MSG:
-				m_xapi.CONNECT_local_TUN_set_packet(buff, buff_sz); // debugging
-				m_xapi.snd_packet(buff, buff_sz);
-			break;
+				/*	Router info
+					MSB: 13A200
+					LSB: 40A8BC2C
+				*/
+				
+				uint32_t msb = 0x13A200;
+				uint16_t lsb = 0x40A8BC2C;
 
+				uint8_t packet[LARGE_BUFF_SZ];
+				m_xapi.construct_transmit_req(msb, 
+										lsb, 
+										ADDR16_BROADCAST,
+										buff, 
+										buff_sz,
+										packet, 
+										LARGE_BUFF_SZ);
+
+				m_xapi.snd_packet(packet, LARGE_BUFF_SZ);
+
+
+			break;
 		}
 	
 		success = true;
