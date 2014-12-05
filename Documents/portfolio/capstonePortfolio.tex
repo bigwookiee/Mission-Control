@@ -9,7 +9,7 @@
 \usepackage{pdflscape}
 \usepackage{hyperref}
 \usepackage{appendix}
-\usepackage{pdfpages}
+
 
 \hypersetup{colorlinks=true, linkcolor=blue, citecolor=blue, filecolor=blue, urlcolor=blue, pdftitle=Capstone Portfolio: Drone Flight Planning Software, pdfauthor=David Klingenberg, pdfsubject=, pdfkeywords=}
 
@@ -22,7 +22,7 @@
 \textwidth = 468pt
 \textheight = 581pt
 \lstset{
-  language=C,                     % choose the language of the code
+  language=C,                % choose the language of the code
   numbers=left,                   % where to put the line-numbers
   stepnumber=1,                   % the step between two line-numbers.        
   numbersep=5pt,                  % how far the line-numbers are from the code
@@ -145,6 +145,8 @@ Refer to \hyperref[sec:clienttranscript]{Section~\ref{sec:clienttranscript}} ini
 
 % Agenda %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+% Agenda %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Sept. 18, 2014}
 { \huge \bfseries Mission Control Team Agenda \\[0.4cm] }
 { \huge \bfseries Thrusday September  18, 2014.\\1500 –-  1600  in JEB   Think  Tank. \\[0.4cm] }
@@ -196,9 +198,10 @@ The rerouting and reconfiguring of the drone is proceeding nicely.  It progress 
 	\end{itemize}
 	\item 1610 \indent Meeting 
 \end{itemize}
-
 % Agenda %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+% Agenda %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Sept. 25, 2014}
 { \huge \bfseries Mission Control Team Agenda \\[0.4cm] }
 { \huge \bfseries Thrusday September 25, 2014.\\1530 –-  1630  in JEB 37\\[0.4cm] }
@@ -249,9 +252,9 @@ The rerouting and reconfiguring of the drone is proceeding nicely.  It progress 
 \end{itemize}	
 
 \clearpage
-
 % Agenda %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% Agenda %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Oct. 2, 2014}
 { \huge \bfseries Mission Control Team Agenda \\[0.4cm] }
 { \huge \bfseries Thrusday October 2, 2014.\\1530 –-  1630  in JEB 37\\[0.4cm] }
@@ -312,6 +315,7 @@ The rerouting and reconfiguring of the drone is proceeding nicely.  It progress 
 
 % Agenda %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% Agenda %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Oct. 9, 2014}
 { \huge \bfseries Mission Control Team Agenda \\[0.4cm] }
 { \huge \bfseries Thrusday October 9, 2014.\\1530 –-  1630  in JEB 37\\[0.4cm] }
@@ -374,9 +378,9 @@ The rerouting and reconfiguring of the drone is proceeding nicely.  It progress 
 
 
 %\clearpage
-
 % Agenda %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% Agenda %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Oct. 16, 2014}
 { \huge \bfseries Mission Control Team Agenda \\[0.4cm] }
 { \huge \bfseries Thrusday October 16, 2014.\\1530 –-  1630  in JEB 37\\[0.4cm] }
@@ -422,7 +426,10 @@ Our next meeting will be in 3 weeks Nov 6, 2014.
 	               Drifting stability have been greatly improved.
 		\end{itemize}
 	\end{itemize}
-	
+	\item New Resources
+		\begin{itemize}
+
+		\end{itemize}
 	\item Action Items
 	\begin{itemize}
 		\item David will continue to experiment with PWM and the quadcopter.   He will explore control algorithms.
@@ -437,9 +444,10 @@ Our next meeting will be in 3 weeks Nov 6, 2014.
 
 
 \clearpage
-
 % Agenda %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+% Agenda %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Nov. 6, 2014}
 { \huge \bfseries Mission Control Team Agenda \\[0.4cm] }
 { \huge \bfseries Thrusday November 6, 2014.\\1530 –-  1630  in JEB 37\\[0.4cm] }
@@ -488,7 +496,9 @@ Our next meeting will be Nov 20, 2014.
 		\end{itemize}
 	\end{itemize}
 	\item New Resources
-	\\
+		\begin{itemize}
+
+		\end{itemize}
 	\item Action Items
 	\begin{itemize}
 		\item David will continue to experiment with PWM and the quadcopter.   Will explore control algorithms used by existing quad copters.
@@ -503,9 +513,9 @@ Our next meeting will be Nov 20, 2014.
 
 
 \clearpage
-
 % Agenda %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% Agenda %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Nov. 20, 2014}
 { \huge \bfseries Mission Control Team Agenda \\[0.4cm] }
 { \huge \bfseries Thrusday November 20, 2014.\\1530 –-  1630  in JEB 37\\[0.4cm] }
@@ -553,11 +563,14 @@ Our next meeting will be Dec 4, 2014.
 			\item  Focusing more on senior design and plans on continuing to work on project next semester, code written for PWM flight control
 		\end{itemize}
 	\end{itemize}
-	
+	\item New Resources
+		\begin{itemize}
+
+		\end{itemize}
 	\item Action Items
 	\begin{itemize}
-		\item David is working on PWM, PWM flight service, team citizenship form.
-		\item Taylor is working on design document, wiki update, team citizenship form, continue working out XBee comm bugs and send EXTERNAL\_LCD TUN packet to another Arduino successfully.
+		\item David is working on PWM, PWM flight service, team citizenship form
+		\item Taylor is working on design document, wiki update, team citizenship form, continue working out XBee comm bugs and send EXTERNAL_LCD TUN packet to another Arduino successfully.
 	\end{itemize}
 	\item Test Flight
 	\begin{itemize}
@@ -568,27 +581,7 @@ Our next meeting will be Dec 4, 2014.
 
 % Agenda %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Code %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
-
-\section{Code}
-\label{sec:code}
-	\subsection{Supplemental quad copter autopilot V1.4}
-	\lstinputlisting{./Supplementary_autopilot.c}
-
-\clearpage
-% Code %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% Design presentation %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Design Presentation}
-\label{sec:DesignPresentation}
-\subsection{Nov 13, 2014}
-See Next Page
-\includepdf[pages={1-9},pagecommand={},width=\textwidth]{./additionalPDF/designReview_revised.pdf}
-
-
-% Design presentation %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \clearpage
 \appendix
@@ -601,13 +594,6 @@ See Next Page
 	\centering
 		\includegraphics[width=0.5\textwidth]{./plantUML/droneControlSequence.png}
 	\caption{Communication Sequence}
-	\label{fig:comseq}
-\end{figure}
-
-\begin{figure}[!h]
-	\centering
-		\includegraphics[width=0.5\textwidth]{./plantUML/PIDloop}
-	\caption{PID Controller}
 	\label{fig:comseq}
 \end{figure}
 

@@ -90,7 +90,7 @@ void process_buttons()
   if(button == LCD_btnLEFT )
   {
     
-    lcd_service.lcd_snd_LOCAL_message(0,0,(const uint8_t*)"K,GOOD JERB!!!!!!");
+    lcd_service.lcd_snd_LOCAL_message(0,0,(const uint8_t*)"GOOD JERB!!!!!!");
     
     /*
     lcd_service.lcd_snd_EXTERNAL_message(  DEBUG_MSB_ADDR,
