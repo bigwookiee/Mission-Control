@@ -1,0 +1,12 @@
+@startuml
+title (**P**)roportional\n(**I**)ntegral\n(**D**)erivative\nAlgorithm/Controller
+	(*) -> [setpoint\nrange to hold\nfrom ground\nin cm] "PID\n+/-" as pid
+    -> [controller error\ne(t)=(SP-PV)] "Flight/Motor\nControler" as mc
+    "Real World\nAltitude Process" as fb  --> [True Range\nFrom Ground] "Ultrasonic\nRange Finder" as rf
+    rf --> [range to ground\nprocess variable signal,PV] pid
+    mc ->[controller\noutput,CO] "ECS" as ecs
+    ecs -> [manipulate\nrotors] fb
+    fb -> (*)
+    "Disturbances" as di --> [natural\nenvironmental effects] fb
+footer Author: David Klingenberg
+@enduml
