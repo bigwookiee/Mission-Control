@@ -18,7 +18,13 @@
 \contentsline {subsubsection}{\numberline {4.4.1}short}{6}{subsubsection.4.4.1}
 \contentsline {subsection}{\numberline {4.5}Oct. 9, 2014}{7}{subsection.4.5}
 \contentsline {subsubsection}{\numberline {4.5.1}short}{7}{subsubsection.4.5.1}
-\contentsline {section}{Appendices}{9}{section*.4}
-\contentsline {section}{\numberline {A}Miscellaneous UML Charts}{9}{appendix.A}
-\contentsline {section}{\numberline {B}ATMEL\textsuperscript {\textcopyright } Microcontrollers}{10}{appendix.B}
-\contentsline {section}{\numberline {C}Technical Drawings}{12}{appendix.C}
+\contentsline {subsection}{\numberline {4.6}Oct. 16, 2014}{8}{subsection.4.6}
+\contentsline {subsubsection}{\numberline {4.6.1}short}{9}{subsubsection.4.6.1}
+\contentsline {subsection}{\numberline {4.7}Nov. 6, 2014}{10}{subsection.4.7}
+\contentsline {subsubsection}{\numberline {4.7.1}short}{10}{subsubsection.4.7.1}
+\contentsline {subsection}{\numberline {4.8}Nov. 20, 2014}{12}{subsection.4.8}
+\contentsline {subsubsection}{\numberline {4.8.1}short}{12}{subsubsection.4.8.1}
+\contentsline {section}{Appendices}{14}{section*.4}
+\contentsline {section}{\numberline {A}Miscellaneous UML Charts}{14}{appendix.A}
+\contentsline {section}{\numberline {B}ATMEL\textsuperscript {\textcopyright } Microcontrollers}{15}{appendix.B}
+\contentsline {section}{\numberline {C}Technical Drawings}{17}{appendix.C}
