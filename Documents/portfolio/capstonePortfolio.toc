@@ -28,7 +28,15 @@
 \contentsline {subsection}{\numberline {5.1}Supplemental quad copter autopilot V1.4}{14}{subsection.5.1}
 \contentsline {section}{\numberline {6}Design Presentation}{23}{section.6}
 \contentsline {subsection}{\numberline {6.1}Nov 13, 2014}{23}{subsection.6.1}
-\contentsline {section}{Appendices}{33}{section*.4}
-\contentsline {section}{\numberline {A}Miscellaneous UML Charts}{33}{appendix.A}
-\contentsline {section}{\numberline {B}ATMEL\textsuperscript {\textcopyright } Microcontrollers}{34}{appendix.B}
-\contentsline {section}{\numberline {C}Technical Drawings}{36}{appendix.C}
+\contentsline {section}{\numberline {7}Design Document}{33}{section.7}
+\contentsline {subsection}{\numberline {7.1}Introduction}{33}{subsection.7.1}
+\contentsline {subsection}{\numberline {7.2}Drone Design}{33}{subsection.7.2}
+\contentsline {subsection}{\numberline {7.3}Communication Design}{34}{subsection.7.3}
+\contentsline {subsubsection}{\numberline {7.3.1}Communication Overview}{34}{subsubsection.7.3.1}
+\contentsline {subsubsection}{\numberline {7.3.2}Hardware Components}{34}{subsubsection.7.3.2}
+\contentsline {subsubsection}{\numberline {7.3.3}XAPI}{35}{subsubsection.7.3.3}
+\contentsline {subsection}{\numberline {7.4}Graphical User Interface Design}{36}{subsection.7.4}
+\contentsline {section}{Appendices}{38}{section*.4}
+\contentsline {section}{\numberline {A}Miscellaneous UML Charts}{38}{appendix.A}
+\contentsline {section}{\numberline {B}ATMEL\textsuperscript {\textcopyright } Microcontrollers}{39}{appendix.B}
+\contentsline {section}{\numberline {C}Technical Drawings}{41}{appendix.C}

@@ -28,7 +28,15 @@
 \BOOKMARK [2][-]{subsection.5.1}{Supplemental quad copter autopilot V1.4}{section.5}% 28
 \BOOKMARK [1][-]{section.6}{Design Presentation}{}% 29
 \BOOKMARK [2][-]{subsection.6.1}{Nov 13, 2014}{section.6}% 30
-\BOOKMARK [1][-]{section*.4}{Appendices}{}% 31
-\BOOKMARK [1][-]{appendix.A}{Miscellaneous UML Charts}{}% 32
-\BOOKMARK [1][-]{appendix.B}{ATMEL\251 Microcontrollers}{}% 33
-\BOOKMARK [1][-]{appendix.C}{Technical Drawings}{}% 34
+\BOOKMARK [1][-]{section.7}{Design Document}{}% 31
+\BOOKMARK [2][-]{subsection.7.1}{Introduction}{section.7}% 32
+\BOOKMARK [2][-]{subsection.7.2}{Drone Design}{section.7}% 33
+\BOOKMARK [2][-]{subsection.7.3}{Communication Design}{section.7}% 34
+\BOOKMARK [3][-]{subsubsection.7.3.1}{Communication Overview}{subsection.7.3}% 35
+\BOOKMARK [3][-]{subsubsection.7.3.2}{Hardware Components}{subsection.7.3}% 36
+\BOOKMARK [3][-]{subsubsection.7.3.3}{XAPI}{subsection.7.3}% 37
+\BOOKMARK [2][-]{subsection.7.4}{Graphical User Interface Design}{section.7}% 38
+\BOOKMARK [1][-]{section*.4}{Appendices}{}% 39
+\BOOKMARK [1][-]{appendix.A}{Miscellaneous UML Charts}{}% 40
+\BOOKMARK [1][-]{appendix.B}{ATMEL\251 Microcontrollers}{}% 41
+\BOOKMARK [1][-]{appendix.C}{Technical Drawings}{}% 42
