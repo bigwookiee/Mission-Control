@@ -40,7 +40,7 @@ The communications system needs to follow the following requirements:
 		\item ACK
 		\item Heartbeat
 		\item Override
-		\item Flight plan protocol types
+		\item Mission plan protocol types
 	\end{itemize}
 \end{itemize}
 
@@ -82,7 +82,50 @@ The following sections will break the communication system down into its several
 	\end{enumerate}
 	
 To satisfy our project's requirements, we need to design a Flight Control service that will be able to handle any instruction packets and translate them to instructions that can be given to the drone's flight computer. In addition to this, there is a requirement for a Mission Plan service that will store and execute flight plan's designed by the user and sent to the drone.
+
+	\subsection{TUN Packet Types}
+	The following is a table of all the TUN packets types that will be required for this design:
 	
+	\begin{tabular}{l | l | l}
+	TUN Type Key & Payload & Use \\
+	Internal/External &  & \\
+	\hline
+	0x50/0x51 & Altitude & Take off and maintain specific altitude \\
+	0x52/0x53 & N/A & Land \\ 
+	0x54/0x55 & X,Y,Altitude & Go to specific coordinate \\
+	0x56/0x57 & MoveType,Amount,Metric & Carry out specific move\\  		& & (left/right/forward/back/rotate) \\
+	0x58/0x59 & N/A & Start mission plan upload \\
+	0x60/0x61 & X,Y,Altitude & Mission instruction - go to specific coordinate \\
+	0x62/0x63 & MoveType,Amount,Metric & Mission instruction - carry out specific move\\
+	& & (left/right/forward/back/rotate) \\
+	0x64/0x65 & ChecksumValue & End install and check checksum to validate success \\
+	0x66/0x67 & N/A & Stop current mission plan and activate manual\\
+	& & control (maintain altitude) \\
+	0x68/0x69 & N/A & Stop current mission plan and activate manual\\
+	& & control (no longer autonomous) \\
+	0x70/0x71 & N/A & Acknowledgment (ACK)\\
+	0x72/0x73 & N/A & Acknowledgment of issue (NACK) \\
+	0x74/0x75 & InstrumentData & Heartbeat that contains the drone's current state \\ 
+	0x76/0x77 & Altitude & Set altitude \\
+	0x78/0x79 & Speed & Set the never exceed speed \\ 
+	0x80/0x81 & Speed & Set never exceed fall speed \\
+	0x82/0x83 & Throttle & Set throttle
+	
+	\end{tabular}
+	
+	\subsection{Mission Plan Upload Protocol}
+	In order for the drone to autonomously carry out a mission plan, the plan must be uploaded from the source computer to the drone's micro-controller. The following is depicts the Mission Plan upload protocol:
+	
+
+	\begin{figure}[h!]
+
+  		\centering
+    	\includegraphics[width=0.75\textwidth]{InstallProcessIdea1.png}
+   		\caption{Mission plan upload process}
+	\end{figure}
+	
+	Simply put, an installation packet is used to signal the start of a mission plan upload, each instruction is then sent one at a time, and finally an end installation packet with the checksum of the final mission plan file is sent to the drone. After each of these packets are received by the drone, the drone will send an acknowledgement (ACK) packet. It should be noted that the final ACK packet can be a NACK packet if the checksum received is not the same as the one calculated.
+
 \section{Graphical User Interface Design}
 The graphical user interface must satisfy several requirements:
 \begin{enumerate}
