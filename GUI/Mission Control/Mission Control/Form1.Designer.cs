@@ -29,7 +29,12 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.holdPos = new System.Windows.Forms.Button();
+            this.eLand = new System.Windows.Forms.Button();
             this.panel11 = new System.Windows.Forms.Panel();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.button6 = new System.Windows.Forms.Button();
             this.comboBox10 = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -60,40 +65,33 @@
             this.submit = new System.Windows.Forms.Button();
             this.addInstruction = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.overallProgress = new System.Windows.Forms.ProgressBar();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.currentProgress = new System.Windows.Forms.ProgressBar();
             this.label7 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label8 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
             this.altitude = new System.Windows.Forms.TrackBar();
-            this.currentProgress = new System.Windows.Forms.ProgressBar();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.overallProgress = new System.Windows.Forms.ProgressBar();
-            this.output = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.submitFlightPlanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFlightPlanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addFlightInstructionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manualControlsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.eLand = new System.Windows.Forms.Button();
-            this.holdPos = new System.Windows.Forms.Button();
-            this.panel5 = new System.Windows.Forms.Panel();
+            this.topView = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.instrumentsPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.serialTerminalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.panel11.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -106,13 +104,12 @@
             this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.altitude)).BeginInit();
             this.menuStrip1.SuspendLayout();
-            this.panel5.SuspendLayout();
+            this.topView.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -131,6 +128,30 @@
             this.panel1.Size = new System.Drawing.Size(325, 418);
             this.panel1.TabIndex = 0;
             // 
+            // holdPos
+            // 
+            this.holdPos.BackColor = System.Drawing.Color.Red;
+            this.holdPos.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.holdPos.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.holdPos.Location = new System.Drawing.Point(8, 370);
+            this.holdPos.Name = "holdPos";
+            this.holdPos.Size = new System.Drawing.Size(87, 37);
+            this.holdPos.TabIndex = 9;
+            this.holdPos.Text = "Hold Position";
+            this.holdPos.UseVisualStyleBackColor = false;
+            // 
+            // eLand
+            // 
+            this.eLand.BackColor = System.Drawing.Color.Red;
+            this.eLand.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.eLand.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.eLand.Location = new System.Drawing.Point(229, 370);
+            this.eLand.Name = "eLand";
+            this.eLand.Size = new System.Drawing.Size(85, 37);
+            this.eLand.TabIndex = 8;
+            this.eLand.Text = "Emergency Land";
+            this.eLand.UseVisualStyleBackColor = false;
+            // 
             // panel11
             // 
             this.panel11.BackColor = System.Drawing.Color.PeachPuff;
@@ -144,6 +165,30 @@
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(296, 49);
             this.panel11.TabIndex = 5;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(195, 15);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(53, 20);
+            this.textBox4.TabIndex = 7;
+            this.textBox4.Text = "Alt";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(136, 15);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(53, 20);
+            this.textBox3.TabIndex = 6;
+            this.textBox3.Text = "Lat";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(77, 15);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(53, 20);
+            this.textBox1.TabIndex = 5;
+            this.textBox1.Text = "Long";
             // 
             // button6
             // 
@@ -490,6 +535,44 @@
             this.panel2.Size = new System.Drawing.Size(325, 143);
             this.panel2.TabIndex = 1;
             // 
+            // overallProgress
+            // 
+            this.overallProgress.BackColor = System.Drawing.Color.Thistle;
+            this.overallProgress.Location = new System.Drawing.Point(8, 105);
+            this.overallProgress.Name = "overallProgress";
+            this.overallProgress.Size = new System.Drawing.Size(303, 23);
+            this.overallProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.overallProgress.TabIndex = 4;
+            this.overallProgress.Value = 20;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(6, 89);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(136, 13);
+            this.label12.TabIndex = 3;
+            this.label12.Text = "Overall Flight Plan Progress";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 38);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(137, 13);
+            this.label11.TabIndex = 2;
+            this.label11.Text = "Current Instruction Progress";
+            // 
+            // currentProgress
+            // 
+            this.currentProgress.BackColor = System.Drawing.Color.Thistle;
+            this.currentProgress.Location = new System.Drawing.Point(8, 54);
+            this.currentProgress.Name = "currentProgress";
+            this.currentProgress.Size = new System.Drawing.Size(303, 23);
+            this.currentProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.currentProgress.TabIndex = 1;
+            this.currentProgress.Value = 60;
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -500,29 +583,6 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "Status Info";
             // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.PaleGreen;
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel3.Controls.Add(this.textBox2);
-            this.panel3.Controls.Add(this.output);
-            this.panel3.Controls.Add(this.label8);
-            this.panel3.Location = new System.Drawing.Point(332, 24);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(587, 150);
-            this.panel3.TabIndex = 2;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(3, 3);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(283, 25);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "Communications Terminal";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
-            // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.CadetBlue;
@@ -530,10 +590,20 @@
             this.panel4.Controls.Add(this.pictureBox1);
             this.panel4.Controls.Add(this.label5);
             this.panel4.Controls.Add(this.altitude);
-            this.panel4.Location = new System.Drawing.Point(332, 180);
+            this.panel4.Location = new System.Drawing.Point(332, 24);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(143, 402);
+            this.panel4.Size = new System.Drawing.Size(143, 558);
             this.panel4.TabIndex = 3;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Mission_Control.Properties.Resources.sideCopter;
+            this.pictureBox1.Location = new System.Drawing.Point(87, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(45, 37);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
             // 
             // label5
             // 
@@ -552,92 +622,9 @@
             this.altitude.Maximum = 30;
             this.altitude.Name = "altitude";
             this.altitude.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.altitude.Size = new System.Drawing.Size(45, 352);
+            this.altitude.Size = new System.Drawing.Size(45, 479);
             this.altitude.TabIndex = 0;
             this.altitude.TickStyle = System.Windows.Forms.TickStyle.Both;
-            // 
-            // currentProgress
-            // 
-            this.currentProgress.BackColor = System.Drawing.Color.Thistle;
-            this.currentProgress.Location = new System.Drawing.Point(8, 54);
-            this.currentProgress.Name = "currentProgress";
-            this.currentProgress.Size = new System.Drawing.Size(303, 23);
-            this.currentProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.currentProgress.TabIndex = 1;
-            this.currentProgress.Value = 60;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 38);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(137, 13);
-            this.label11.TabIndex = 2;
-            this.label11.Text = "Current Instruction Progress";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(6, 89);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(136, 13);
-            this.label12.TabIndex = 3;
-            this.label12.Text = "Overall Flight Plan Progress";
-            // 
-            // overallProgress
-            // 
-            this.overallProgress.BackColor = System.Drawing.Color.Thistle;
-            this.overallProgress.Location = new System.Drawing.Point(8, 105);
-            this.overallProgress.Name = "overallProgress";
-            this.overallProgress.Size = new System.Drawing.Size(303, 23);
-            this.overallProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.overallProgress.TabIndex = 4;
-            this.overallProgress.Value = 20;
-            // 
-            // output
-            // 
-            this.output.BackColor = System.Drawing.Color.PaleGreen;
-            this.output.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.output.Location = new System.Drawing.Point(8, 35);
-            this.output.Multiline = true;
-            this.output.Name = "output";
-            this.output.ReadOnly = true;
-            this.output.Size = new System.Drawing.Size(566, 80);
-            this.output.TabIndex = 1;
-            this.output.Text = "Data from the drone will display here.  You can also send commands to drone.";
-            // 
-            // textBox2
-            // 
-            this.textBox2.AccessibleDescription = "";
-            this.textBox2.Location = new System.Drawing.Point(8, 122);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(566, 20);
-            this.textBox2.TabIndex = 2;
-            this.textBox2.Tag = "";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(77, 15);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(53, 20);
-            this.textBox1.TabIndex = 5;
-            this.textBox1.Text = "Long";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(136, 15);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(53, 20);
-            this.textBox3.TabIndex = 6;
-            this.textBox3.Text = "Lat";
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(195, 15);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(53, 20);
-            this.textBox4.TabIndex = 7;
-            this.textBox4.Text = "Alt";
             // 
             // menuStrip1
             // 
@@ -663,31 +650,6 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addFlightInstructionToolStripMenuItem,
-            this.removeSelectedToolStripMenuItem});
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
-            this.editToolStripMenuItem.Text = "Edit";
-            // 
-            // viewToolStripMenuItem
-            // 
-            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.manualControlsToolStripMenuItem});
-            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.viewToolStripMenuItem.Text = "View";
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
@@ -712,6 +674,15 @@
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addFlightInstructionToolStripMenuItem,
+            this.removeSelectedToolStripMenuItem});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
             // addFlightInstructionToolStripMenuItem
             // 
             this.addFlightInstructionToolStripMenuItem.Name = "addFlightInstructionToolStripMenuItem";
@@ -724,11 +695,29 @@
             this.removeSelectedToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.removeSelectedToolStripMenuItem.Text = "Remove Selected";
             // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.manualControlsToolStripMenuItem,
+            this.instrumentsPanelToolStripMenuItem,
+            this.serialTerminalToolStripMenuItem});
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.viewToolStripMenuItem.Text = "View";
+            // 
             // manualControlsToolStripMenuItem
             // 
             this.manualControlsToolStripMenuItem.Name = "manualControlsToolStripMenuItem";
             this.manualControlsToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.manualControlsToolStripMenuItem.Text = "Manual Controls";
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
             // 
             // aboutToolStripMenuItem
             // 
@@ -736,43 +725,19 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             // 
-            // eLand
+            // topView
             // 
-            this.eLand.BackColor = System.Drawing.Color.Red;
-            this.eLand.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.eLand.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.eLand.Location = new System.Drawing.Point(229, 370);
-            this.eLand.Name = "eLand";
-            this.eLand.Size = new System.Drawing.Size(85, 37);
-            this.eLand.TabIndex = 8;
-            this.eLand.Text = "Emergency Land";
-            this.eLand.UseVisualStyleBackColor = false;
-            // 
-            // holdPos
-            // 
-            this.holdPos.BackColor = System.Drawing.Color.Red;
-            this.holdPos.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.holdPos.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.holdPos.Location = new System.Drawing.Point(8, 370);
-            this.holdPos.Name = "holdPos";
-            this.holdPos.Size = new System.Drawing.Size(87, 37);
-            this.holdPos.TabIndex = 9;
-            this.holdPos.Text = "Hold Position";
-            this.holdPos.UseVisualStyleBackColor = false;
-            // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.panel5.BackgroundImage = global::Mission_Control.Properties.Resources.maps;
-            this.panel5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel5.Controls.Add(this.pictureBox2);
-            this.panel5.Controls.Add(this.label9);
-            this.panel5.Location = new System.Drawing.Point(472, 180);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(447, 402);
-            this.panel5.TabIndex = 4;
-            this.panel5.Paint += new System.Windows.Forms.PaintEventHandler(this.panel5_Paint);
+            this.topView.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.topView.BackgroundImage = global::Mission_Control.Properties.Resources.maps;
+            this.topView.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.topView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.topView.Controls.Add(this.pictureBox2);
+            this.topView.Controls.Add(this.label9);
+            this.topView.Location = new System.Drawing.Point(472, 24);
+            this.topView.Name = "topView";
+            this.topView.Size = new System.Drawing.Size(447, 558);
+            this.topView.TabIndex = 4;
+            this.topView.Paint += new System.Windows.Forms.PaintEventHandler(this.panel5_Paint);
             // 
             // pictureBox2
             // 
@@ -795,15 +760,17 @@
             this.label9.TabIndex = 0;
             this.label9.Text = "Longitude / Latitude";
             // 
-            // pictureBox1
+            // instrumentsPanelToolStripMenuItem
             // 
-            this.pictureBox1.Image = global::Mission_Control.Properties.Resources.sideCopter;
-            this.pictureBox1.Location = new System.Drawing.Point(87, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(45, 37);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
+            this.instrumentsPanelToolStripMenuItem.Name = "instrumentsPanelToolStripMenuItem";
+            this.instrumentsPanelToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.instrumentsPanelToolStripMenuItem.Text = "Instruments Panel";
+            // 
+            // serialTerminalToolStripMenuItem
+            // 
+            this.serialTerminalToolStripMenuItem.Name = "serialTerminalToolStripMenuItem";
+            this.serialTerminalToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.serialTerminalToolStripMenuItem.Text = "Serial Terminal";
             // 
             // Form1
             // 
@@ -811,9 +778,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(920, 584);
-            this.Controls.Add(this.panel5);
+            this.Controls.Add(this.topView);
             this.Controls.Add(this.panel4);
-            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
@@ -839,17 +805,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.altitude)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
+            this.topView.ResumeLayout(false);
+            this.topView.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -860,9 +824,8 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button addInstruction;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel topView;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.TrackBar altitude;
@@ -891,7 +854,6 @@
         private System.Windows.Forms.ComboBox comboBox5;
         private System.Windows.Forms.ComboBox comboBox6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Panel panel11;
@@ -903,8 +865,6 @@
         private System.Windows.Forms.ProgressBar currentProgress;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox output;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox1;
@@ -923,6 +883,8 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.Button holdPos;
         private System.Windows.Forms.Button eLand;
+        private System.Windows.Forms.ToolStripMenuItem instrumentsPanelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem serialTerminalToolStripMenuItem;
     }
 }
 

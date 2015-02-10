@@ -7,3 +7,12 @@ c:\users\higle_000\documents\visual studio 2013\Projects\Mission Control\Mission
 c:\users\higle_000\documents\visual studio 2013\Projects\Mission Control\Mission Control\obj\Debug\Mission Control.csproj.GenerateResource.Cache
 c:\users\higle_000\documents\visual studio 2013\Projects\Mission Control\Mission Control\obj\Debug\Mission Control.exe
 c:\users\higle_000\documents\visual studio 2013\Projects\Mission Control\Mission Control\obj\Debug\Mission Control.pdb
+C:\Users\higle_000\Documents\GitHub\Mission-Control\GUI\Mission Control\Mission Control\bin\Debug\Mission Control.exe.config
+C:\Users\higle_000\Documents\GitHub\Mission-Control\GUI\Mission Control\Mission Control\obj\Debug\Mission Control.exe
+C:\Users\higle_000\Documents\GitHub\Mission-Control\GUI\Mission Control\Mission Control\obj\Debug\Mission Control.pdb
+C:\Users\higle_000\Documents\GitHub\Mission-Control\GUI\Mission Control\Mission Control\bin\Debug\Mission Control.exe
+C:\Users\higle_000\Documents\GitHub\Mission-Control\GUI\Mission Control\Mission Control\bin\Debug\Mission Control.pdb
+C:\Users\higle_000\Documents\GitHub\Mission-Control\GUI\Mission Control\Mission Control\obj\Debug\Mission Control.csprojResolveAssemblyReference.cache
+C:\Users\higle_000\Documents\GitHub\Mission-Control\GUI\Mission Control\Mission Control\obj\Debug\Mission_Control.Form1.resources
+C:\Users\higle_000\Documents\GitHub\Mission-Control\GUI\Mission Control\Mission Control\obj\Debug\Mission_Control.Properties.Resources.resources
+C:\Users\higle_000\Documents\GitHub\Mission-Control\GUI\Mission Control\Mission Control\obj\Debug\Mission Control.csproj.GenerateResource.Cache

@@ -65,7 +65,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>TN93pXrSAHecFpc0NiCStqidEDo=</dsig:DigestValue>
+        <dsig:DigestValue>bHOAf6VbbyKEbo6qXUH+7IYnNQo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -105,13 +105,13 @@
       <dsig:DigestValue>ezzKn1xitmhK3st5L7Ah8TbAnSQ=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="SerialPort Terminal.pdb" size="99840">
+  <file name="SerialPort Terminal.pdb" size="108032">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>gFXU11Ts8cBQPTYE/yVIxFcmXCg=</dsig:DigestValue>
+      <dsig:DigestValue>6Sm/jyXKIcbapRuKLnBXZN/9lCM=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>
