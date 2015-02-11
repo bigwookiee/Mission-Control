@@ -92,20 +92,21 @@ To satisfy our project's requirements, we need to design a Flight Control servic
 	\hline
 	0x50/0x51 & Altitude & Take off and maintain specific altitude \\
 	0x52/0x53 & N/A & Land \\ 
-	0x54/0x55 & X,Y,Altitude & Go to specific coordinate \\
-	0x56/0x57 & MoveType,Amount,Metric & Carry out specific move\\  		& & (left/right/forward/back/rotate) \\
+	0x54/0x55 & X,Y,Altitude & Go to specific\\
+	& & coordinate \\
+	0x56/0x57 & MoveDirection,Amount,Metric & Carry out specific move\\  		& & (North/South/East/West) \\
 	0x58/0x59 & N/A & Start mission plan upload \\
-	0x60/0x61 & X,Y,Altitude & Mission instruction - go to specific coordinate \\
-	0x62/0x63 & MoveType,Amount,Metric & Mission instruction - carry out specific move\\
-	& & (left/right/forward/back/rotate) \\
-	0x64/0x65 & ChecksumValue & End install and check checksum to validate success \\
-	0x66/0x67 & N/A & Stop current mission plan and activate manual\\
-	& & control (maintain altitude) \\
-	0x68/0x69 & N/A & Stop current mission plan and activate manual\\
-	& & control (no longer autonomous) \\
+	0x60/0x61 & X,Y,Altitude & Mission instruction - go to specific\\ & & coordinate \\
+	0x62/0x63 & MoveDirection,Amount,Metric & Mission instruction - carry out specific move\\
+	& & (North/South/East/West) \\
+	0x64/0x65 & ChecksumValue & End install and check checksum to\\ 	& & validate success \\
+	0x66/0x67 & N/A & Stop current mission plan and activate\\
+	& & manual control (maintain altitude) \\
+	0x68/0x69 & N/A & Stop current mission plan and activate\\
+	& & manual control (no longer autonomous) \\
 	0x70/0x71 & N/A & Acknowledgment (ACK)\\
 	0x72/0x73 & N/A & Acknowledgment of issue (NACK) \\
-	0x74/0x75 & InstrumentData & Heartbeat that contains the drone's current state \\ 
+	0x74/0x75 & InstrumentData & Heartbeat that contains the drone's\\ & & current state \\ 
 	0x76/0x77 & Altitude & Set altitude \\
 	0x78/0x79 & Speed & Set the never exceed speed \\ 
 	0x80/0x81 & Speed & Set never exceed fall speed \\
