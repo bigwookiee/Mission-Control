@@ -43,6 +43,10 @@ namespace Mission_Control
 
         }
 
+        /**
+         * Add an istruction to the list.
+         * @author Joe Higley
+         **/
         private void addInstruction(object sender, EventArgs e)
         {
             // make new panel
@@ -87,6 +91,10 @@ namespace Mission_Control
             instructionP.Controls.Add(p);
         }
 
+        /**
+         * Delete chosen instruction
+         * @author Joe Higley
+         **/
         private void delInstruction(object sender, EventArgs e)
         {
             Button b = (Button)sender;
@@ -114,6 +122,10 @@ namespace Mission_Control
             instructs--;
         }
 
+        /**
+         * Add correct fields in instruction
+         * @author Joe Higley
+         **/
         private void fillFields(object sender, EventArgs e)
         {
             ComboBox cb = (ComboBox)sender;
