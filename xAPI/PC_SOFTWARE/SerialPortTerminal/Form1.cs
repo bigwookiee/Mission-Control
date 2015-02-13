@@ -237,6 +237,8 @@ namespace SerialPortTerminal
          **/
         private void SubmitFlightPlan(object sender, EventArgs e)
         {
+            parentSerialTerminal.SendString_LCD("0,0,TestData");
+            /*
             //Animate the submition.
             Control p = instructionP.Controls[0];
 
@@ -244,7 +246,9 @@ namespace SerialPortTerminal
             {
                 p.BackColor = Color.LightCoral;
                 p.Controls.Remove(p.Controls[1]);
-            }
+                
+            }*/
+            
         }
 
         private bool checkInstructCompletion(Control p)

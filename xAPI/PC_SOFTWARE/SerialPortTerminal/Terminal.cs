@@ -87,6 +87,7 @@ namespace SerialPortTerminal
       heads_up = new hud(this);
       xbee_service = new Xbee_service();
 
+
         // show the hud
       heads_up.Show();
 
@@ -289,6 +290,7 @@ namespace SerialPortTerminal
 
                     // Open GUI Window
                     GUIWin = new Form1(this);
+                    GUIWin.Show();
 				}
       }
 
@@ -606,7 +608,37 @@ namespace SerialPortTerminal
             Log(LogMsgType.Outgoing, result + "\n");
 
         }
+        //*******************************************************************
+        //*******************************************************************
+        // Public routine for sending LCD_TUN packet intended for use by GUI
+        //
+        public void SendString_LCD(String input)
+        {
 
+            // storage for the packet
+            string packet;
+
+            string raw_text = input.Replace("\0", string.Empty);
+
+
+
+            // create the packet
+            int returnSz = m_util.create_LCD_TUN_packet((int)TUN_types.TUN_TYPE_LOCAL_LCD_MSG, raw_text, out packet);
+            Log(LogMsgType.Outgoing, "packet created\n");
+            if (returnSz == 0)
+            {
+                Log(LogMsgType.Outgoing, "packet 0 len\n");
+            }
+            // must remove null bytes from string
+            string result = packet.Replace("\0", string.Empty);
+            Log(LogMsgType.Outgoing, "packet null replaced\n");
+            // Send the user's text straight out the port
+            comport.Write(result);
+            Log(LogMsgType.Outgoing, "packet written\n");
+            // display the packet
+            Log(LogMsgType.Outgoing, result + "\n");
+
+        }
         //*******************************************************************
         //*******************************************************************
         // Updates the count down (-1), and if <=0, the heads up
