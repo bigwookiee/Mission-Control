@@ -229,5 +229,35 @@ namespace Mission_Control
                 cb.Parent.Controls.Add(alt);
             }
         }
+
+        /**
+         * Submit flight plan to drone.
+         * @author Joe Higley
+         **/
+        private void SubmitFlightPlan(object sender, EventArgs e)
+        {
+            //Animate the submition.
+            Control p = instructionP.Controls[0];
+
+            if (checkInstructCompletion(p))
+            {
+                p.BackColor = Color.LightCoral;
+                p.Controls.Remove(p.Controls[1]);
+            }
+        }
+
+        private bool checkInstructCompletion(Control p)
+        {
+            if (!(p.Controls[1] is Button)) return false;
+            if ((p.Controls[0].Text == "Move" || p.Controls[0].Text == "Rotate" || p.Controls[0].Text == "GPS") &&
+                (p.Controls[2].Text != "Long" && p.Controls[2].Text != "" || (p.Controls[2].Text == "North" || p.Controls[2].Text == "South" ||
+                 p.Controls[2].Text == "East" || p.Controls[2].Text == "West" || p.Controls[2].Text == "Left" || p.Controls[2].Text == "Right")) &&
+                (p.Controls[3].Text != "Lat" && p.Controls[3].Text != "" && p.Controls[3].Text != "0") &&
+                (p.Controls[4].Text != "Alt" && p.Controls[4].Text != ""))
+            {
+                return true;
+            }
+            else return false;
+        }
     }
 }

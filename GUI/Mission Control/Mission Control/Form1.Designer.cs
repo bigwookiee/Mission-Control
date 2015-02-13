@@ -138,6 +138,7 @@
             this.submit.TabIndex = 5;
             this.submit.Text = "Submit Flight Plan";
             this.submit.UseVisualStyleBackColor = true;
+            this.submit.Click += new System.EventHandler(this.SubmitFlightPlan);
             // 
             // addInstr
             // 
