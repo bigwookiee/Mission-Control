@@ -50,6 +50,9 @@ namespace SerialPortTerminal
     // for the hud
       hud heads_up;
 
+      // for GUI
+      Form1 GUIWin;
+
     // for the XBee services
       Xbee_service xbee_service;
 
@@ -283,6 +286,9 @@ namespace SerialPortTerminal
 					UpdatePinState();
 					chkDTR.Checked = comport.DtrEnable;
 					chkRTS.Checked = comport.RtsEnable;
+
+                    // Open GUI Window
+                    GUIWin = new Form1(this);
 				}
       }
 

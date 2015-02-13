@@ -58,14 +58,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SerialPort Terminal.exe" size="43520">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SerialPort Terminal.exe" size="146944">
       <assemblyIdentity name="SerialPort Terminal" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>bHOAf6VbbyKEbo6qXUH+7IYnNQo=</dsig:DigestValue>
+        <dsig:DigestValue>sYWgLu7cZLYtTizlx49q5BZMqbo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -96,6 +96,42 @@
       <dsig:DigestValue>rKJea6vyMszumyHuyuNJx577Nho=</dsig:DigestValue>
     </hash>
   </file>
+  <file name="Resources\maps.PNG" size="82045">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>5lmAXHR+5RCTlmlgJ5EgC9bYU2c=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Resources\sideCopter.png" size="2674">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>eQ2YZuAffrKRPISulZREvXfucB0=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Resources\topCopter.png" size="3173">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>C8NEXQ14QDYxyhN0Y6eQcUwlnbI=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Resources\topview.png" size="12565">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>SKNs6OvZNLTqMSELdstsIKUlcdU=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="SerialPort Terminal.exe.config" size="1659">
     <hash>
       <dsig:Transforms>
@@ -105,13 +141,13 @@
       <dsig:DigestValue>ezzKn1xitmhK3st5L7Ah8TbAnSQ=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="SerialPort Terminal.pdb" size="108032">
+  <file name="SerialPort Terminal.pdb" size="105984">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>6Sm/jyXKIcbapRuKLnBXZN/9lCM=</dsig:DigestValue>
+      <dsig:DigestValue>z7ukponM85crzIwIHX4N5WxY75A=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

@@ -11,14 +11,14 @@
     <deploymentProvider codebase="http://coad.net/blog/resources/clickonce/SerialPortTerminal/SerialPort%20Terminal.application" />
   </deployment>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="SerialPort Terminal.exe.manifest" size="5936">
+    <dependentAssembly dependencyType="install" codebase="SerialPort Terminal.exe.manifest" size="7465">
       <assemblyIdentity name="SerialPort Terminal.exe" version="1.0.0.8" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>ykIx6iH+dZJFvWedRpWScS/1yKY=</dsig:DigestValue>
+        <dsig:DigestValue>E7BAtDNk/l1CyHFvdH4Ztcx/q94=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

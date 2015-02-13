@@ -106,3 +106,19 @@ C:\Users\higle_000\Documents\GitHub\Mission-Control\xAPI\PC_SOFTWARE\SerialPortT
 C:\Users\higle_000\Documents\GitHub\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.csproj.GenerateResource.Cache
 C:\Users\higle_000\Documents\GitHub\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPort Terminal.exe.manifest
 C:\Users\higle_000\Documents\GitHub\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPort Terminal.application
+C:\Users\higle_000\Documents\GitHub\Mission-Control\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\bin\Debug\SerialPort Terminal.exe.config
+C:\Users\higle_000\Documents\GitHub\Mission-Control\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPort Terminal.exe
+C:\Users\higle_000\Documents\GitHub\Mission-Control\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPort Terminal.pdb
+C:\Users\higle_000\Documents\GitHub\Mission-Control\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\bin\Debug\SerialPort Terminal.exe.manifest
+C:\Users\higle_000\Documents\GitHub\Mission-Control\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\bin\Debug\SerialPort Terminal.application
+C:\Users\higle_000\Documents\GitHub\Mission-Control\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\bin\Debug\SerialPort Terminal.exe
+C:\Users\higle_000\Documents\GitHub\Mission-Control\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\bin\Debug\SerialPort Terminal.pdb
+C:\Users\higle_000\Documents\GitHub\Mission-Control\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.csprojResolveAssemblyReference.cache
+C:\Users\higle_000\Documents\GitHub\Mission-Control\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.frmAbout.resources
+C:\Users\higle_000\Documents\GitHub\Mission-Control\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.hud.resources
+C:\Users\higle_000\Documents\GitHub\Mission-Control\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.frmTerminal.resources
+C:\Users\higle_000\Documents\GitHub\Mission-Control\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.Properties.Resources.resources
+C:\Users\higle_000\Documents\GitHub\Mission-Control\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.csproj.GenerateResource.Cache
+C:\Users\higle_000\Documents\GitHub\Mission-Control\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPort Terminal.exe.manifest
+C:\Users\higle_000\Documents\GitHub\Mission-Control\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPort Terminal.application
+C:\Users\higle_000\Documents\GitHub\Mission-Control\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.Form1.resources
