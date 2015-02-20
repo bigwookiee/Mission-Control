@@ -1,6 +1,6 @@
 ﻿namespace SerialPortTerminal
 {
-    partial class Form1
+    partial class GUIform
     {
         /// <summary>
         /// Required designer variable.

@@ -9,11 +9,11 @@ using System.Windows.Forms;
 
 namespace SerialPortTerminal
 {
-    public partial class Form1 : Form
+    public partial class GUIform : Form
     {
         int instructs = 0;
         frmTerminal parentSerialTerminal;
-        public Form1(frmTerminal parentTerminal)
+        public GUIform(frmTerminal parentTerminal)
         {
             parentSerialTerminal = parentTerminal;
             InitializeComponent();
@@ -238,7 +238,11 @@ namespace SerialPortTerminal
         private void SubmitFlightPlan(object sender, EventArgs e)
         {
             parentSerialTerminal.SendString_LCD("0,0,TestData");
-            /*
+
+            if (instructionP.Controls.Count == 0)
+            {
+                return; //nothing to submit
+            }
             //Animate the submition.
             Control p = instructionP.Controls[0];
 
@@ -246,8 +250,7 @@ namespace SerialPortTerminal
             {
                 p.BackColor = Color.LightCoral;
                 p.Controls.Remove(p.Controls[1]);
-                
-            }*/
+            }
             
         }
 

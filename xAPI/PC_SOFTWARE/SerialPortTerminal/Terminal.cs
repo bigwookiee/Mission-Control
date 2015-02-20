@@ -51,7 +51,7 @@ namespace SerialPortTerminal
       hud heads_up;
 
       // for GUI
-      Form1 GUIWin;
+      GUIform GUIWin;
 
     // for the XBee services
       Xbee_service xbee_service;
@@ -289,7 +289,7 @@ namespace SerialPortTerminal
 					chkRTS.Checked = comport.RtsEnable;
 
                     // Open GUI Window
-                    GUIWin = new Form1(this);
+                    GUIWin = new GUIform(this);
                     GUIWin.Show();
 				}
       }

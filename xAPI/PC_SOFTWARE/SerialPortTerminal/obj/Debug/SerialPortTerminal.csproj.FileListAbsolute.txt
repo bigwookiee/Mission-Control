@@ -121,7 +121,6 @@ C:\Users\higle_000\Documents\GitHub\Mission-Control\Mission-Control\xAPI\PC_SOFT
 C:\Users\higle_000\Documents\GitHub\Mission-Control\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.csproj.GenerateResource.Cache
 C:\Users\higle_000\Documents\GitHub\Mission-Control\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPort Terminal.exe.manifest
 C:\Users\higle_000\Documents\GitHub\Mission-Control\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPort Terminal.application
-C:\Users\higle_000\Documents\GitHub\Mission-Control\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.Form1.resources
 C:\Users\Taylor Trabun\Documents\MissionControl\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\bin\Debug\SerialPort Terminal.exe.config
 C:\Users\Taylor Trabun\Documents\MissionControl\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPort Terminal.exe
 C:\Users\Taylor Trabun\Documents\MissionControl\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPort Terminal.pdb
@@ -138,3 +137,4 @@ C:\Users\Taylor Trabun\Documents\MissionControl\Mission-Control\xAPI\PC_SOFTWARE
 C:\Users\Taylor Trabun\Documents\MissionControl\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.csproj.GenerateResource.Cache
 C:\Users\Taylor Trabun\Documents\MissionControl\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPort Terminal.exe.manifest
 C:\Users\Taylor Trabun\Documents\MissionControl\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPort Terminal.application
+C:\Users\higle_000\Documents\GitHub\Mission-Control\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.GUIform.resources
