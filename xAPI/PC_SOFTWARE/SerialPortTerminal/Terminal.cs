@@ -259,6 +259,9 @@ namespace SerialPortTerminal
     private void btnOpenPort_Click(object sender, EventArgs e)
     {
 			bool error = false;
+            // Open GUI Window
+            GUIWin = new GUIform(this);
+            GUIWin.Show();
 
       // If the port is open, close it.
       if (comport.IsOpen) comport.Close();

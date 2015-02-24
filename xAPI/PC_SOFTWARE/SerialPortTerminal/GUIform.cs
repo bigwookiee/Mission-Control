@@ -237,7 +237,7 @@ namespace SerialPortTerminal
          **/
         private void SubmitFlightPlan(object sender, EventArgs e)
         {
-            parentSerialTerminal.SendString_LCD("0,0,TestData");
+            //parentSerialTerminal.SendString_LCD("0,0,TestData");
 
             if (instructionP.Controls.Count == 0)
             {
