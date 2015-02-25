@@ -79,6 +79,76 @@
 #define TUN_TYPE_EXTERNAL_CHAT 0x08
 #define TUN_TYPE_LOCAL_CHAT 0x09
 
+//for take-off
+#define TUN_TYPE_LOCAL_TAKEOFF 0x50
+#define TUN_TYPE_EXTERNAL_TAKEOFF 0x51
+
+//for immediate landing
+#define TUN_TYPE_LOCAL_LAND 0x52
+#define TUN_TYPE_EXTERNAL_LAND 0x53
+
+//for goto coordinate
+#define TUN_TYPE_LOCAL_GOTO_COORD 0x54
+#define TUN_TYPE_EXTERNAL_GOTO_COORD 0x55
+
+//for do specific move (N/S/E/W)
+#define TUN_TYPE_LOCAL_DO_MOVE 0x56
+#define TUN_TYPE_EXTERNAL_DO_MOVE 0x57
+
+//for start mission plan upload
+#define TUN_TYPE_LOCAL_UPLOAD_START 0x58
+#define TUN_TYPE_EXTERNAL_UPLOAD_START 0x59
+
+//for mission plan upload instruction (coord)
+#define TUN_TYPE_LOCAL_UPLOAD_INSTRUCTION_COORD 0x60
+#define TUN_TYPE_EXTERNAL_UPLOAD_INSTRUCTION_COORD 0x61
+
+//for mission plan upload instruction (specific move)
+#define TUN_TYPE_LOCAL_UPLOAD_INSTRUCTION_DO_MOVE 0x62
+#define TUN_TYPE_EXTERNAL_UPLOAD_INSTRUCTION_DO_MOVE 0x63
+
+//for end mission plan upload 
+#define TUN_TYPE_LOCAL_UPLOAD_END 0x64
+#define TUN_TYPE_EXTERNAL_UPLOAD_END 0x65
+
+//for manual control (maintain altitude)
+#define TUN_TYPE_LOCAL_MANUAL_OVERRIDE_MAINTAIN_ALT 0x66
+#define TUN_TYPE_EXTERNAL_MANUAL_OVERRIDE_MAINTAIN_ALT 0x67
+
+//for manual control (no altitude hold)
+#define TUN_TYPE_LOCAL_MANUAL_OVERRIDE_FULL 0x68
+#define TUN_TYPE_EXTERNAL_MANUAL_OVERRIDE_FULL 0x69
+
+//for ack
+#define TUN_TYPE_LOCAL_ACK 0x70
+#define TUN_TYPE_EXTERNAL_ACK 0x71
+
+//for nack
+#define TUN_TYPE_LOCAL_NACK 0x72
+#define TUN_TYPE_EXTERNAL_NACK 0x73
+
+//for heartbeat
+#define TUN_TYPE_LOCAL_HEARTBEAT 0x74
+#define TUN_TYPE_EXTERNAL_HEARTBEAT 0x75
+
+//for set altitude
+#define TUN_TYPE_LOCAL_SET_ALTITUDE 0x76
+#define TUN_TYPE_EXTERNAL_SET_ALTITUDE 0x77
+
+//for set never exceed speed
+#define TUN_TYPE_LOCAL_SET_NEVER_EXCEED_SPEED 0x78
+#define TUN_TYPE_EXTERNAL_SET_NEVER_EXCEED_SPEED 0x79
+
+//for set never exceed fall speed
+#define TUN_TYPE_LOCAL_SET_NEVER_EXCEED_FALL_SPEED 0x80
+#define TUN_TYPE_EXTERNAL_SET_NEVER_EXCEED_FALL_SPEED 0x81
+
+//for set throttle
+#define TUN_TYPE_LOCAL_SET_THROTTLE 0x82
+#define TUN_TYPE_EXTERNAL_SET_THROTTLE 0x83
+
+
+
 
 //***********************************************
 //***********************************************
