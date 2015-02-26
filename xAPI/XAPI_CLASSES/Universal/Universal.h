@@ -95,6 +95,10 @@
 #define TUN_TYPE_LOCAL_DO_MOVE 0x56
 #define TUN_TYPE_EXTERNAL_DO_MOVE 0x57
 
+//for do rotate (degree)
+#define TUN_TYPE_LOCAL_ROTATE 0x5A
+#define TUN_TYPE_EXTERNAL_ROTATE 0x5B
+
 //for start mission plan upload
 #define TUN_TYPE_LOCAL_UPLOAD_START 0x58
 #define TUN_TYPE_EXTERNAL_UPLOAD_START 0x59
@@ -106,6 +110,18 @@
 //for mission plan upload instruction (specific move)
 #define TUN_TYPE_LOCAL_UPLOAD_INSTRUCTION_DO_MOVE 0x62
 #define TUN_TYPE_EXTERNAL_UPLOAD_INSTRUCTION_DO_MOVE 0x63
+
+//for mission plan land
+#define TUN_TYPE_LOCAL_UPLOAD_INSTRUCTION_LAND 0x6A
+#define TUN_TYPE_EXTERNAL_UPLOAD_INSTRUCTION_LAND 0x6B
+
+//for mission plan take-off
+#define TUN_TYPE_LOCAL_UPLOAD_INSTRUCTION_TAKEOFF 0x6C
+#define TUN_TYPE_EXTERNAL_UPLOAD_INSTRUCTION_TAKEOFF 0x6D
+
+//for mission plan instruction rotation
+#define TUN_TYPE_LOCAL_UPLOAD_INSTRUCTION_ROTATE 0x6E
+#define TUN_TYPE_EXTERNAL_UPLOAD_INSTRUCTION_ROTATE 0x6F
 
 //for end mission plan upload 
 #define TUN_TYPE_LOCAL_UPLOAD_END 0x64
