@@ -95,15 +95,13 @@ To satisfy our project's requirements, we need to design a Flight Control servic
 	0x54/0x55 & X,Y,Altitude & Go to specific\\
 	& & coordinate \\
 	0x56/0x57 & MoveDirection,Amount,Metric & Carry out specific move\\  		& & (North/South/East/West) \\
-	0x5C/0x5D & Rotation & Rotate specific amount \\
+	0x5A/0x5B & Rotation & Rotate specific amount \\
 	0x58/0x59 & N/A & Start mission plan upload \\
 	0x60/0x61 & X,Y,Altitude & Mission instruction - go to specific\\ & & coordinate \\
 	0x62/0x63 & MoveDirection,Amount,Metric & Mission instruction - carry out specific move\\
 	& & (North/South/East/West) \\
 	0x6A/0x6B &  & Instruction - Land \\  
-	0x5A/0x5B & Altitude & Instruction - Take off and maintain \\ 		    & & specific altitude \\
-	0x6C/0x6D & X,Y,Altitude & Instruction - Go to  \\
-		& & specific coordinate \\
+	0x6C/0x6D & Altitude & Instruction - Take off and maintain \\ 		    & & specific altitude \\
 	0x6E/0x6F & Rotation & Instruction - Rotate specific amount \\
 	0x64/0x65 & ChecksumValue & End install and check checksum to\\ 	& & validate success \\
 	0x66/0x67 & N/A & Stop current mission plan and activate\\
