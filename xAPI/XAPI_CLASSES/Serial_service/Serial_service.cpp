@@ -136,20 +136,88 @@ boolean Serial_service::process_TUN_packet(	uint8_t* buff,
 					MSB: 13A200
 					LSB: 40A8BC2C
 				*/
+				//uint32_t msb = 0x13A200;
+				//uint16_t lsb = 0x40A8BC2C;
+				uint32_t msb = 0x0;
+				uint16_t lsb = 0xffff;
 				
-				uint32_t msb = 0x13A200;
-				uint16_t lsb = 0x40A8BC2C;
+								
+				uint8_t x = 0;
+				uint8_t y = 0;
+				uint8_t LCD_payload_sz = 0;
+				uint8_t packet_size = 0;
+				// storage for payload
+				uint8_t payload[MED_BUFF_SZ];
+				uint8_t message[MED_BUFF_SZ];
+				// storage for new packet
+				//uint8_t new_TUN_packet[LARGE_BUFF_SZ];
+				//uint8_t new_TUN_packet_sz = 0;
 
-				uint8_t packet[LARGE_BUFF_SZ];
-				m_xapi.construct_transmit_req(msb, 
-										lsb, 
-										ADDR16_BROADCAST,
-										buff, 
-										buff_sz,
-										packet, 
+				uint8_t payload_buff_sz = 0;
+				
+				uint8_t payload_buff[LARGE_BUFF_SZ];
+				uint8_t packet_buff[LARGE_BUFF_SZ];
+
+				uint8_t TUN_buff[LARGE_BUFF_SZ];
+				uint8_t TUN_buff_sz = 0;					
+				/*
+				// extract payload, should contain x,y,message
+				LCD_payload_sz = m_util.get_TUN_payload(buff, payload, MED_BUFF_SZ);
+
+				// get the X and Y coordinates
+				x = m_util.hex_to_int(LCD_X_START, LCD_X_END, LCD_X_SZ, LCD_payload);
+				y = m_util.hex_to_int(LCD_Y_START, LCD_Y_END, LCD_Y_SZ, LCD_payload);
+			
+				// figure out the msg size
+				LCD_payload_sz -= (LCD_X_SZ + LCD_Y_SZ);
+			
+				// display the string
+				for(uint8_t i = 0; i < LCD_payload_sz; i++)
+					message[i] = LCD_payload[i+LCD_MSG_START];
+				*/										
+				//m_lcd.lcd_print(0,0,"first");
+				payload_buff_sz = m_util.get_TUN_payload(buff, payload_buff, MED_BUFF_SZ);
+				//m_lcd.lcd_print(0,0,"second");
+
+				TUN_buff_sz = m_util.create_TUN_packet(	TUN_TYPE_EXTERNAL_LCD_MSG, 
+										payload_buff, 
+										payload_buff_sz, 
+										TUN_buff, 
 										LARGE_BUFF_SZ);
+				//construct and send packet
+								//m_lcd.lcd_print(0,0,"third");
 
-				m_xapi.snd_packet(packet, LARGE_BUFF_SZ);
+								
+				//TUN_buff[0] = 'X';
+				//TUN_buff[1] = 'X';
+				//TUN_buff[2] = 'X';
+				//TUN_buff_sz = 3;
+				
+				packet_size = m_xapi.construct_transmit_req(msb, 
+															lsb, 
+															ADDR16_BROADCAST,
+															TUN_buff, 
+															TUN_buff_sz,
+															packet_buff, 
+															LARGE_BUFF_SZ);
+				//m_lcd.lcd_print(0,0,"fourth");
+
+
+				m_xapi.snd_packet(packet_buff, packet_size);   
+				
+				//uint8_t* TUN_buff[3];
+				//TUN_buff[0] = 'X';
+				//TUN_buff[1] = 'X';
+				//TUN_buff[2] = 'X';
+				//lcd.lcd_snd_EXTERNAL_message(	msb,
+					//					lsb,
+						//				ADDR16_BROADCAST,
+							//			0,
+								//		0,
+									//	(uint8_t*)"XXXX");
+				
+				//m_lcd.lcd_print(0,0,"final");
+				//m_xapi.display_TUN_packet(TUN_buff, TUN_buff_sz);
 
 
 			break;
@@ -228,8 +296,8 @@ uint8_t Serial_service::assemble_TUN_packet(uint8_t c)
 
 //************************************************
 //************************************************
-Serial_service::Serial_service(HardwareSerial& _serial, Xapi& _xapi):
-m_serial(_serial), m_xapi(_xapi)
+Serial_service::Serial_service(HardwareSerial& _serial, Xapi& _xapi)://, LCD_service& _lcd):
+m_serial(_serial), m_xapi(_xapi)//, m_lcd(_lcd)
 {
 	m_util = Util();
 	reset_rx_state();

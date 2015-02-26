@@ -6,6 +6,8 @@
 #include <Universal.h>
 #include <Util.h>
 #include <Single_buff.h>
+#include <Land_service.h>
+#include <Takeoff_service.h>
 
 //0013a200
 //40a1446d
@@ -15,6 +17,11 @@
 Xapi xapi = Xapi(Serial);
 //Serial_service serial_service = Serial_service(Serial1, xapi);
 LCD_service lcd_service (xapi);
+//************************************************
+// The next services pertain to drone instructions
+//************************************************
+Takeoff_service takeoff_service(xapi);
+Land_service land_service(xapi);
 //Serial_service serial_service = Serial_service(Serial1, xapi, lcd_service);
 uint8_t msg1[] =   "I FEEL GREAT";
 uint8_t msg2[] =   "COMMODORE 64";
@@ -36,86 +43,20 @@ void setup()
 //***********************************************
 void loop()
 {
-  system_active();
-  process_buttons();
+  //system_active();
+  //process_buttons();
   xapi.xapi_latch();
   lcd_service.lcd_service_latch();
-  serial_service.serial_service_latch();
+  takeoff_service.takeoff_service_latch();
+  land_service.land_service_latch();
+  //serial_service.serial_service_latch();
+  
   //delay(4000);
 }
 
-//***********************************************
-//***********************************************
-
-void process_buttons()
-{
-  // storage for the button
-  int button;
-
-  button = lcd_service.get_lcd_key();
-
-  // process packet
-  if(button == LCD_btnSELECT)
-  {
-  
-    lcd_service.lcd_snd_local_serial_debug((const uint8_t*)"SELECT");
-    //lcd_service.lcd_snd_LOCAL_message(0,0,(const uint8_t*)"VICTORY(C)     ");
-    lcd_service.lcd_snd_EXTERNAL_message(ADDR_MSB, 0x40a1446d, ADDR16_BROADCAST, 
-                                        0,0,(const uint8_t*)"VICTORY(EN)    ");
-  
-  
-    /*
-    lcd_service.lcd_snd_EXTERNAL_message(  DEBUG_MSB_ADDR,
-					  DEBUG_LSB_ADDR,
-				          DEBUG_ADDR16,
-					  0,
-					  0,
-					  _clear);
-    
-    
-    
-   lcd_service.lcd_snd_EXTERNAL_message(  DEBUG_MSB_ADDR,
-					  DEBUG_LSB_ADDR,
-				          DEBUG_ADDR16,
-					  0,
-					  0,
-					  msg1);
-  
-  lcd_service.lcd_print(0, 0, (const char*)"first message");
-  lcd_service.lcd_print(0,1, (const char*)"                ");
-  
-*/
-  }
-
-  if(button == LCD_btnLEFT )
-  {
-    
-    lcd_service.lcd_snd_LOCAL_message(0,0,(const uint8_t*)"GOOD JERB!!!!!!");
-    
-    /*
-    lcd_service.lcd_snd_EXTERNAL_message(  DEBUG_MSB_ADDR,
-					  DEBUG_LSB_ADDR,
-				          DEBUG_ADDR16,
-					  0,
-					  1,
-					  _clear);
-    
-    
-    lcd_service.lcd_snd_EXTERNAL_message(  DEBUG_MSB_ADDR,
-					  DEBUG_LSB_ADDR,
-				          DEBUG_ADDR16,
-					  0,
-					  1,
-					  msg2);
-
-  lcd_service.lcd_print(0, 1, (const char*)"second message");
-  lcd_service.lcd_print(0,0, (const char*)"                ");
-  
-  */
-  }
-}
 
 //***********************************************
+// Old function. Not needed
 //***********************************************
 void system_active()
 {

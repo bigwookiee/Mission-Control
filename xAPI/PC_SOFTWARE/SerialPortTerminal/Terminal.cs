@@ -603,12 +603,12 @@ namespace SerialPortTerminal
             }
             // must remove null bytes from string
             string result = packet.Replace("\0", string.Empty);
-            Log(LogMsgType.Outgoing, "packet null replaced\n");
+            //Log(LogMsgType.Outgoing, "packet null replaced\n");
             // Send the user's text straight out the port
             comport.Write(result);
-            Log(LogMsgType.Outgoing, "packet written\n");
+            //Log(LogMsgType.Outgoing, "packet written\n");
             // display the packet
-            Log(LogMsgType.Outgoing, result + "\n");
+            //Log(LogMsgType.Outgoing, result + "\n");
 
         }
         //*******************************************************************
@@ -634,10 +634,61 @@ namespace SerialPortTerminal
             }
             // must remove null bytes from string
             string result = packet.Replace("\0", string.Empty);
-            Log(LogMsgType.Outgoing, "packet null replaced\n");
+            //Log(LogMsgType.Outgoing, "packet null replaced\n");
             // Send the user's text straight out the port
             comport.Write(result);
-            Log(LogMsgType.Outgoing, "packet written\n");
+            //Log(LogMsgType.Outgoing, "packet written\n");
+            // display the packet
+            //Log(LogMsgType.Outgoing, result + "\n");
+
+        }
+        //*******************************************************************
+        // Public routine for sending TUN land drone packet intended for use by GUI
+        //
+        public void Send_land_packet()
+        {
+
+            // storage for the packet
+            string packet;
+
+            //string raw_text = input.Replace("\0", string.Empty);
+
+
+
+            // create the packet
+            int returnSz = m_util.create_land_TUN_packet((int)TUN_types.TUN_TYPE_EXTERNAL_LAND, out packet);
+            //int returnSz = m_util.create_LCD_TUN_packet((int)TUN_types.TUN_TYPE_LOCAL_LCD_MSG, raw_text, out packet);
+            // must remove null bytes from string
+            string result = packet.Replace("\0", string.Empty);
+            // Send the user's text straight out the port
+            comport.Write(result);
+         
+            // display the packet
+            Log(LogMsgType.Outgoing, result + "\n");
+
+        }
+
+        //*******************************************************************
+        // Public routine for sending TUN land drone packet intended for use by GUI
+        // Args: altitude (altitude at which the drone should reach)
+        public void Send_takeoff_packet(int altitude)
+        {
+
+            // storage for the packet
+            string packet;
+
+            //string raw_text = input.Replace("\0", string.Empty);
+
+
+
+            // create the packet
+            int returnSz = m_util.create_takeoff_TUN_packet((int)TUN_types.TUN_TYPE_EXTERNAL_TAKEOFF, altitude, out packet);
+            //int returnSz = m_util.create_LCD_TUN_packet((int)TUN_types.TUN_TYPE_LOCAL_LCD_MSG, raw_text, out packet);
+            // must remove null bytes from string
+            string result = packet.Replace("\0", string.Empty);
+            // Send the user's text straight out the port
+            comport.Write(result);
+
             // display the packet
             Log(LogMsgType.Outgoing, result + "\n");
 

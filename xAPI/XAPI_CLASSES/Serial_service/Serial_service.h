@@ -6,6 +6,7 @@
 #include <single_buff.h>
 #include <util.h>
 #include <xapi.h>
+#include <LCD_service.h>
 
 //**********************************************
 //**********************************************
