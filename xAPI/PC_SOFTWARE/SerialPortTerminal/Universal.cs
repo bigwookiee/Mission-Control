@@ -56,6 +56,24 @@ namespace SerialPortTerminal
 
     //***********************************************
     //***********************************************
+    // Movement direction values for drone instruction
+    enum DRONE_movement_dir
+    {
+        MOVE_FORWARD = 0x00, MOVE_BACKWARD = 0x01,
+        MOVE_LEFT = 0x02, MOVE_RIGHT = 0x03
+    }
+
+    //***********************************************
+    //***********************************************
+    // Movement metric types for drone instruction
+    enum DRONE_movement_metric
+    {
+        METRIC_FEET = 0x00, METRIC_SECONDS = 0x01
+    }
+
+
+    //***********************************************
+    //***********************************************
     // TUN packet types
     enum TUN_types
     {

@@ -693,6 +693,33 @@ namespace SerialPortTerminal
             Log(LogMsgType.Outgoing, result + "\n");
 
         }
+              //*******************************************************************
+        // Public routine for sending TUN move specific (left,right,forward,backwards) 
+        // drone packet intended for use by GUI
+        // Args: moveType (use DRONE_movement_dir), metricType(DRONE_movement_metric), moveAmount
+        public void Send_move_specifc(int moveType, int metricType, int moveAmount)
+        {
+
+            // storage for the packet
+            string packet;
+
+            //string raw_text = input.Replace("\0", string.Empty);
+
+
+
+            // create the packet
+            int returnSz = m_util.create_specific_move_TUN_packet((int)TUN_types.TUN_TYPE_EXTERNAL_TAKEOFF, moveType, metricType,
+                                                                    moveAmount, out packet);
+            //int returnSz = m_util.create_LCD_TUN_packet((int)TUN_types.TUN_TYPE_LOCAL_LCD_MSG, raw_text, out packet);
+            // must remove null bytes from string
+            string result = packet.Replace("\0", string.Empty);
+            // Send the user's text straight out the port
+            comport.Write(result);
+
+            // display the packet
+            Log(LogMsgType.Outgoing, result + "\n");
+        }
+
         //*******************************************************************
         //*******************************************************************
         // Updates the count down (-1), and if <=0, the heads up
