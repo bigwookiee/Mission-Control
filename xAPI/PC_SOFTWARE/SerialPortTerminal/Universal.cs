@@ -68,7 +68,7 @@ namespace SerialPortTerminal
     // Movement metric types for drone instruction
     enum DRONE_movement_metric
     {
-        METRIC_FEET = 0x00, METRIC_SECONDS = 0x01
+        METRIC_FEET = 0x00, METRIC_SECONDS = 0x01, METRIC_METERS = 0x02
     }
 
 

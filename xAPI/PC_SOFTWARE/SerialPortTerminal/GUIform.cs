@@ -13,6 +13,8 @@ namespace SerialPortTerminal
     {
         int instructs = 0;
         frmTerminal parentSerialTerminal;
+        bool Takeoff = false;
+
         public GUIform(frmTerminal parentTerminal)
         {
             parentSerialTerminal = parentTerminal;
@@ -148,10 +150,10 @@ namespace SerialPortTerminal
                 dir.Location = new Point(78, 14);
                 dir.Items.Add("Up");
                 dir.Items.Add("Down");
-                dir.Items.Add("North");
-                dir.Items.Add("South");
-                dir.Items.Add("East");
-                dir.Items.Add("West");
+                dir.Items.Add("Forward");
+                dir.Items.Add("Back");
+                dir.Items.Add("Left");
+                dir.Items.Add("Right");
                 dir.Text = "Direction";
                 dir.Name = "dir";
                 cb.Parent.Controls.Add(dir);
@@ -237,6 +239,12 @@ namespace SerialPortTerminal
          **/
         private void SubmitFlightPlan(object sender, EventArgs e)
         {
+            if (!Takeoff)
+            {
+                parentSerialTerminal.Send_takeoff_packet(4);
+                Takeoff = true;
+            }
+
             //parentSerialTerminal.SendString_LCD("0,0,TestData");
 
             if (instructionP.Controls.Count == 0)
@@ -269,9 +277,9 @@ namespace SerialPortTerminal
 
                     //Parse data and send to drone
                     String field0, field1, field2, field3;
-                    field0 = p.Controls[0].Text;
-                    field1 = p.Controls[j].Text;
-                    field2 = p.Controls[j + 1].Text;
+                    field0 = p.Controls[0].Text;        // Packet Type
+                    field1 = p.Controls[j].Text;        // Move/Rotate: direction  ... GPS Longitude
+                    field2 = p.Controls[j + 1].Text;    // Move/Rotate: value ... GPS Latitude
 
                     switch (field0)
                     {
@@ -287,20 +295,28 @@ namespace SerialPortTerminal
                                     //calculate new coords.
                                     break;
 
-                                case "North":
-                                    //calculate new coords.
+                                case "Forward":
+                                    parentSerialTerminal.Send_move_specifc((int) DRONE_movement_dir.MOVE_FORWARD,
+                                                                           (int) DRONE_movement_metric.METRIC_METERS,
+                                                                           Int32.Parse(field2));
                                     break;
 
-                                case "South":
-                                    //calculate new coords.
+                                case "Back":
+                                    parentSerialTerminal.Send_move_specifc((int)DRONE_movement_dir.MOVE_BACKWARD,
+                                                                           (int)DRONE_movement_metric.METRIC_METERS,
+                                                                           Int32.Parse(field2));
                                     break;
 
-                                case "East":
-                                    //calculate new coords.
+                                case "Left":
+                                    parentSerialTerminal.Send_move_specifc((int)DRONE_movement_dir.MOVE_LEFT,
+                                                                           (int)DRONE_movement_metric.METRIC_METERS,
+                                                                           Int32.Parse(field2));
                                     break;
 
-                                case "West":
-                                    //calculate new coords.
+                                case "Right":
+                                    parentSerialTerminal.Send_move_specifc((int)DRONE_movement_dir.MOVE_RIGHT,
+                                                                           (int)DRONE_movement_metric.METRIC_METERS,
+                                                                           Int32.Parse(field2));
                                     break;
                             }
                             break;
@@ -339,11 +355,11 @@ namespace SerialPortTerminal
         private bool checkInstructCompletion(Control p)
         {
             if (!(p.Controls[1] is Button)) return false;
-            if ((p.Controls[0].Text == "Move" || p.Controls[0].Text == "Rotate" || p.Controls[0].Text == "GPS") &&
-                (p.Controls[2].Text != "Long" && p.Controls[2].Text != "" || (p.Controls[2].Text == "North" || p.Controls[2].Text == "South" ||
-                 p.Controls[2].Text == "East" || p.Controls[2].Text == "West" || p.Controls[2].Text == "Left" || p.Controls[2].Text == "Right")) &&
-                (p.Controls[3].Text != "Lat" && p.Controls[3].Text != "" && p.Controls[3].Text != "0") &&
-                (p.Controls[4].Text != "Alt" && p.Controls[4].Text != ""))
+            if ((p.Controls[0].Text == "Move" || p.Controls[0].Text == "Rotate" || p.Controls[0].Text == "GPS")     &&
+                (p.Controls[2].Text != "Long" && p.Controls[2].Text != ""       || (p.Controls[2].Text == "Forward" || 
+                 p.Controls[2].Text == "Back" || p.Controls[2].Text == "Left"   || p.Controls[2].Text == "Right"))  &&
+                (p.Controls[3].Text != "Lat"  && p.Controls[3].Text != ""       && p.Controls[3].Text != "0")       &&
+                (p.Controls[4].Text != "Alt"  && p.Controls[4].Text != ""))
             {
                 return true;
             }

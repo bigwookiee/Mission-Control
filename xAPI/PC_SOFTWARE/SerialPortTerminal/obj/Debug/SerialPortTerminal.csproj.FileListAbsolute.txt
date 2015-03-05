@@ -138,3 +138,4 @@ C:\Users\Taylor Trabun\Documents\MissionControl\Mission-Control\xAPI\PC_SOFTWARE
 C:\Users\Taylor Trabun\Documents\MissionControl\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPort Terminal.application
 C:\Users\higle_000\Documents\GitHub\Mission-Control\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.GUIform.resources
 C:\Users\Taylor Trabun\Documents\MissionControl\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.GUIform.resources
+C:\Users\higle_000\Documents\GitHub\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.GUIform.resources
