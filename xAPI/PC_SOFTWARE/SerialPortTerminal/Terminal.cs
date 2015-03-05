@@ -708,7 +708,7 @@ namespace SerialPortTerminal
 
 
             // create the packet
-            int returnSz = m_util.create_specific_move_TUN_packet((int)TUN_types.TUN_TYPE_EXTERNAL_TAKEOFF, moveType, metricType,
+            int returnSz = m_util.create_specific_move_TUN_packet((int)TUN_types.TUN_TYPE_EXTERNAL_DO_MOVE, moveType, metricType,
                                                                     moveAmount, out packet);
             //int returnSz = m_util.create_LCD_TUN_packet((int)TUN_types.TUN_TYPE_LOCAL_LCD_MSG, raw_text, out packet);
             // must remove null bytes from string
