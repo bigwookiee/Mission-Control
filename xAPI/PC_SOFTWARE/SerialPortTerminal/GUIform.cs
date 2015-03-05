@@ -245,13 +245,95 @@ namespace SerialPortTerminal
             }
             //Animate the submition.
             Control p = instructionP.Controls[0];
-
             if (checkInstructCompletion(p))
             {
                 p.BackColor = Color.LightCoral;
-                p.Controls.Remove(p.Controls[1]);
+                if (p.Controls[1] is Button) // only remove - button if this is a button
+                {
+                    p.Controls.Remove(p.Controls[1]);
+                }
+
             }
-            
+
+            //Send data to drone
+            for (int i = 0; i < instructionP.Controls.Count; i++)
+            {
+                p = instructionP.Controls[i];
+                if (checkInstructCompletion(p)) //Only submit complete instructions
+                {
+                    int j = 1; //Starting control of parsed data
+                    if (p.Controls[1] is Button) //If control is not first control
+                    {
+                        j = 2;
+                    }
+
+                    //Parse data and send to drone
+                    String field0, field1, field2, field3;
+                    field0 = p.Controls[0].Text;
+                    field1 = p.Controls[j].Text;
+                    field2 = p.Controls[j + 1].Text;
+
+                    switch (field0)
+                    {
+                        case "Move":
+                            /** Create Move Packet to send to drone **/
+                            switch (field1)
+                            {
+                                case "Up":
+                                    //calculate new coords.
+                                    break;
+
+                                case "Down":
+                                    //calculate new coords.
+                                    break;
+
+                                case "North":
+                                    //calculate new coords.
+                                    break;
+
+                                case "South":
+                                    //calculate new coords.
+                                    break;
+
+                                case "East":
+                                    //calculate new coords.
+                                    break;
+
+                                case "West":
+                                    //calculate new coords.
+                                    break;
+                            }
+                            break;
+
+
+                        case "Rotate":
+                            /** Create Rotate Packet to send to drone **/
+                            switch (field1)
+                            {
+                                case "Left":
+                                    //calculate new facing
+                                    break;
+
+                                case "Right":
+                                    //calculate new facing
+                                    break;
+                            }
+                            break;
+
+
+                        case "GPS":
+                            field3 = p.Controls[j + 2].Text; //only used for GPS packet.
+                            /** Create GPS Packet to send to drone **/
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                    // FORM/SEND PACKET
+                }
+            }
+
         }
 
         private bool checkInstructCompletion(Control p)
