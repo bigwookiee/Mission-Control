@@ -53,6 +53,9 @@ namespace SerialPortTerminal
       // for GUI
       GUIform GUIWin;
 
+      //for Instrument Panel
+      DemoWinow InsturmentWin;
+
     // for the XBee services
       Xbee_service xbee_service;
 
@@ -262,6 +265,9 @@ namespace SerialPortTerminal
             // Open GUI Window
             GUIWin = new GUIform(this);
             GUIWin.Show();
+            // Open Avionics Instrument Window
+            InsturmentWin = new DemoWinow(this);
+            InsturmentWin.Show();
 
       // If the port is open, close it.
       if (comport.IsOpen) comport.Close();

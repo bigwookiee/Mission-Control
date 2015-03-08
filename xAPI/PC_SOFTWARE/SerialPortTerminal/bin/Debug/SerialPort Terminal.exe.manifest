@@ -58,14 +58,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SerialPort Terminal.exe" size="151040">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SerialPort Terminal.exe" size="3053568">
       <assemblyIdentity name="SerialPort Terminal" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>XyeKTAmVsgEomf54kgbAAubvdfA=</dsig:DigestValue>
+        <dsig:DigestValue>ZcrcXmTXhH4p88C/mvgNnVdBHc4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -141,13 +141,13 @@
       <dsig:DigestValue>ezzKn1xitmhK3st5L7Ah8TbAnSQ=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="SerialPort Terminal.pdb" size="136704">
+  <file name="SerialPort Terminal.pdb" size="208384">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>6lF5KFVyVr8FDUyF+wCOeWgQxa4=</dsig:DigestValue>
+      <dsig:DigestValue>03f5jA/l6EAW5OK+ADIBuRgK8VA=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>
