@@ -1,0 +1,74 @@
+\documentclass[a4paper,landscape]{article}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{array}
+
+\begin{document}
+
+	\section{Risk Assessment}
+		\def\arraystretch{1.8}
+		\begin{center}
+		\begin{small}
+		\begin{tabular}{| m{2.5cm} | m{3cm} | m{4cm} | m{3cm} | m{2cm} | m{1.7cm} | m{1.7cm} | m{4cm} |}
+			\hline
+				\centering \textbf{Description of component, subsystem, or function} &
+				\centering \textbf{Symptom\break(what?)} &
+				\centering \textbf{Effect\break(so what)} &
+				\centering \textbf{Failure mode\break(why?)} &
+				\centering \textbf{Probability of Failure} &
+				\centering \textbf{Severity of Effect} &
+				\centering \textbf{Risk Priority} &
+				\centering\arraybackslash \textbf{Remedial Action} \\
+			\hline
+		\end{tabular}
+		\\
+		\begin{tabular}{| >{\raggedright}p{2.5cm} | >{\raggedright}p{3cm} | >{\raggedright}p{4cm} | >{\raggedright}p{3cm} | >{\centering}m{2cm} | >{\centering}m{1.7cm} | >{\centering}m{1.7cm} | >{\raggedright\arraybackslash}p{4cm} |}
+			\hline
+				Sensors &
+				Failure to init. \newline\newline Error code. &
+				Unexpected drone behavior. &
+				Hardware failure \newline\newline Code error &
+				2 &
+				4 &
+				8 &
+				Check wire connections. \newline\newline Debug code. \\
+			\hline
+				Motors &
+				1 or more motors not rotating. &
+				Propellers do not spin. \newline\newline Bad or no take-off. &
+				Disconnected wire. \newline\newline Bad motor. \newline\newline Error in code. &
+				1 &
+				2 & 
+				2 &
+				Check wire connections. \newline\newline Replace motor. \newline\newline Debug code. \\
+			\hline
+				Comm Hardware &
+				Packets not being sent/received. \newline\newline Doesn't turn on. &
+				No updates between drone and computer. \newline\newline Drone doesn't fly. &
+				Disconnected Cable. \newline\newline\newline Bad firmware/code. \newline\newline Bad power source. &
+				2 &
+				3 &
+				6 &
+				Check cable connections. \newline\newline\newline Check for firmware update. \newline\newline Replace power source. \\
+			\hline
+				Firmware &
+				Can't connect to COMM ports. &
+				Unable to communicate with drone. \newline\newline Unable to open GUI system or auxiliary windows. &
+				Incompatible or Out-of-date firmware. &
+				1 &
+				1 &
+				1 &
+				Look for firmware update. \\
+			\hline
+				Software/GUI &
+				Program doesn't execute. \newline\newline Fails to open GUI window. \newline\newline\newline\newline Fails to open utility windows. &
+				No communication to drone. \newline\newline No flight. \newline\newline No access to flight planner. \newline\newline No access to manual controls and other auxiliary windows. &
+				Bad executable. \newline\newline\newline No connection to drone COMM system. \newline\newline\newline Bad code/code error. &
+				2 &
+				2 &
+				4 &
+				Remake executable. \newline\newline\newline Check firmware and physical connections. \newline\newline\newline\newline Debug code. \\
+			\hline
+		\end{tabular}
+		\end{small}
+		\end{center}
+\end{document}
