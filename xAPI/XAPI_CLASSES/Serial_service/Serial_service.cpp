@@ -132,7 +132,32 @@ boolean Serial_service::process_TUN_packet(	uint8_t* buff,
 			break;	
 			
 			case TUN_TYPE_EXTERNAL_LCD_MSG:
-				/*	Router info
+				create_and_pass_external(TUN_TYPE_EXTERNAL_LCD_MSG, buff, buff_sz);
+				//m_lcd.lcd_print("**************");
+				m_lcd.lcd_print(0,0,"Got LCD");
+			break;
+			case TUN_TYPE_EXTERNAL_LAND:
+				create_and_pass_external(TUN_TYPE_EXTERNAL_LAND,buff, buff_sz);
+				//m_lcd.lcd_print("**************");
+				m_lcd.lcd_print(0,0,"Got Land");
+			break;
+			case TUN_TYPE_EXTERNAL_TAKEOFF:
+				create_and_pass_external(TUN_TYPE_EXTERNAL_TAKEOFF, buff, buff_sz);
+				//m_lcd.lcd_print("**************");
+				m_lcd.lcd_print(0,0,"Got Takeoff");
+			break;
+		}
+	
+		success = true;
+	}
+	return success;
+}
+
+void Serial_service::create_and_pass_external(uint8_t packet_type,
+											  uint8_t* buff, 
+											  uint8_t buff_sz)
+{
+/*	Router info
 					MSB: 13A200
 					LSB: 40A8BC2C
 				*/
@@ -179,7 +204,7 @@ boolean Serial_service::process_TUN_packet(	uint8_t* buff,
 				payload_buff_sz = m_util.get_TUN_payload(buff, payload_buff, MED_BUFF_SZ);
 				//m_lcd.lcd_print(0,0,"second");
 
-				TUN_buff_sz = m_util.create_TUN_packet(	TUN_TYPE_EXTERNAL_LCD_MSG, 
+				TUN_buff_sz = m_util.create_TUN_packet(	packet_type, 
 										payload_buff, 
 										payload_buff_sz, 
 										TUN_buff, 
@@ -219,13 +244,6 @@ boolean Serial_service::process_TUN_packet(	uint8_t* buff,
 				//m_lcd.lcd_print(0,0,"final");
 				//m_xapi.display_TUN_packet(TUN_buff, TUN_buff_sz);
 
-
-			break;
-		}
-	
-		success = true;
-	}
-	return success;
 }
 
 //************************************************************************
@@ -296,8 +314,8 @@ uint8_t Serial_service::assemble_TUN_packet(uint8_t c)
 
 //************************************************
 //************************************************
-Serial_service::Serial_service(HardwareSerial& _serial, Xapi& _xapi)://, LCD_service& _lcd):
-m_serial(_serial), m_xapi(_xapi)//, m_lcd(_lcd)
+Serial_service::Serial_service(HardwareSerial& _serial, Xapi& _xapi, LCD_service& _lcd):
+m_serial(_serial), m_xapi(_xapi), m_lcd(_lcd)
 {
 	m_util = Util();
 	reset_rx_state();

@@ -9,8 +9,7 @@
 //***************************************************
 void Takeoff_service::takeoff_service_latch()
 {
-	// update the button states
-		
+
 	// process any local LCD message packets
 	process_local_TUN_packet();
 	
@@ -37,6 +36,13 @@ void Takeoff_service::process_external_TUN_packet()
 		m_xapi.CONNECT_external_TUN_get_packet(TUN_packet, MED_BUFF_SZ);
 	
 		// do something
+		//lcd prints are for debugging, should be removed
+		//m_lcd.lcd_print(0,0,"*************");
+		//m_lcd.lcd_print(0,0,"Got Takeoff");
+		m_lcd.lcd_print(0,0,"ttest1");
+		m_lcd.lcd_print(0,0,"takeoff");		
+		m_lcd.lcd_print(0,0,"ttest2");
+		
 
 	}
 }
@@ -58,6 +64,7 @@ void Takeoff_service::process_local_TUN_packet()
 		m_xapi.CONNECT_local_TUN_get_packet(TUN_packet, MED_BUFF_SZ);
 	
 		// do something
+
 	}
 }
 
@@ -71,8 +78,8 @@ void Takeoff_service::reset_TUN_storage()
 
 //***************************************************
 //***************************************************
-Takeoff_service::Takeoff_service(Xapi& _xapi):
-m_xapi(_xapi)
+Takeoff_service::Takeoff_service(Xapi& _xapi, LCD_service& _lcd):
+m_xapi(_xapi), m_lcd(_lcd)
 {
 	reset_TUN_storage();
 

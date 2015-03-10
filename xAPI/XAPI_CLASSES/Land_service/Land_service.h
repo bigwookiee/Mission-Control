@@ -3,6 +3,7 @@
 #include <arduino.h>
 #include <Xapi.h>
 #include <Util.h>
+#include <LCD_service.h>
 
 
 //**********************************************
@@ -14,6 +15,7 @@ class Land_service
 	private:
 		Xapi& m_xapi;
 		Util m_util;
+		LCD_service& m_lcd;
 		
 	private:
 
@@ -30,7 +32,7 @@ class Land_service
 		
 	// Constructor
 	public:
-		Land_service(Xapi& _xapi);
+		Land_service(Xapi& _xapi, LCD_service& _lcd);
 };
 
 #endif

@@ -8,8 +8,7 @@
 //***************************************************
 void Land_service::land_service_latch()
 {
-	// update the button states
-		
+
 	// process any local LCD message packets
 	process_local_TUN_packet();
 	
@@ -36,7 +35,11 @@ void Land_service::process_external_TUN_packet()
 		m_xapi.CONNECT_external_TUN_get_packet(TUN_packet, MED_BUFF_SZ);
 	
 		// do something
-
+		//lcd prints are for debugging, should be removed
+		//m_lcd.lcd_print("*********");
+		m_lcd.lcd_print(0,0,"ltest1");
+		m_lcd.lcd_print(0,0,"land");		
+		m_lcd.lcd_print(0,0,"ltest2");
 	}
 }
 
@@ -70,8 +73,8 @@ void Land_service::reset_TUN_storage()
 
 //***************************************************
 //***************************************************
-Land_service::Land_service(Xapi& _xapi):
-m_xapi(_xapi)
+Land_service::Land_service(Xapi& _xapi, LCD_service& _lcd):
+m_xapi(_xapi), m_lcd(_lcd)
 {
 	reset_TUN_storage();
 

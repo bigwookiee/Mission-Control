@@ -234,6 +234,17 @@ namespace SerialPortTerminal
         }
 
         /**
+         *  Land drone now
+         *  @author Taylor Trabun
+         *  
+         * Function is under construction
+         **/
+        private void LandNow(object sender, EventArgs e)
+        {
+            parentSerialTerminal.Send_land_packet();
+        }
+
+        /**
          * Submit flight plan to drone.
          * @author Joe Higley
          **/
@@ -242,7 +253,8 @@ namespace SerialPortTerminal
             if (!Takeoff)
             {
                 parentSerialTerminal.Send_takeoff_packet(4);
-                Takeoff = true;
+                //Commented for snapshot demo, uncomment when this is encountered
+                //Takeoff = true;
             }
 
             //parentSerialTerminal.SendString_LCD("0,0,TestData");
@@ -365,5 +377,7 @@ namespace SerialPortTerminal
             }
             else return false;
         }
+
+
     }
 }

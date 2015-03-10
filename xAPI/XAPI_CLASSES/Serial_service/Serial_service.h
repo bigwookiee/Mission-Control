@@ -26,6 +26,7 @@ class Serial_service
 		Util m_util;
 		HardwareSerial& m_serial;
 		Xapi& m_xapi;
+		LCD_service& m_lcd;
 		
 	// This buffer and variables keep track of 
 	// incoming RX bytes.
@@ -44,10 +45,12 @@ class Serial_service
 		void simple_local_LCD_msg( uint8_t* buff, uint8_t buff_sz);
 		void snd_serial_add_frame(const uint8_t* buff, uint8_t buff_sz);
 		void snd_local_TUN_packet_via_serial();
+		void create_and_pass_external(uint8_t packet_type, uint8_t* buff, 
+									  uint8_t buff_sz);
 	
 	// constructor and latch
 	public:
-		Serial_service(HardwareSerial& _serial, Xapi& _xapi);
+		Serial_service(HardwareSerial& _serial, Xapi& _xapi, LCD_service& _lcd);
 		void serial_service_latch();
 };
 

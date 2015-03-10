@@ -262,12 +262,13 @@ namespace SerialPortTerminal
     private void btnOpenPort_Click(object sender, EventArgs e)
     {
 			bool error = false;
+            /* The following code produces redundant windows */
             // Open GUI Window
-            GUIWin = new GUIform(this);
-            GUIWin.Show();
+            //GUIWin = new GUIform(this);
+            //GUIWin.Show();
             // Open Avionics Instrument Window
-            InsturmentWin = new DemoWinow(this);
-            InsturmentWin.Show();
+            //InsturmentWin = new DemoWinow(this);
+            //InsturmentWin.Show();
 
       // If the port is open, close it.
       if (comport.IsOpen) comport.Close();
@@ -300,6 +301,9 @@ namespace SerialPortTerminal
                     // Open GUI Window
                     GUIWin = new GUIform(this);
                     GUIWin.Show();
+
+                    InsturmentWin = new DemoWinow(this);
+                    InsturmentWin.Show();
 				}
       }
 
@@ -614,7 +618,7 @@ namespace SerialPortTerminal
             comport.Write(result);
             //Log(LogMsgType.Outgoing, "packet written\n");
             // display the packet
-            //Log(LogMsgType.Outgoing, result + "\n");
+            Log(LogMsgType.Outgoing, result + "\n");
 
         }
         //*******************************************************************
