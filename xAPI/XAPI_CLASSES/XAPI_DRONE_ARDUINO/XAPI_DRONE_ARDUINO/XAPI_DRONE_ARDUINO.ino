@@ -20,8 +20,8 @@ LCD_service lcd_service (xapi);
 //************************************************
 // The next services pertain to drone instructions
 //************************************************
-Takeoff_service takeoff_service(xapi);
-Land_service land_service(xapi);
+Takeoff_service takeoff_service(xapi, lcd_service);
+Land_service land_service(xapi, lcd_service);
 //Serial_service serial_service = Serial_service(Serial1, xapi, lcd_service);
 uint8_t msg1[] =   "I FEEL GREAT";
 uint8_t msg2[] =   "COMMODORE 64";
