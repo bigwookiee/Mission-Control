@@ -262,10 +262,10 @@ namespace SerialPortTerminal
     private void btnOpenPort_Click(object sender, EventArgs e)
     {
 			bool error = false;
-            /* The following code produces redundant windows */
+            /* The following code is for testing GUI without hardware */
             // Open GUI Window
-            //GUIWin = new GUIform(this);
-            //GUIWin.Show();
+            GUIWin = new GUIform(this);
+            GUIWin.Show();
             // Open Avionics Instrument Window
             //InsturmentWin = new DemoWinow(this);
             //InsturmentWin.Show();

@@ -55,7 +55,7 @@
             this.addFlightInstructionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.manualControlsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manualControlsLink = new System.Windows.Forms.ToolStripMenuItem();
             this.instrumentsPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serialTerminalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -329,18 +329,18 @@
             // viewToolStripMenuItem
             // 
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.manualControlsToolStripMenuItem,
+            this.manualControlsLink,
             this.instrumentsPanelToolStripMenuItem,
             this.serialTerminalToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "View";
             // 
-            // manualControlsToolStripMenuItem
+            // manualControlsLink
             // 
-            this.manualControlsToolStripMenuItem.Name = "manualControlsToolStripMenuItem";
-            this.manualControlsToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.manualControlsToolStripMenuItem.Text = "Manual Controls";
+            this.manualControlsLink.Name = "manualControlsLink";
+            this.manualControlsLink.Size = new System.Drawing.Size(169, 22);
+            this.manualControlsLink.Text = "Manual Controls";
             // 
             // instrumentsPanelToolStripMenuItem
             // 
@@ -465,7 +465,7 @@
         private System.Windows.Forms.ToolStripMenuItem addFlightInstructionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem removeSelectedToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem manualControlsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem manualControlsLink;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.Button holdPos;
