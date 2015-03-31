@@ -28,115 +28,118 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.rightButton = new System.Windows.Forms.Button();
-            this.leftButton = new System.Windows.Forms.Button();
-            this.backButton = new System.Windows.Forms.Button();
-            this.rotateRightButton = new System.Windows.Forms.Button();
-            this.rotateLeftButton = new System.Windows.Forms.Button();
-            this.upButton = new System.Windows.Forms.Button();
-            this.downButton = new System.Windows.Forms.Button();
-            this.forwardButton = new System.Windows.Forms.Button();
+            this.right = new System.Windows.Forms.Button();
+            this.left = new System.Windows.Forms.Button();
+            this.back = new System.Windows.Forms.Button();
+            this.rot_right = new System.Windows.Forms.Button();
+            this.rot_left = new System.Windows.Forms.Button();
+            this.up = new System.Windows.Forms.Button();
+            this.down = new System.Windows.Forms.Button();
+            this.forward = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.altitudeTxt = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // rightButton
+            // right
             // 
-            this.rightButton.FlatAppearance.BorderSize = 0;
-            this.rightButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rightButton.Font = new System.Drawing.Font("Consolas", 10F);
-            this.rightButton.Image = global::SerialPortTerminal.Properties.Resources.right;
-            this.rightButton.Location = new System.Drawing.Point(294, 170);
-            this.rightButton.Name = "rightButton";
-            this.rightButton.Size = new System.Drawing.Size(132, 76);
-            this.rightButton.TabIndex = 1;
-            this.rightButton.UseVisualStyleBackColor = true;
+            this.right.FlatAppearance.BorderSize = 0;
+            this.right.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.right.Font = new System.Drawing.Font("Consolas", 10F);
+            this.right.Image = global::SerialPortTerminal.Properties.Resources.right;
+            this.right.Location = new System.Drawing.Point(294, 170);
+            this.right.Name = "right";
+            this.right.Size = new System.Drawing.Size(132, 76);
+            this.right.TabIndex = 1;
+            this.right.UseVisualStyleBackColor = true;
             // 
-            // leftButton
+            // left
             // 
-            this.leftButton.FlatAppearance.BorderSize = 0;
-            this.leftButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.leftButton.Font = new System.Drawing.Font("Consolas", 10F);
-            this.leftButton.Image = global::SerialPortTerminal.Properties.Resources.left;
-            this.leftButton.Location = new System.Drawing.Point(29, 169);
-            this.leftButton.Name = "leftButton";
-            this.leftButton.Size = new System.Drawing.Size(125, 76);
-            this.leftButton.TabIndex = 2;
-            this.leftButton.UseVisualStyleBackColor = true;
+            this.left.FlatAppearance.BorderSize = 0;
+            this.left.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.left.Font = new System.Drawing.Font("Consolas", 10F);
+            this.left.Image = global::SerialPortTerminal.Properties.Resources.left;
+            this.left.Location = new System.Drawing.Point(29, 169);
+            this.left.Name = "left";
+            this.left.Size = new System.Drawing.Size(125, 76);
+            this.left.TabIndex = 2;
+            this.left.UseVisualStyleBackColor = true;
             // 
-            // backButton
+            // back
             // 
-            this.backButton.FlatAppearance.BorderSize = 0;
-            this.backButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.backButton.Font = new System.Drawing.Font("Consolas", 10F);
-            this.backButton.Image = global::SerialPortTerminal.Properties.Resources.back;
-            this.backButton.Location = new System.Drawing.Point(165, 248);
-            this.backButton.Name = "backButton";
-            this.backButton.Size = new System.Drawing.Size(118, 140);
-            this.backButton.TabIndex = 3;
-            this.backButton.UseVisualStyleBackColor = true;
+            this.back.FlatAppearance.BorderSize = 0;
+            this.back.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.back.Font = new System.Drawing.Font("Consolas", 10F);
+            this.back.Image = global::SerialPortTerminal.Properties.Resources.back;
+            this.back.Location = new System.Drawing.Point(165, 248);
+            this.back.Name = "back";
+            this.back.Size = new System.Drawing.Size(118, 140);
+            this.back.TabIndex = 3;
+            this.back.UseVisualStyleBackColor = true;
             // 
-            // rotateRightButton
+            // rot_right
             // 
-            this.rotateRightButton.FlatAppearance.BorderSize = 0;
-            this.rotateRightButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rotateRightButton.Font = new System.Drawing.Font("Consolas", 10F);
-            this.rotateRightButton.Image = global::SerialPortTerminal.Properties.Resources.rot_right;
-            this.rotateRightButton.Location = new System.Drawing.Point(262, 36);
-            this.rotateRightButton.Name = "rotateRightButton";
-            this.rotateRightButton.Size = new System.Drawing.Size(85, 36);
-            this.rotateRightButton.TabIndex = 4;
-            this.rotateRightButton.UseVisualStyleBackColor = true;
+            this.rot_right.FlatAppearance.BorderSize = 0;
+            this.rot_right.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rot_right.Font = new System.Drawing.Font("Consolas", 10F);
+            this.rot_right.Image = global::SerialPortTerminal.Properties.Resources.rot_right;
+            this.rot_right.Location = new System.Drawing.Point(262, 36);
+            this.rot_right.Name = "rot_right";
+            this.rot_right.Size = new System.Drawing.Size(85, 36);
+            this.rot_right.TabIndex = 4;
+            this.rot_right.UseVisualStyleBackColor = true;
             // 
-            // rotateLeftButton
+            // rot_left
             // 
-            this.rotateLeftButton.FlatAppearance.BorderSize = 0;
-            this.rotateLeftButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rotateLeftButton.Font = new System.Drawing.Font("Consolas", 10F);
-            this.rotateLeftButton.Image = global::SerialPortTerminal.Properties.Resources.rot_left;
-            this.rotateLeftButton.Location = new System.Drawing.Point(104, 36);
-            this.rotateLeftButton.Name = "rotateLeftButton";
-            this.rotateLeftButton.Size = new System.Drawing.Size(86, 36);
-            this.rotateLeftButton.TabIndex = 5;
-            this.rotateLeftButton.UseVisualStyleBackColor = true;
+            this.rot_left.FlatAppearance.BorderSize = 0;
+            this.rot_left.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rot_left.Font = new System.Drawing.Font("Consolas", 10F);
+            this.rot_left.Image = global::SerialPortTerminal.Properties.Resources.rot_left;
+            this.rot_left.Location = new System.Drawing.Point(104, 36);
+            this.rot_left.Name = "rot_left";
+            this.rot_left.Size = new System.Drawing.Size(86, 36);
+            this.rot_left.TabIndex = 5;
+            this.rot_left.UseVisualStyleBackColor = true;
             // 
-            // upButton
+            // up
             // 
-            this.upButton.FlatAppearance.BorderSize = 0;
-            this.upButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.upButton.Font = new System.Drawing.Font("Consolas", 10F);
-            this.upButton.Image = global::SerialPortTerminal.Properties.Resources.up;
-            this.upButton.Location = new System.Drawing.Point(495, 41);
-            this.upButton.Name = "upButton";
-            this.upButton.Size = new System.Drawing.Size(96, 118);
-            this.upButton.TabIndex = 6;
-            this.upButton.UseVisualStyleBackColor = true;
+            this.up.FlatAppearance.BorderSize = 0;
+            this.up.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.up.Font = new System.Drawing.Font("Consolas", 10F);
+            this.up.Image = global::SerialPortTerminal.Properties.Resources.up;
+            this.up.Location = new System.Drawing.Point(495, 41);
+            this.up.Name = "up";
+            this.up.Size = new System.Drawing.Size(96, 118);
+            this.up.TabIndex = 6;
+            this.up.UseVisualStyleBackColor = true;
             // 
-            // downButton
+            // down
             // 
-            this.downButton.FlatAppearance.BorderSize = 0;
-            this.downButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.downButton.Font = new System.Drawing.Font("Consolas", 10F);
-            this.downButton.Image = global::SerialPortTerminal.Properties.Resources.down;
-            this.downButton.Location = new System.Drawing.Point(493, 229);
-            this.downButton.Name = "downButton";
-            this.downButton.Size = new System.Drawing.Size(98, 122);
-            this.downButton.TabIndex = 7;
-            this.downButton.UseVisualStyleBackColor = true;
+            this.down.FlatAppearance.BorderSize = 0;
+            this.down.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.down.Font = new System.Drawing.Font("Consolas", 10F);
+            this.down.Image = global::SerialPortTerminal.Properties.Resources.down;
+            this.down.Location = new System.Drawing.Point(493, 229);
+            this.down.Name = "down";
+            this.down.Size = new System.Drawing.Size(98, 122);
+            this.down.TabIndex = 7;
+            this.down.UseVisualStyleBackColor = true;
             // 
-            // forwardButton
+            // forward
             // 
-            this.forwardButton.BackColor = System.Drawing.Color.Transparent;
-            this.forwardButton.FlatAppearance.BorderSize = 0;
-            this.forwardButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.forwardButton.Font = new System.Drawing.Font("Consolas", 10F);
-            this.forwardButton.Image = global::SerialPortTerminal.Properties.Resources.forward;
-            this.forwardButton.Location = new System.Drawing.Point(181, 98);
-            this.forwardButton.Name = "forwardButton";
-            this.forwardButton.Size = new System.Drawing.Size(87, 70);
-            this.forwardButton.TabIndex = 0;
-            this.forwardButton.UseVisualStyleBackColor = false;
+            this.forward.BackColor = System.Drawing.Color.Transparent;
+            this.forward.FlatAppearance.BorderSize = 0;
+            this.forward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.forward.Font = new System.Drawing.Font("Consolas", 10F);
+            this.forward.Image = global::SerialPortTerminal.Properties.Resources.forward;
+            this.forward.Location = new System.Drawing.Point(181, 98);
+            this.forward.Name = "forward";
+            this.forward.Size = new System.Drawing.Size(87, 70);
+            this.forward.TabIndex = 0;
+            this.forward.UseVisualStyleBackColor = false;
             // 
             // label1
             // 
@@ -168,22 +171,61 @@
             this.label3.TabIndex = 10;
             this.label3.Text = "Altitude";
             // 
+            // altitudeTxt
+            // 
+            this.altitudeTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.altitudeTxt.Location = new System.Drawing.Point(516, 170);
+            this.altitudeTxt.Multiline = true;
+            this.altitudeTxt.Name = "altitudeTxt";
+            this.altitudeTxt.ReadOnly = true;
+            this.altitudeTxt.Size = new System.Drawing.Size(55, 53);
+            this.altitudeTxt.TabIndex = 11;
+            this.altitudeTxt.Text = "3.4 Meters";
+            this.altitudeTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.textBox1.Location = new System.Drawing.Point(166, 174);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(118, 68);
+            this.textBox1.TabIndex = 12;
+            this.textBox1.Text = "Long: A4923                                  Lat: 9885F";
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.textBox2.Location = new System.Drawing.Point(191, 40);
+            this.textBox2.Multiline = true;
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(65, 28);
+            this.textBox2.TabIndex = 13;
+            this.textBox2.Text = "20° N";
+            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // ManualControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(629, 435);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.altitudeTxt);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.downButton);
-            this.Controls.Add(this.upButton);
-            this.Controls.Add(this.rotateLeftButton);
-            this.Controls.Add(this.rotateRightButton);
-            this.Controls.Add(this.backButton);
-            this.Controls.Add(this.leftButton);
-            this.Controls.Add(this.rightButton);
-            this.Controls.Add(this.forwardButton);
+            this.Controls.Add(this.down);
+            this.Controls.Add(this.up);
+            this.Controls.Add(this.rot_left);
+            this.Controls.Add(this.rot_right);
+            this.Controls.Add(this.back);
+            this.Controls.Add(this.left);
+            this.Controls.Add(this.right);
+            this.Controls.Add(this.forward);
             this.Name = "ManualControl";
             this.Text = "ManualControl";
             this.ResumeLayout(false);
@@ -193,16 +235,19 @@
 
         #endregion
 
-        private System.Windows.Forms.Button forwardButton;
-        private System.Windows.Forms.Button rightButton;
-        private System.Windows.Forms.Button leftButton;
-        private System.Windows.Forms.Button backButton;
-        private System.Windows.Forms.Button rotateRightButton;
-        private System.Windows.Forms.Button rotateLeftButton;
-        private System.Windows.Forms.Button upButton;
-        private System.Windows.Forms.Button downButton;
+        private System.Windows.Forms.Button forward;
+        private System.Windows.Forms.Button right;
+        private System.Windows.Forms.Button left;
+        private System.Windows.Forms.Button back;
+        private System.Windows.Forms.Button rot_right;
+        private System.Windows.Forms.Button rot_left;
+        private System.Windows.Forms.Button up;
+        private System.Windows.Forms.Button down;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox altitudeTxt;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox2;
     }
 }
