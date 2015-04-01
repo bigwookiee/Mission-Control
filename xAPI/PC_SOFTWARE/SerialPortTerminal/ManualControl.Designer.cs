@@ -28,118 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.right = new System.Windows.Forms.Button();
-            this.left = new System.Windows.Forms.Button();
-            this.back = new System.Windows.Forms.Button();
-            this.rot_right = new System.Windows.Forms.Button();
-            this.rot_left = new System.Windows.Forms.Button();
-            this.up = new System.Windows.Forms.Button();
-            this.down = new System.Windows.Forms.Button();
-            this.forward = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.altitudeTxt = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.down = new System.Windows.Forms.Button();
+            this.up = new System.Windows.Forms.Button();
+            this.rot_left = new System.Windows.Forms.Button();
+            this.rot_right = new System.Windows.Forms.Button();
+            this.back = new System.Windows.Forms.Button();
+            this.left = new System.Windows.Forms.Button();
+            this.right = new System.Windows.Forms.Button();
+            this.forward = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // right
-            // 
-            this.right.FlatAppearance.BorderSize = 0;
-            this.right.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.right.Font = new System.Drawing.Font("Consolas", 10F);
-            this.right.Image = global::SerialPortTerminal.Properties.Resources.right;
-            this.right.Location = new System.Drawing.Point(294, 170);
-            this.right.Name = "right";
-            this.right.Size = new System.Drawing.Size(132, 76);
-            this.right.TabIndex = 1;
-            this.right.UseVisualStyleBackColor = true;
-            // 
-            // left
-            // 
-            this.left.FlatAppearance.BorderSize = 0;
-            this.left.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.left.Font = new System.Drawing.Font("Consolas", 10F);
-            this.left.Image = global::SerialPortTerminal.Properties.Resources.left;
-            this.left.Location = new System.Drawing.Point(29, 169);
-            this.left.Name = "left";
-            this.left.Size = new System.Drawing.Size(125, 76);
-            this.left.TabIndex = 2;
-            this.left.UseVisualStyleBackColor = true;
-            // 
-            // back
-            // 
-            this.back.FlatAppearance.BorderSize = 0;
-            this.back.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.back.Font = new System.Drawing.Font("Consolas", 10F);
-            this.back.Image = global::SerialPortTerminal.Properties.Resources.back;
-            this.back.Location = new System.Drawing.Point(165, 248);
-            this.back.Name = "back";
-            this.back.Size = new System.Drawing.Size(118, 140);
-            this.back.TabIndex = 3;
-            this.back.UseVisualStyleBackColor = true;
-            // 
-            // rot_right
-            // 
-            this.rot_right.FlatAppearance.BorderSize = 0;
-            this.rot_right.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rot_right.Font = new System.Drawing.Font("Consolas", 10F);
-            this.rot_right.Image = global::SerialPortTerminal.Properties.Resources.rot_right;
-            this.rot_right.Location = new System.Drawing.Point(262, 36);
-            this.rot_right.Name = "rot_right";
-            this.rot_right.Size = new System.Drawing.Size(85, 36);
-            this.rot_right.TabIndex = 4;
-            this.rot_right.UseVisualStyleBackColor = true;
-            // 
-            // rot_left
-            // 
-            this.rot_left.FlatAppearance.BorderSize = 0;
-            this.rot_left.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rot_left.Font = new System.Drawing.Font("Consolas", 10F);
-            this.rot_left.Image = global::SerialPortTerminal.Properties.Resources.rot_left;
-            this.rot_left.Location = new System.Drawing.Point(104, 36);
-            this.rot_left.Name = "rot_left";
-            this.rot_left.Size = new System.Drawing.Size(86, 36);
-            this.rot_left.TabIndex = 5;
-            this.rot_left.UseVisualStyleBackColor = true;
-            // 
-            // up
-            // 
-            this.up.FlatAppearance.BorderSize = 0;
-            this.up.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.up.Font = new System.Drawing.Font("Consolas", 10F);
-            this.up.Image = global::SerialPortTerminal.Properties.Resources.up;
-            this.up.Location = new System.Drawing.Point(495, 41);
-            this.up.Name = "up";
-            this.up.Size = new System.Drawing.Size(96, 118);
-            this.up.TabIndex = 6;
-            this.up.UseVisualStyleBackColor = true;
-            // 
-            // down
-            // 
-            this.down.FlatAppearance.BorderSize = 0;
-            this.down.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.down.Font = new System.Drawing.Font("Consolas", 10F);
-            this.down.Image = global::SerialPortTerminal.Properties.Resources.down;
-            this.down.Location = new System.Drawing.Point(493, 229);
-            this.down.Name = "down";
-            this.down.Size = new System.Drawing.Size(98, 122);
-            this.down.TabIndex = 7;
-            this.down.UseVisualStyleBackColor = true;
-            // 
-            // forward
-            // 
-            this.forward.BackColor = System.Drawing.Color.Transparent;
-            this.forward.FlatAppearance.BorderSize = 0;
-            this.forward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.forward.Font = new System.Drawing.Font("Consolas", 10F);
-            this.forward.Image = global::SerialPortTerminal.Properties.Resources.forward;
-            this.forward.Location = new System.Drawing.Point(181, 98);
-            this.forward.Name = "forward";
-            this.forward.Size = new System.Drawing.Size(87, 70);
-            this.forward.TabIndex = 0;
-            this.forward.UseVisualStyleBackColor = false;
             // 
             // label1
             // 
@@ -206,6 +109,153 @@
             this.textBox2.TabIndex = 13;
             this.textBox2.Text = "20° N";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // down
+            // 
+            this.down.FlatAppearance.BorderSize = 0;
+            this.down.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.down.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.down.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.down.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.down.Font = new System.Drawing.Font("Consolas", 10F);
+            this.down.Image = global::SerialPortTerminal.Properties.Resources.down;
+            this.down.Location = new System.Drawing.Point(493, 229);
+            this.down.Name = "down";
+            this.down.Size = new System.Drawing.Size(98, 122);
+            this.down.TabIndex = 7;
+            this.down.Tag = "Down";
+            this.down.UseVisualStyleBackColor = true;
+            this.down.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mouseSend);
+            this.down.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mouseStop);
+            // 
+            // up
+            // 
+            this.up.FlatAppearance.BorderSize = 0;
+            this.up.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.up.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.up.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.up.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.up.Font = new System.Drawing.Font("Consolas", 10F);
+            this.up.Image = global::SerialPortTerminal.Properties.Resources.up;
+            this.up.Location = new System.Drawing.Point(495, 41);
+            this.up.Name = "up";
+            this.up.Size = new System.Drawing.Size(96, 118);
+            this.up.TabIndex = 6;
+            this.up.Tag = "Up";
+            this.up.UseVisualStyleBackColor = true;
+            this.up.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mouseSend);
+            this.up.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mouseStop);
+            // 
+            // rot_left
+            // 
+            this.rot_left.FlatAppearance.BorderSize = 0;
+            this.rot_left.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.rot_left.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.rot_left.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.rot_left.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rot_left.Font = new System.Drawing.Font("Consolas", 10F);
+            this.rot_left.Image = global::SerialPortTerminal.Properties.Resources.rot_left;
+            this.rot_left.Location = new System.Drawing.Point(104, 36);
+            this.rot_left.Name = "rot_left";
+            this.rot_left.Size = new System.Drawing.Size(86, 36);
+            this.rot_left.TabIndex = 5;
+            this.rot_left.Tag = "Q";
+            this.rot_left.UseVisualStyleBackColor = true;
+            this.rot_left.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mouseSend);
+            this.rot_left.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mouseStop);
+            // 
+            // rot_right
+            // 
+            this.rot_right.FlatAppearance.BorderSize = 0;
+            this.rot_right.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.rot_right.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.rot_right.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.rot_right.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rot_right.Font = new System.Drawing.Font("Consolas", 10F);
+            this.rot_right.Image = global::SerialPortTerminal.Properties.Resources.rot_right;
+            this.rot_right.Location = new System.Drawing.Point(262, 36);
+            this.rot_right.Name = "rot_right";
+            this.rot_right.Size = new System.Drawing.Size(85, 36);
+            this.rot_right.TabIndex = 4;
+            this.rot_right.Tag = "E";
+            this.rot_right.UseVisualStyleBackColor = true;
+            this.rot_right.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mouseSend);
+            this.rot_right.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mouseStop);
+            // 
+            // back
+            // 
+            this.back.FlatAppearance.BorderSize = 0;
+            this.back.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.back.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.back.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.back.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.back.Font = new System.Drawing.Font("Consolas", 10F);
+            this.back.Image = global::SerialPortTerminal.Properties.Resources.back;
+            this.back.Location = new System.Drawing.Point(165, 248);
+            this.back.Name = "back";
+            this.back.Size = new System.Drawing.Size(118, 140);
+            this.back.TabIndex = 3;
+            this.back.Tag = "S";
+            this.back.UseVisualStyleBackColor = true;
+            this.back.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mouseSend);
+            this.back.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mouseStop);
+            // 
+            // left
+            // 
+            this.left.FlatAppearance.BorderSize = 0;
+            this.left.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.left.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.left.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.left.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.left.Font = new System.Drawing.Font("Consolas", 10F);
+            this.left.Image = global::SerialPortTerminal.Properties.Resources.left;
+            this.left.Location = new System.Drawing.Point(29, 169);
+            this.left.Name = "left";
+            this.left.Size = new System.Drawing.Size(125, 76);
+            this.left.TabIndex = 2;
+            this.left.Tag = "A";
+            this.left.UseVisualStyleBackColor = true;
+            this.left.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mouseSend);
+            this.left.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mouseStop);
+            // 
+            // right
+            // 
+            this.right.FlatAppearance.BorderSize = 0;
+            this.right.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.right.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.right.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.right.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.right.Font = new System.Drawing.Font("Consolas", 10F);
+            this.right.Image = global::SerialPortTerminal.Properties.Resources.right;
+            this.right.Location = new System.Drawing.Point(294, 170);
+            this.right.Name = "right";
+            this.right.Size = new System.Drawing.Size(132, 76);
+            this.right.TabIndex = 1;
+            this.right.Tag = "D";
+            this.right.UseVisualStyleBackColor = true;
+            this.right.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keySend);
+            this.right.KeyUp += new System.Windows.Forms.KeyEventHandler(this.keyStop);
+            this.right.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mouseSend);
+            this.right.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mouseStop);
+            // 
+            // forward
+            // 
+            this.forward.BackColor = System.Drawing.Color.Transparent;
+            this.forward.FlatAppearance.BorderSize = 0;
+            this.forward.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.forward.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.forward.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.forward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.forward.Font = new System.Drawing.Font("Consolas", 10F);
+            this.forward.Image = global::SerialPortTerminal.Properties.Resources.forward;
+            this.forward.Location = new System.Drawing.Point(181, 98);
+            this.forward.Name = "forward";
+            this.forward.Size = new System.Drawing.Size(87, 70);
+            this.forward.TabIndex = 0;
+            this.forward.Tag = "W";
+            this.forward.UseVisualStyleBackColor = false;
+            this.forward.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mouseSend);
+            this.forward.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mouseStop);
             // 
             // ManualControl
             // 

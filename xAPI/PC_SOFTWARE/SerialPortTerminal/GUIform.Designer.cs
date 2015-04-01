@@ -341,6 +341,7 @@
             this.manualControlsLink.Name = "manualControlsLink";
             this.manualControlsLink.Size = new System.Drawing.Size(169, 22);
             this.manualControlsLink.Text = "Manual Controls";
+            this.manualControlsLink.Click += new System.EventHandler(this.openManualControls);
             // 
             // instrumentsPanelToolStripMenuItem
             // 

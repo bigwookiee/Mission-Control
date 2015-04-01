@@ -12,7 +12,10 @@ namespace SerialPortTerminal
     public partial class GUIform : Form
     {
         int instructs = 0;
+
         frmTerminal parentSerialTerminal;
+        ManualControl mc;
+
         bool Takeoff = false;
 
         public GUIform(frmTerminal parentTerminal)
@@ -376,6 +379,12 @@ namespace SerialPortTerminal
                 return true;
             }
             else return false;
+        }
+
+        private void openManualControls(object sender, EventArgs e)
+        {
+            mc = new ManualControl(parentSerialTerminal);
+            mc.Show();
         }
 
 
