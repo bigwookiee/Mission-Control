@@ -123,5 +123,16 @@ namespace SerialPortTerminal
             }
         }
 
+        private void previewKey(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Down:
+                case Keys.Up:
+                    e.IsInputKey = true;
+                    break;
+            }
+        }
+
     }
 }

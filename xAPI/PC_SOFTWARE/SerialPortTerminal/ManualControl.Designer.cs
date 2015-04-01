@@ -31,9 +31,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.altitudeTxt = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.down = new System.Windows.Forms.Button();
             this.up = new System.Windows.Forms.Button();
             this.rot_left = new System.Windows.Forms.Button();
@@ -42,6 +39,11 @@
             this.left = new System.Windows.Forms.Button();
             this.right = new System.Windows.Forms.Button();
             this.forward = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -58,7 +60,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(185, 11);
+            this.label2.Location = new System.Drawing.Point(186, 11);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(78, 20);
             this.label2.TabIndex = 9;
@@ -73,42 +75,6 @@
             this.label3.Size = new System.Drawing.Size(71, 20);
             this.label3.TabIndex = 10;
             this.label3.Text = "Altitude";
-            // 
-            // altitudeTxt
-            // 
-            this.altitudeTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.altitudeTxt.Location = new System.Drawing.Point(516, 170);
-            this.altitudeTxt.Multiline = true;
-            this.altitudeTxt.Name = "altitudeTxt";
-            this.altitudeTxt.ReadOnly = true;
-            this.altitudeTxt.Size = new System.Drawing.Size(55, 53);
-            this.altitudeTxt.TabIndex = 11;
-            this.altitudeTxt.Text = "3.4 Meters";
-            this.altitudeTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.textBox1.Location = new System.Drawing.Point(166, 174);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(118, 68);
-            this.textBox1.TabIndex = 12;
-            this.textBox1.Text = "Long: A4923                                  Lat: 9885F";
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.textBox2.Location = new System.Drawing.Point(191, 40);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(65, 28);
-            this.textBox2.TabIndex = 13;
-            this.textBox2.Text = "20° N";
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // down
             // 
@@ -127,6 +93,7 @@
             this.down.UseVisualStyleBackColor = true;
             this.down.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mouseSend);
             this.down.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mouseStop);
+            this.down.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.previewKey);
             // 
             // up
             // 
@@ -155,7 +122,7 @@
             this.rot_left.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rot_left.Font = new System.Drawing.Font("Consolas", 10F);
             this.rot_left.Image = global::SerialPortTerminal.Properties.Resources.rot_left;
-            this.rot_left.Location = new System.Drawing.Point(104, 36);
+            this.rot_left.Location = new System.Drawing.Point(105, 36);
             this.rot_left.Name = "rot_left";
             this.rot_left.Size = new System.Drawing.Size(86, 36);
             this.rot_left.TabIndex = 5;
@@ -173,7 +140,7 @@
             this.rot_right.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rot_right.Font = new System.Drawing.Font("Consolas", 10F);
             this.rot_right.Image = global::SerialPortTerminal.Properties.Resources.rot_right;
-            this.rot_right.Location = new System.Drawing.Point(262, 36);
+            this.rot_right.Location = new System.Drawing.Point(263, 36);
             this.rot_right.Name = "rot_right";
             this.rot_right.Size = new System.Drawing.Size(85, 36);
             this.rot_right.TabIndex = 4;
@@ -227,7 +194,7 @@
             this.right.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.right.Font = new System.Drawing.Font("Consolas", 10F);
             this.right.Image = global::SerialPortTerminal.Properties.Resources.right;
-            this.right.Location = new System.Drawing.Point(294, 170);
+            this.right.Location = new System.Drawing.Point(293, 170);
             this.right.Name = "right";
             this.right.Size = new System.Drawing.Size(132, 76);
             this.right.TabIndex = 1;
@@ -257,14 +224,74 @@
             this.forward.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mouseSend);
             this.forward.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mouseStop);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label4.Location = new System.Drawing.Point(202, 43);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(47, 20);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "20° N";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label5.Location = new System.Drawing.Point(175, 182);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(101, 20);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Lon: A233F6";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label7.Location = new System.Drawing.Point(529, 174);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(27, 20);
+            this.label7.TabIndex = 14;
+            this.label7.Text = "12";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label6.Location = new System.Drawing.Point(177, 210);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(97, 20);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Lat: A233F6";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label8.Location = new System.Drawing.Point(515, 194);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(58, 20);
+            this.label8.TabIndex = 16;
+            this.label8.Text = "meters";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // ManualControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.DarkSalmon;
             this.ClientSize = new System.Drawing.Size(629, 435);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.altitudeTxt);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -296,8 +323,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox altitudeTxt;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label8;
     }
 }
