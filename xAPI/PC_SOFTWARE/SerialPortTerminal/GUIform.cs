@@ -342,11 +342,15 @@ namespace SerialPortTerminal
                             switch (field1)
                             {
                                 case "Left":
-                                    //calculate new facing
+                                    parentSerialTerminal.Send_move_specifc((int)DRONE_movement_dir.MOVE_ROTATE_CLOCKWISE,
+                                                                           (int)DRONE_movement_metric.METRIC_DEGREES,
+                                                                           Int32.Parse("-" + field2));
                                     break;
 
                                 case "Right":
-                                    //calculate new facing
+                                    parentSerialTerminal.Send_move_specifc((int)DRONE_movement_dir.MOVE_ROTATE_CLOCKWISE,
+                                                                           (int)DRONE_movement_metric.METRIC_DEGREES,
+                                                                           Int32.Parse(field2));
                                     break;
                             }
                             break;

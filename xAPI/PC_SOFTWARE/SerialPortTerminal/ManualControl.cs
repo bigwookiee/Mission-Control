@@ -94,23 +94,35 @@ namespace SerialPortTerminal
 
             switch (k)
             {
-                case "W":
-                    //send forward command
+                case "W": //forward
+                    parentSerialTerminal.Send_move_specifc((int)DRONE_movement_dir.MOVE_FORWARD,
+                                                           (int)DRONE_movement_metric.METRIC_FEET,
+                                                            Int32.Parse("1"));
                     break;
-                case "A":
-                    //send left command
+                case "A": //left
+                    parentSerialTerminal.Send_move_specifc((int)DRONE_movement_dir.MOVE_LEFT,
+                                                           (int)DRONE_movement_metric.METRIC_FEET,
+                                                            Int32.Parse("1"));
                     break;
-                case "S":
-                    //send back command
+                case "S": //back
+                    parentSerialTerminal.Send_move_specifc((int)DRONE_movement_dir.MOVE_BACKWARD,
+                                                           (int)DRONE_movement_metric.METRIC_FEET,
+                                                            Int32.Parse("1"));
                     break;
-                case "D":
-                    //send right command
+                case "D": //right
+                    parentSerialTerminal.Send_move_specifc((int)DRONE_movement_dir.MOVE_RIGHT,
+                                                           (int)DRONE_movement_metric.METRIC_FEET,
+                                                            Int32.Parse("1"));
                     break;
                 case "Q":
-                    //send rotate left command
+                    parentSerialTerminal.Send_move_specifc((int)DRONE_movement_dir.MOVE_ROTATE_CLOCKWISE,
+                                                           (int)DRONE_movement_metric.METRIC_DEGREES,
+                                                            Int32.Parse("-5"));
                     break;
                 case "E":
-                    //send rotate right command
+                    parentSerialTerminal.Send_move_specifc((int)DRONE_movement_dir.MOVE_ROTATE_CLOCKWISE,
+                                                           (int)DRONE_movement_metric.METRIC_DEGREES,
+                                                            Int32.Parse("5"));
                     break;
                 case "Up":
                     //send Up command
