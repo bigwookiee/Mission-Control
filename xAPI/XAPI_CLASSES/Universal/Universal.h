@@ -96,8 +96,8 @@
 #define TUN_TYPE_EXTERNAL_DO_MOVE 0x57
 
 //for do rotate (degree)
-#define TUN_TYPE_LOCAL_ROTATE 0x5A
-#define TUN_TYPE_EXTERNAL_ROTATE 0x5B
+//#define TUN_TYPE_LOCAL_ROTATE 0x5A
+//#define TUN_TYPE_EXTERNAL_ROTATE 0x5B
 
 //for start mission plan upload
 #define TUN_TYPE_LOCAL_UPLOAD_START 0x58
@@ -120,8 +120,8 @@
 #define TUN_TYPE_EXTERNAL_UPLOAD_INSTRUCTION_TAKEOFF 0x6D
 
 //for mission plan instruction rotation
-#define TUN_TYPE_LOCAL_UPLOAD_INSTRUCTION_ROTATE 0x6E
-#define TUN_TYPE_EXTERNAL_UPLOAD_INSTRUCTION_ROTATE 0x6F
+//#define TUN_TYPE_LOCAL_UPLOAD_INSTRUCTION_ROTATE 0x6E
+//#define TUN_TYPE_EXTERNAL_UPLOAD_INSTRUCTION_ROTATE 0x6F
 
 //for end mission plan upload 
 #define TUN_TYPE_LOCAL_UPLOAD_END 0x64
@@ -298,5 +298,21 @@
 // Used by Subscriptions (SUB)
 #define SUB_MAX_SUBSCRIPTIONS 5
 
+//***********************************************
+//***********************************************
+// METRICS FOR DRONE MOVEMENT
+# define METRIC_FEET = 0x00
+#define METRIC_SECONDS = 0x01
+#define METRIC_METERS = 0x02
+#define METRIC_DEGREES = 0x03
+
+//************************************************
+//************************************************
+// DRONE MOVEMENT TYPES
+#define MOVE_FORWARD = 0x00
+#define MOVE_BACKWARD = 0x01
+#define MOVE_LEFT = 0x02
+#define MOVE_RIGHT = 0x03
+#define MOVE_ROTATE_CLOCKWISE = 0x04
 
 #endif

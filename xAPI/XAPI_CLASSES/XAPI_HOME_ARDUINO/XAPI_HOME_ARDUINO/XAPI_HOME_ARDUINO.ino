@@ -15,7 +15,7 @@
 Xapi xapi = Xapi(Serial);
 //Serial_service serial_service = Serial_service(Serial1, xapi);
 LCD_service lcd_service (xapi);
-Serial_service serial_service = Serial_service(Serial1, xapi);
+Serial_service serial_service = Serial_service(Serial1, xapi, lcd_service);
 uint8_t msg1[] =   "I FEEL GREAT";
 uint8_t msg2[] =   "COMMODORE 64";
 uint8_t _clear[] = "                ";

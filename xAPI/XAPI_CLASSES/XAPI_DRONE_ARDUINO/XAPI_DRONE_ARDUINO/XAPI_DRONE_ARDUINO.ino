@@ -8,6 +8,7 @@
 #include <Single_buff.h>
 #include <Land_service.h>
 #include <Takeoff_service.h>
+#include <DoMove_service.h>
 
 //0013a200
 //40a1446d
@@ -22,6 +23,7 @@ LCD_service lcd_service (xapi);
 //************************************************
 Takeoff_service takeoff_service(xapi, lcd_service);
 Land_service land_service(xapi, lcd_service);
+DoMove_service doMove_service(xapi, lcd_service);
 //Serial_service serial_service = Serial_service(Serial1, xapi, lcd_service);
 uint8_t msg1[] =   "I FEEL GREAT";
 uint8_t msg2[] =   "COMMODORE 64";
@@ -49,6 +51,7 @@ void loop()
   lcd_service.lcd_service_latch();
   takeoff_service.takeoff_service_latch();
   land_service.land_service_latch();
+  doMove_service.DoMove_service_latch();
   //serial_service.serial_service_latch();
   
   //delay(4000);

@@ -146,6 +146,11 @@ boolean Serial_service::process_TUN_packet(	uint8_t* buff,
 				//m_lcd.lcd_print("**************");
 				m_lcd.lcd_print(0,0,"Got Takeoff");
 			break;
+			case TUN_TYPE_EXTERNAL_DO_MOVE:
+				create_and_pass_external(TUN_TYPE_EXTERNAL_DO_MOVE, buff, buff_sz);
+				//m_lcd.lcd_print("**************");
+				m_lcd.lcd_print(0,0,"Got Do Move");
+			break;
 		}
 	
 		success = true;
