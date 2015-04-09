@@ -163,7 +163,9 @@
 #define TUN_TYPE_LOCAL_SET_THROTTLE 0x82
 #define TUN_TYPE_EXTERNAL_SET_THROTTLE 0x83
 
-
+//for set arm
+#define TUN_TYPE_LOCAL_ARM 0x90
+#define TUN_TYPE_EXTERNAL_ARM 0x91
 
 
 //***********************************************
