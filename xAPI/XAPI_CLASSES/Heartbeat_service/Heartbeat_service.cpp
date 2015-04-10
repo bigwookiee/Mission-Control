@@ -94,7 +94,7 @@ void Heartbeat_service::send_heartbeat()
 
 	uint8_t payload_buff_sz = 0;
 	
-	uint8_t payload_buff[1];
+	uint8_t payload_buff[MED_BUFF_SZ];
 	uint8_t packet_buff[LARGE_BUFF_SZ];
 
 	uint8_t TUN_buff[LARGE_BUFF_SZ];
@@ -104,7 +104,7 @@ void Heartbeat_service::send_heartbeat()
 	//m_lcd.lcd_print(0,0,"first");
 	//payload_buff_sz = m_util.get_TUN_payload(buff, payload_buff, MED_BUFF_SZ);
 	payload_buff[0] = 0x00; //temp code
-	payload_buff_sz = 1;
+	payload_buff_sz = 2;
 	//m_lcd.lcd_print(0,0,"second");
 
 	TUN_buff_sz = m_util.create_TUN_packet(	TUN_TYPE_EXTERNAL_HEARTBEAT, 
