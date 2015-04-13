@@ -158,10 +158,16 @@ namespace SerialPortTerminal
         private void activateKeys()
         {
             armed = true;
+            //Get image path to update status indicator
+            String imgUrl = System.IO.Directory.GetCurrentDirectory() + "MC_activated.png";
+            MC_Status.Image = new Bitmap(imgUrl);
         }
         private void deactivateKeys()
         {
             armed = false;
+            //Get image path to update status indicator
+            String imgUrl = System.IO.Directory.GetCurrentDirectory() + "MC_deactivated.png";
+            MC_Status.Image = new Bitmap(imgUrl);
         }
 
     }

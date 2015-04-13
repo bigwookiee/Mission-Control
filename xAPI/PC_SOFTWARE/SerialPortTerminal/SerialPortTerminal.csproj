@@ -177,6 +177,8 @@
     <None Include="Resources\rot_left_pressed.png" />
     <None Include="Resources\rot_right.png" />
     <None Include="Resources\rot_right_pressed.png" />
+    <None Include="Resources\MC_activated.png" />
+    <None Include="Resources\MC_deactivated.png" />
     <Content Include="Resources\sideCopter.png" />
     <None Include="Resources\SmallNeedleAltimeter.bmp" />
     <Content Include="Resources\topCopter.png" />
