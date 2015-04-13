@@ -731,6 +731,32 @@ namespace SerialPortTerminal
         }
 
         //*******************************************************************
+        // Public routine for sending TUN arm message (true/false) (arm/disarm) 
+        // drone packet intended for use by GUI
+        // Args: bool armDrone
+        public void Send_arm_message(bool armDrone)
+        {
+
+            // storage for the packet
+            string packet;
+
+            //string raw_text = input.Replace("\0", string.Empty);
+
+
+            
+            // create the packet
+            int returnSz = m_util.create_arm_TUN_packet((int)TUN_types.TUN_TYPE_EXTERNAL_ARM, armDrone, out packet);
+            //int returnSz = m_util.create_LCD_TUN_packet((int)TUN_types.TUN_TYPE_LOCAL_LCD_MSG, raw_text, out packet);
+            // must remove null bytes from string
+            string result = packet.Replace("\0", string.Empty);
+            // Send the user's text straight out the port
+            comport.Write(result);
+
+            // display the packet
+            Log(LogMsgType.Outgoing, result + "\n");
+        }
+
+        //*******************************************************************
         //*******************************************************************
         // Updates the count down (-1), and if <=0, the heads up
         // display will show red
