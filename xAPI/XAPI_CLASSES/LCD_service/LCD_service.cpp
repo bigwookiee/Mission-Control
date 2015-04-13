@@ -7,14 +7,14 @@
 //***************************************************
 void LCD_service::lcd_service_latch()
 {
-	// update the button states
+	/*/ update the button states
 	read_LCD_buttons();
 	
 	// process any local LCD message packets
 	process_local_TUN_packet();
 	
 	// process any external LCD message packets
-	process_external_TUN_packet();
+	process_external_TUN_packet();*/
 }
 
 //***************************************************
@@ -294,7 +294,7 @@ void LCD_service::reset_TUN_storage()
 //***************************************************
 LCD_service::LCD_service(Xapi& _xapi):
 m_xapi(_xapi)
-{
+{/*
 	m_lcd = new LiquidCrystal(8, 9, 4, 5, 6, 7);
 	m_lcd_key = LCD_btnNONE;	
 	m_locked = false;
@@ -303,6 +303,7 @@ m_xapi(_xapi)
 	m_lcd->begin(16, 2);             
 	lcd_setCursor(0,0);
 	lcd_print("HeLLoWoRlD?"); 
+*/	
 }
 
 //***************************************************

@@ -1,7 +1,9 @@
 #ifndef ARM_SERVICE_cpp
 #define ARM_SERVICE_cpp
 #include <Arm_service.h>
+#include <AutoPilot.h>
 
+extern uint8_t bit_autopilot_flags;
 //***************************************************
 // This latch is what is called in the microcontroller's
 // main loop. Put any required processing here
@@ -38,7 +40,16 @@ void Arm_service::process_external_TUN_packet()
 		//lcd prints are for debugging, should be removed
 		//m_lcd.lcd_print("*********");
 		//m_lcd.lcd_print(0,0,"ltest1");
-		m_lcd.lcd_print(0,0,"arm packet");		
+		//m_lcd.lcd_print(0,0,"arm packet");
+		Serial.print("I should be armed AutoPilot: ");
+
+		bit_autopilot_flags |= ARM_FLAG;  // Turns bir on in flags
+		Serial.println(bit_autopilot_flags);
+		// Turns Turns off Arm --->>   bit_autopilot_flags &= ~ARM_FLAG;
+		
+
+
+
 		//m_lcd.lcd_print(0,0,"ltest2");
 	}
 }

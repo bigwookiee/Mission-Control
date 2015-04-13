@@ -13,6 +13,7 @@ namespace SerialPortTerminal
     public partial class ManualControl : Form
     {
         frmTerminal parentSerialTerminal;
+        Boolean armed = false;
 
         public ManualControl(frmTerminal parentTerminal)
         {
@@ -26,6 +27,8 @@ namespace SerialPortTerminal
 
         private void keySend(object sender, KeyEventArgs e)
         {
+            if (!armed) return; //only run event if drone is armed
+
             String key = e.KeyCode.ToString();
             String name;
 
@@ -46,6 +49,8 @@ namespace SerialPortTerminal
 
         private void keyStop(object sender, KeyEventArgs e)
         {
+            if (!armed) return; //only run event if drone is armed
+
             String key = e.KeyCode.ToString();
             String name;
 
@@ -66,6 +71,8 @@ namespace SerialPortTerminal
 
         private void mouseSend(object sender, MouseEventArgs e)
         {
+            if (!armed) return; //only run event if drone is armed
+
             Button b = (Button)sender;
             String key = b.Tag.ToString();
 
@@ -79,6 +86,8 @@ namespace SerialPortTerminal
 
         private void mouseStop(object sender, MouseEventArgs e)
         {
+            if (!armed) return; //only run event if drone is armed
+
             Button b = (Button)sender;
 
             String name = "/../../Resources/" + b.Name + ".png";
@@ -144,6 +153,21 @@ namespace SerialPortTerminal
                     e.IsInputKey = true;
                     break;
             }
+        }
+
+        private void activateKeys()
+        {
+            armed = true;
+            //Get image path to update status indicator
+            String imgUrl = System.IO.Directory.GetCurrentDirectory() + "MC_activated.png";
+            MC_Status.Image = new Bitmap(imgUrl);
+        }
+        private void deactivateKeys()
+        {
+            armed = false;
+            //Get image path to update status indicator
+            String imgUrl = System.IO.Directory.GetCurrentDirectory() + "MC_deactivated.png";
+            MC_Status.Image = new Bitmap(imgUrl);
         }
 
     }
