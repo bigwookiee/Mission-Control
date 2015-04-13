@@ -42,18 +42,18 @@ void Arm_service::process_external_TUN_packet()
 		//lcd prints are for debugging, should be removed
 		//m_lcd.lcd_print("*********");
 		//m_lcd.lcd_print(0,0,"ltest1");
-		m_lcd.lcd_print(0,0,"arm packet");
+		//m_lcd.lcd_print(0,0,"arm packet");
 		
 		if(m_util.hex_to_int(0, 1, 2, payload_buff) == 1){
 			//Serial.print("I should be armed AutoPilot: ");
-			m_lcd.lcd_print(0,0,"armed!");
-			//bit_autopilot_flags |= ARM_FLAG;  // Turns bir on in flags
+			//m_lcd.lcd_print(0,0,"armed!");
+			bit_autopilot_flags |= ARM_FLAG;  // Turns bir on in flags
 			//Serial.println(bit_autopilot_flags);
 		}
 		else{
 		// Turns Turns off Arm --->>   bit_autopilot_flags &= ~ARM_FLAG;
-			m_lcd.lcd_print(0,0,"disarmed!");
-			//bit_autopilot_flags &= ~ARM_FLAG;
+			//m_lcd.lcd_print(0,0,"disarmed!");
+			bit_autopilot_flags &= ~ARM_FLAG;
 		}
 
 		//m_lcd.lcd_print(0,0,"ltest2");
