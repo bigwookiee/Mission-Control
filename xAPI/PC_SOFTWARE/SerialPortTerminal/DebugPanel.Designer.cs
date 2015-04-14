@@ -50,7 +50,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 32);
             this.button1.TabIndex = 0;
-            this.button1.Text = "Debug 0";
+            this.button1.Text = "Disarm";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.debug0);
             // 
@@ -176,11 +176,11 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(75, 32);
             this.button10.TabIndex = 5;
-            this.button10.Text = "Debug 5";
+            this.button10.Text = "Arm";
             this.button10.UseVisualStyleBackColor = false;
             this.button10.Click += new System.EventHandler(this.debug5);
             // 
-            // Debug
+            // DebugPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -195,7 +195,7 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Name = "Debug";
+            this.Name = "DebugPanel";
             this.Text = "Debug";
             this.ResumeLayout(false);
 

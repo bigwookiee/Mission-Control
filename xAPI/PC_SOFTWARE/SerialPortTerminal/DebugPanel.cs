@@ -18,10 +18,10 @@ namespace SerialPortTerminal
             parentSerialTerminal = parentTerminal;
             InitializeComponent();
         }
-
+        //disarm
         private void debug0(object sender, EventArgs e)
         {
-
+            parentSerialTerminal.Send_arm_message(false);
         }
 
         private void debug1(object sender, EventArgs e)
@@ -43,10 +43,10 @@ namespace SerialPortTerminal
         {
 
         }
-
+        //arm
         private void debug5(object sender, EventArgs e)
         {
-
+            parentSerialTerminal.Send_arm_message(true);
         }
 
         private void debug6(object sender, EventArgs e)
