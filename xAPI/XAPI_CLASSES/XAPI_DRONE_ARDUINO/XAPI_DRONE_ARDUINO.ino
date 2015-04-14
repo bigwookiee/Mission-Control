@@ -190,7 +190,7 @@ void loop()
   //heartbeat_service.heartbeat_service_latch();
   //serial_service.serial_service_latch();
   
-  //delay(4000);
+  
   
 }
 
@@ -203,6 +203,10 @@ void calcAlierons()
   else
   {
     ali_in_shared = (uint16_t) (micros() - ali_start);
+    
+    if ((ali_in_shared > LOW_CENTER_STICK) && (ali_in_shared < HIGH_CENTER_STICK))
+      ali_in_shared = 1500;
+      
     bit_update_flags_shared |= ALI_FLAG;
   }
   
@@ -215,6 +219,10 @@ void calcElevator()
   else
   {
     ele_in_shared = (uint16_t) (micros() - ele_start);
+    
+      if ((ele_in_shared > LOW_CENTER_STICK) && (ele_in_shared < HIGH_CENTER_STICK))
+      ele_in_shared = 1500;    
+
     bit_update_flags_shared |= ELE_FLAG;
   }
   
@@ -239,6 +247,10 @@ void calcRudder()
   else
   {
     rud_in_shared = (uint16_t) (micros() - rud_start);
+    
+    if ((rud_in_shared > LOW_CENTER_STICK) && (rud_in_shared < HIGH_CENTER_STICK))
+      rud_in_shared = 1500;
+    
     bit_update_flags_shared |= RUD_FLAG;
   }
   
@@ -520,7 +532,7 @@ void RX_pass(){
   bit_update_flags = 0;
 
 
-/*  Serial.print("ali:");
+  Serial.print("ali:");
   Serial.print(ali_in);
   Serial.print("|");
   
@@ -538,10 +550,10 @@ void RX_pass(){
   
   Serial.print("aux:");
   Serial.print(aux_in);
-  Serial.print("|");/*
+  Serial.print("|");
   
   Serial.print("HED:");
-  erial.println(bit_autopilot_flags);*/
+  Serial.println(bit_autopilot_flags);
   
 }
 
@@ -621,18 +633,39 @@ void AutoPilot(){
  
  pid_loop();
  RX_pass();
- if (bit_autopilot_flags & ARM_FLAG & !IS_ARMED_FLAG)
+ 
+ //Serial.println(bit_autopilot_flags, HEX);
+ //delay(1000);
+ 
+ //bit_autopilot_flags |= 128;
+ 
+ 
+ 
+ if (bit_autopilot_flags & ARM_FLAG)
+   if (!(bit_autopilot_flags & (1 << IS_ARMED_FLAG_POSITION)))
+   {
+     Serial.println("I am armed ");
+//     arm();
+     
+     bit_autopilot_flags |= IS_ARMED_FLAG;
+   }
+ 
+ //Serial.println(bit_autopilot_flags, HEX);
+ //delay(1000);
+ 
+ //bit_autopilot_flags &= ~128;
+ 
+ if (!(bit_autopilot_flags & ARM_FLAG))
  {
-   arm();
-   bit_autopilot_flags |= (1 << IS_ARMED_FLAG);
+   disarm();
+   bit_autopilot_flags &= ~IS_ARMED_FLAG;
+   Serial.println("I am disarmed");
    
  }
  
- if (bit_autopilot_flags & !ARM_FLAG )
- {
-   disarm();
-   bit_autopilot_flags &= ~(1 <<IS_ARMED_FLAG);
- }
+ //Serial.println(bit_autopilot_flags, HEX);
+ //delay(1000);
+ 
   //remote_relay();
   
   //acc.getEvent(&event);

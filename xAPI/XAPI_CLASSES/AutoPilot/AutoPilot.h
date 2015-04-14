@@ -73,6 +73,9 @@ sensore expermentations.
 #define RX_RUDDER     A12
 #define RX_AUX        A11
 
+/* RX center stick values */
+#define HIGH_CENTER_STICK 	1515
+#define LOW_CENTER_STICK 	1475
 /* Bitflag used in interups to indecate a 
 new signal on a channel.  
 
