@@ -63,6 +63,7 @@
             this.topView = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.debugPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -331,7 +332,8 @@
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.manualControlsLink,
             this.instrumentsPanelToolStripMenuItem,
-            this.serialTerminalToolStripMenuItem});
+            this.serialTerminalToolStripMenuItem,
+            this.debugPanelToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "View";
@@ -404,6 +406,13 @@
             this.label9.TabIndex = 0;
             this.label9.Text = "Longitude / Latitude";
             // 
+            // debugPanelToolStripMenuItem
+            // 
+            this.debugPanelToolStripMenuItem.Name = "debugPanelToolStripMenuItem";
+            this.debugPanelToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.debugPanelToolStripMenuItem.Text = "Debug Panel";
+            this.debugPanelToolStripMenuItem.Click += new System.EventHandler(this.openDebugPanel);
+            // 
             // GUIform
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -473,6 +482,7 @@
         private System.Windows.Forms.Button eLand;
         private System.Windows.Forms.ToolStripMenuItem instrumentsPanelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem serialTerminalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem debugPanelToolStripMenuItem;
     }
 }
 

@@ -15,6 +15,7 @@ namespace SerialPortTerminal
 
         frmTerminal parentSerialTerminal;
         ManualControl mc;
+        DebugPanel dbg;
 
         bool Takeoff = false;
 
@@ -389,6 +390,12 @@ namespace SerialPortTerminal
         {
             mc = new ManualControl(parentSerialTerminal);
             mc.Show();
+        }
+
+        private void openDebugPanel(object sender, EventArgs e)
+        {
+            dbg = new DebugPanel(parentSerialTerminal);
+            dbg.Show();
         }
 
 
