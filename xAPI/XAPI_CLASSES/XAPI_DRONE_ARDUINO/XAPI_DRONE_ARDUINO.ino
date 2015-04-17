@@ -366,10 +366,12 @@ void set_rud (int val) {
 
 /* Arms the motors */
 byte arm(){
-  set_thr(0);
-  set_rud(-100);
+  throttle.writeMicroseconds(1000);
+  aileron.writeMicroseconds(1100);
+  rudder.writeMicroseconds(1100);
   delay(1000);
-  set_rud(0);
+  aileron.writeMicroseconds(1500);
+  rudder.writeMicroseconds(1500);
   
   return 1;
   
@@ -377,11 +379,12 @@ byte arm(){
 
 /* Disarms the motors */
 byte  disarm(){
-  set_thr(0);
-  set_rud(100);
+  throttle.writeMicroseconds(1000);
+  aileron.writeMicroseconds(1900);
+  rudder.writeMicroseconds(1900);
   delay(1000);
-  set_rud(0);
-  
+  aileron.writeMicroseconds(1500);
+  rudder.writeMicroseconds(1500);
   return(0);
 }
 
@@ -645,7 +648,7 @@ void AutoPilot(){
    if (!(bit_autopilot_flags & (1 << IS_ARMED_FLAG_POSITION)))
    {
      Serial.println("I am armed ");
-//     arm();
+     arm();
      
      bit_autopilot_flags |= IS_ARMED_FLAG;
    }
@@ -656,12 +659,13 @@ void AutoPilot(){
  //bit_autopilot_flags &= ~128;
  
  if (!(bit_autopilot_flags & ARM_FLAG))
- {
-   disarm();
-   bit_autopilot_flags &= ~IS_ARMED_FLAG;
-   Serial.println("I am disarmed");
-   
- }
+   if ((bit_autopilot_flags & (1 << IS_ARMED_FLAG_POSITION)))
+   {
+     disarm();
+     bit_autopilot_flags &= ~IS_ARMED_FLAG;
+     Serial.println("I am disarmed");
+     
+   }
  
  //Serial.println(bit_autopilot_flags, HEX);
  //delay(1000);
