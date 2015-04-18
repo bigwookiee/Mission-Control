@@ -176,6 +176,7 @@ namespace SerialPortTerminal
         //*********************************************************
         //*********************************************************
         // Helper function to create a LCD Service TUN packet passing string
+        // Author: Taylor Trabun
         public int create_land_TUN_packet(int packet_type, out string buff)
         {
             int total_sz = 0;
@@ -205,6 +206,7 @@ namespace SerialPortTerminal
         //*********************************************************
         //*********************************************************
         // Helper function to create a LCD Service TUN packet passing string
+        // Author: Taylor Trabun
         public int create_specific_move_TUN_packet(int packet_type, int moveType, int moveMetric, int moveAmount, out string buff)
         {
             int total_sz = 0;
@@ -249,6 +251,7 @@ namespace SerialPortTerminal
         //*********************************************************
         //*********************************************************
         // Helper function to create a takeoff Service TUN packet passing string
+        // Author: Taylor Trabun
         public int create_takeoff_TUN_packet(int packet_type, int altitude, out string buff)
         {
             int total_sz = 0;
@@ -283,6 +286,7 @@ namespace SerialPortTerminal
         }
 
         // Helper function to create a arm Service TUN packet passing string
+        // Author: Taylor Trabun
         public int create_arm_TUN_packet(int packet_type, bool armDrone, out string buff)
         {
             int total_sz = 0;

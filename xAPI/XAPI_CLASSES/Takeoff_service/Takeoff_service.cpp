@@ -31,10 +31,18 @@ void Takeoff_service::process_external_TUN_packet()
 	{	
 		// allocate the space
 		uint8_t TUN_packet[MED_BUFF_SZ];
-	
+		uint8_t payload_buff[SMALL_BUFF_SZ];
+		uint8_t payload_buff_sz = 0;
+		int height = 0;
 		// extract the packet
 		m_xapi.CONNECT_external_TUN_get_packet(TUN_packet, MED_BUFF_SZ);
+		
+		//extract payload
+		payload_buff_sz = m_util.get_TUN_payload(TUN_packet, payload_buff, SMALL_BUFF_SZ);
 	
+		//grab height from payload (4 bytes)
+		height = m_util.hex_to_int(0, 4, payload_buff_sz, payload_buff);
+		
 		// do something
 		//lcd prints are for debugging, should be removed
 		//m_lcd.lcd_print(0,0,"*************");
@@ -42,6 +50,9 @@ void Takeoff_service::process_external_TUN_packet()
 		m_lcd.lcd_print(0,0,"ttest1");
 		m_lcd.lcd_print(0,0,"takeoff");		
 		m_lcd.lcd_print(0,0,"ttest2");
+		if(height = 10){
+			m_lcd.lcd_print(0,0,"Height 10");
+		}
 		
 
 	}
