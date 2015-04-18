@@ -53,11 +53,16 @@ sensore expermentations.
 
 /*  INPUT RANGE */
 #define ZERO_THROTTLE  1000
-#define FULL_THROTTLE  2300
+#define FULL_THROTTLE  2000
 
-#define FULL_STICK_LEFT_FORWARD  900
-#define FULL_STICK_RIGHT_BACK    2100
+#define FULL_STICK_LEFT_FORWARD  1000
+#define FULL_STICK_RIGHT_BACK    2000
 #define ZERO_STICK               1500
+
+/* Defualt test hold data. */
+#define HOLD_HEADING  90
+#define HOLD_ALTITUDE 150
+
 
 /* PWM pin assignments. */
 #define AILERONS_PIN  5
@@ -70,7 +75,7 @@ sensore expermentations.
 #define RX_AILERONS   A15
 #define RX_ELEVATOR   A14
 #define RX_THROTTLE   A13
-#define RX_RUDDER     A12
+#define RX_RUDDER     A12 
 #define RX_AUX        A11
 
 /* RX center stick values */
@@ -107,6 +112,7 @@ This ius a power of 2. valied numbers are
 #define GROUND_ECHO_PIN           26
 #define GROUND_MAX_SONAR_DISTANCE 200
 #define GROUND_SONAR_ITERATION    5
+#define CALIBRATION_ERROR         9
 
 /*  PID Setup */
 #define thr_out_range 1.25
@@ -123,3 +129,5 @@ This ius a power of 2. valied numbers are
 #define L_SIDE       50,0,0  // For max intesity of red set 255,0,0
 #define R_SIDE       0,50,0  // For max green set to 0,255,0 
 
+typedef struct drone_state drone_state;
+typedef struct waypoint waypoint;
