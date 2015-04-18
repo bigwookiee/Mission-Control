@@ -1,7 +1,7 @@
 #ifndef ARM_SERVICE_cpp
 #define ARM_SERVICE_cpp
 #include <Arm_service.h>
-//#include <AutoPilot.h>
+#include <AutoPilot.h>
 
 extern uint8_t bit_autopilot_flags;
 //***************************************************

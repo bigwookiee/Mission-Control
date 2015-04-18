@@ -25,6 +25,7 @@
 #include <PinChangeInt.h>
 #include <AutoPilot.h>
 
+/*
 struct drone_state
 {
   double     current_head; // deg. The current heading.
@@ -39,18 +40,9 @@ struct drone_state
   double     current_lat;  // Latatude
   double     target_lat;   // Latatide I want to travil to.
   uint16_t   loiter_time;  // Time on station when drone arives.
-};
+};*/
 
-struct waypoint
-{
-  waypoint   *next_waypoint; // Pointer to next waypoint.
-  double     hold_head;      // deg. The heading to hold, this is independend of
-                             //      course. 
-  double     hold_alt;       // cm Altitude to hold above sea level(ASL). 
-  double     target_lat;     // longitude drone needs to go to.
-  double     target_lon;     // latatide drone needs to travil to.
-  uint16_t   loiter_time;    // Time on station when drone arives.
-};
+
 /* Global Variables */
           uint8_t       bit_autopilot_flags;  // Used to keep track of auto pilot enabled subsytems.
 volatile  uint8_t       bit_update_flags_shared;  //Used for interups
@@ -298,12 +290,16 @@ void pid_loop(){
   //altPID.SetOutputLimits(thr_min,thr_max);
  
   if (bit_autopilot_flags & ALTHOLD_FLAG)
-  {  
+  { 
+    Serial.print("I am taking off! alt to hold:");
+    Serial.print(P_state->hold_alt);
+    Serial.print(" current alt: ");
+    Serial.println(P_state->current_alt);
     P_state->sonar_alt = ground_range.ping_median(GROUND_SONAR_ITERATION);
-    P_state->sonar_alt = (int)P_state->sonar_alt / RangeTime_1cm;
+    P_state->sonar_alt = (int)(P_state->sonar_alt / RangeTime_1cm) - CALIBRATION_ERROR;
 
     if (P_state->sonar_alt < 500)
-      P_state->current_alt = P_state->ground_alt + P_state->sonar_alt - CALIBRATION_ERROR;
+      P_state->current_alt = P_state->ground_alt + P_state->sonar_alt;
     else
       P_state->current_alt = cmAlt();
     //Serial.print("Alt: ");

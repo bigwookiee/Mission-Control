@@ -1,8 +1,11 @@
 
 #ifndef TAKEOFF_SERVICE_cpp
 #define TAKEOFF_SERVICE_cpp
+#include <AutoPilot.h>
 #include <Takeoff_service.h>
 
+extern uint8_t bit_autopilot_flags;
+extern drone_state *P_state; 
 //***************************************************
 // This latch is what is called in the microcontroller's
 // main loop. Put any required processing here
@@ -47,14 +50,14 @@ void Takeoff_service::process_external_TUN_packet()
 		//lcd prints are for debugging, should be removed
 		//m_lcd.lcd_print(0,0,"*************");
 		//m_lcd.lcd_print(0,0,"Got Takeoff");
-		m_lcd.lcd_print(0,0,"ttest1");
-		m_lcd.lcd_print(0,0,"takeoff");		
-		m_lcd.lcd_print(0,0,"ttest2");
-		if(height = 10){
-			m_lcd.lcd_print(0,0,"Height 10");
-		}
-		
-
+		//m_lcd.lcd_print(0,0,"ttest1");
+		//m_lcd.lcd_print(0,0,"takeoff");		
+		//m_lcd.lcd_print(0,0,"ttest2");
+		//if(height = 10){
+		//	m_lcd.lcd_print(0,0,"Height 10");
+		//}
+		P_state->hold_alt = P_state->ground_alt + height;
+		bit_autopilot_flags |= ALTHOLD_FLAG;
 	}
 }
 

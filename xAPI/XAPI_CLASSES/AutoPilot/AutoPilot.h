@@ -129,5 +129,35 @@ This ius a power of 2. valied numbers are
 #define L_SIDE       50,0,0  // For max intesity of red set 255,0,0
 #define R_SIDE       0,50,0  // For max green set to 0,255,0 
 
+struct drone_state
+{
+  double     current_head; // deg. The current heading.
+  double     hold_head;   // deg. The heading to hold, this is independend of
+                           //      course. 
+  double     current_alt;  // cm Above sea level(ASL). 
+  double     hold_alt;     // cm Altitude to hold above sea level(ASL). 
+  double     ground_alt;   // cm The ground level when armed(AGL) ie. ASL when armed.    
+  double     sonar_alt;    // cm The returned from range finder(AGL).
+  double     current_lon;  // Longitude
+  double     target_lon;   // Longitude I want to go to.
+  double     current_lat;  // Latatude
+  double     target_lat;   // Latatide I want to travil to.
+  unsigned int    loiter_time;  // Time on station when drone arives.
+};
+
+struct waypoint
+{
+  waypoint   *next_waypoint; // Pointer to next waypoint.
+  double     hold_head;      // deg. The heading to hold, this is independend of
+                             //      course. 
+  double     hold_alt;       // cm Altitude to hold above sea level(ASL). 
+  double     target_lat;     // longitude drone needs to go to.
+  double     target_lon;     // latatide drone needs to travil to.
+  unsigned int   loiter_time;    // Time on station when drone arives.
+};
+
+
+
+
 typedef struct drone_state drone_state;
 typedef struct waypoint waypoint;
