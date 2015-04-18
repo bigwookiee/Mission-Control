@@ -11,6 +11,8 @@
  *             Written to support the blog post article at: http://msmvps.com/blogs/coad/archive/2005/03/23/39466.aspx
  * 
  *             Search for "comport" to see how I'm using the SerialPort control.
+ *             
+ * ******Modfied for Drone Mission Planning Software by: Taylor Trabun
  */
 
 #region Namespace Inclusions
@@ -624,7 +626,7 @@ namespace SerialPortTerminal
         //*******************************************************************
         //*******************************************************************
         // Public routine for sending LCD_TUN packet intended for use by GUI
-        //
+        // Author: Taylor Trabun
         public void SendString_LCD(String input)
         {
 
@@ -654,7 +656,7 @@ namespace SerialPortTerminal
         }
         //*******************************************************************
         // Public routine for sending TUN land drone packet intended for use by GUI
-        //
+        // Author: Taylor Trabun
         public void Send_land_packet()
         {
 
@@ -681,6 +683,7 @@ namespace SerialPortTerminal
         //*******************************************************************
         // Public routine for sending TUN land drone packet intended for use by GUI
         // Args: altitude (altitude at which the drone should reach)
+        // Author: Taylor Trabun
         public void Send_takeoff_packet(int altitude)
         {
 
@@ -707,6 +710,7 @@ namespace SerialPortTerminal
         // Public routine for sending TUN move specific (left,right,forward,backwards) 
         // drone packet intended for use by GUI
         // Args: moveType (use DRONE_movement_dir), metricType(DRONE_movement_metric), moveAmount
+        // Author: Taylor Trabun
         public void Send_move_specifc(int moveType, int metricType, int moveAmount)
         {
 
@@ -734,6 +738,7 @@ namespace SerialPortTerminal
         // Public routine for sending TUN arm message (true/false) (arm/disarm) 
         // drone packet intended for use by GUI
         // Args: bool armDrone
+        // Author: Taylor Trabun
         public void Send_arm_message(bool armDrone)
         {
 

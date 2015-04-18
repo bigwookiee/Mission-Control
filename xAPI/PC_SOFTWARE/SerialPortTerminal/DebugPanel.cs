@@ -18,15 +18,16 @@ namespace SerialPortTerminal
             parentSerialTerminal = parentTerminal;
             InitializeComponent();
         }
-        //disarm
+        //disarm button - sends disarm packet
+        // Author: Taylor Trabun
         private void debug0(object sender, EventArgs e)
         {
             parentSerialTerminal.Send_arm_message(false);
         }
-
+        //send takeoff with altitue 10
         private void debug1(object sender, EventArgs e)
         {
-
+            parentSerialTerminal.Send_takeoff_packet(10);
         }
 
         private void debug2(object sender, EventArgs e)
@@ -43,7 +44,8 @@ namespace SerialPortTerminal
         {
 
         }
-        //arm
+        //arm button code - sends arm packet
+        // Author: Taylor Trabun
         private void debug5(object sender, EventArgs e)
         {
             parentSerialTerminal.Send_arm_message(true);
