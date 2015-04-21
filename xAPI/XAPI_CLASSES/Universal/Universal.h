@@ -167,6 +167,12 @@
 #define TUN_TYPE_LOCAL_ARM 0x90
 #define TUN_TYPE_EXTERNAL_ARM 0x91
 
+//for set heading
+#define TUN_TYPE_LOCAL_SET_HEADING 0x92
+#define TUN_TYPE_EXTERNAL_SET_HEADING 0x93
+//for set altitude hold
+#define TUN_TYPE_LOCAL_ALT_HOLD 0x94
+#define TUN_TYPE_EXTERNAL_ALT_HOLD 0x95
 
 //***********************************************
 //***********************************************

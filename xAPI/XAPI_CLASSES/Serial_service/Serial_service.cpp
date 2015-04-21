@@ -151,6 +151,16 @@ boolean Serial_service::process_TUN_packet(	uint8_t* buff,
 				//m_lcd.lcd_print("**************");
 				m_lcd.lcd_print(0,0,"Got Do Move");
 			break;
+			case TUN_TYPE_EXTERNAL_SET_HEADING:
+				create_and_pass_external(TUN_TYPE_EXTERNAL_SET_HEADING, buff, buff_sz);
+				//m_lcd.lcd_print("**************");
+				m_lcd.lcd_print(0,0,"Got Set HEading");
+			break;
+			case TUN_TYPE_EXTERNAL_ALT_HOLD:
+				create_and_pass_external(TUN_TYPE_EXTERNAL_ALT_HOLD, buff, buff_sz);
+				//m_lcd.lcd_print("**************");
+				m_lcd.lcd_print(0,0,"Got Alt Hold");
+			break;
 		}
 	
 		success = true;
