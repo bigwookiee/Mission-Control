@@ -60,11 +60,11 @@
             this.button2.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateGray;
             this.button2.FlatAppearance.BorderSize = 2;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(12, 50);
+            this.button2.Location = new System.Drawing.Point(12, 52);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 32);
             this.button2.TabIndex = 1;
-            this.button2.Text = "Takeoff 10";
+            this.button2.Text = "Takeoff 160";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.debug1);
             // 

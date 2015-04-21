@@ -145,3 +145,22 @@ C:\Users\higle_000\Documents\GitHub\Mission-Control\xAPI\PC_SOFTWARE\SerialPortT
 C:\Users\Taylor Trabun\Documents\MissionControl\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.ManualControl.resources
 C:\Users\higle_000\Documents\GitHub\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.DebugPanel.resources
 C:\Users\Taylor Trabun\Documents\MissionControl\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.DebugPanel.resources
+C:\Users\Taylor Trabun\Documents\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\bin\Debug\SerialPort Terminal.exe.config
+C:\Users\Taylor Trabun\Documents\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPort Terminal.exe
+C:\Users\Taylor Trabun\Documents\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPort Terminal.pdb
+C:\Users\Taylor Trabun\Documents\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\bin\Debug\SerialPort Terminal.exe.manifest
+C:\Users\Taylor Trabun\Documents\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\bin\Debug\SerialPort Terminal.application
+C:\Users\Taylor Trabun\Documents\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\bin\Debug\SerialPort Terminal.exe
+C:\Users\Taylor Trabun\Documents\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\bin\Debug\SerialPort Terminal.pdb
+C:\Users\Taylor Trabun\Documents\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.csprojResolveAssemblyReference.cache
+C:\Users\Taylor Trabun\Documents\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.frmAbout.resources
+C:\Users\Taylor Trabun\Documents\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.DemoWinow.resources
+C:\Users\Taylor Trabun\Documents\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.DebugPanel.resources
+C:\Users\Taylor Trabun\Documents\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.GUIform.resources
+C:\Users\Taylor Trabun\Documents\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.hud.resources
+C:\Users\Taylor Trabun\Documents\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.ManualControl.resources
+C:\Users\Taylor Trabun\Documents\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.frmTerminal.resources
+C:\Users\Taylor Trabun\Documents\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.Properties.Resources.resources
+C:\Users\Taylor Trabun\Documents\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPortTerminal.csproj.GenerateResource.Cache
+C:\Users\Taylor Trabun\Documents\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPort Terminal.exe.manifest
+C:\Users\Taylor Trabun\Documents\Mission-Control\xAPI\PC_SOFTWARE\SerialPortTerminal\obj\Debug\SerialPort Terminal.application

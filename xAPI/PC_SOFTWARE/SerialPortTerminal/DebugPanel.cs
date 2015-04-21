@@ -24,10 +24,10 @@ namespace SerialPortTerminal
         {
             parentSerialTerminal.Send_arm_message(false);
         }
-        //send takeoff with altitue 10
+        //send takeoff with altitue 160
         private void debug1(object sender, EventArgs e)
         {
-            parentSerialTerminal.Send_takeoff_packet(10);
+            parentSerialTerminal.Send_takeoff_packet(160);
         }
 
         private void debug2(object sender, EventArgs e)
