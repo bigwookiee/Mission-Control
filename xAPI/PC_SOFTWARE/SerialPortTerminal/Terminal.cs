@@ -762,6 +762,62 @@ namespace SerialPortTerminal
         }
 
         //*******************************************************************
+        // Public routine for sending TUN altHold message (true/false) (on/off) 
+        // drone packet intended for use by GUI
+        // Args: bool setHold
+        // Author: Taylor Trabun
+        public void Send_altHold_message(bool setHold)
+        {
+
+            // storage for the packet
+            string packet;
+
+            //string raw_text = input.Replace("\0", string.Empty);
+
+
+
+            // create the packet
+            int returnSz = m_util.create_altHold_TUN_packet((int)TUN_types.TUN_TYPE_EXTERNAL_ALT_HOLD, setHold, out packet);
+            //int returnSz = m_util.create_LCD_TUN_packet((int)TUN_types.TUN_TYPE_LOCAL_LCD_MSG, raw_text, out packet);
+            // must remove null bytes from string
+            string result = packet.Replace("\0", string.Empty);
+            // Send the user's text straight out the port
+            comport.Write(result);
+
+            // display the packet
+            Log(LogMsgType.Outgoing, result + "\n");
+        }
+
+
+        //*******************************************************************
+        // Public routine for sending TUN set heading message with heading int 
+        // drone packet intended for use by GUI
+        // Args: int heading (must be 0-360)
+        // Author: Taylor Trabun
+        public void Send_setHeading_message(int heading)
+        {
+
+            // storage for the packet
+            string packet;
+
+            //string raw_text = input.Replace("\0", string.Empty);
+
+
+
+            // create the packet
+            int returnSz = m_util.create_heading_TUN_packet((int)TUN_types.TUN_TYPE_EXTERNAL_SET_HEADING, heading, out packet);
+            //int returnSz = m_util.create_LCD_TUN_packet((int)TUN_types.TUN_TYPE_LOCAL_LCD_MSG, raw_text, out packet);
+            // must remove null bytes from string
+            string result = packet.Replace("\0", string.Empty);
+            // Send the user's text straight out the port
+            comport.Write(result);
+
+            // display the packet
+            Log(LogMsgType.Outgoing, result + "\n");
+        }
+
+
+        //*******************************************************************
         //*******************************************************************
         // Updates the count down (-1), and if <=0, the heads up
         // display will show red
