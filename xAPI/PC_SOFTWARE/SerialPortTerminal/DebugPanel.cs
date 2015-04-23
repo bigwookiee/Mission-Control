@@ -29,10 +29,10 @@ namespace SerialPortTerminal
         {
             parentSerialTerminal.Send_takeoff_packet(160);
         }
-
+        //set altHold true
         private void debug2(object sender, EventArgs e)
         {
-
+            parentSerialTerminal.Send_altHold_message(true);
         }
 
         private void debug3(object sender, EventArgs e)
@@ -50,15 +50,15 @@ namespace SerialPortTerminal
         {
             parentSerialTerminal.Send_arm_message(true);
         }
-
+        //set heading 105
         private void debug6(object sender, EventArgs e)
         {
-
+            parentSerialTerminal.Send_setHeading_message(105);
         }
-
+        //alt hold off
         private void debug7(object sender, EventArgs e)
         {
-
+            parentSerialTerminal.Send_altHold_message(false);
         }
 
         private void debug8(object sender, EventArgs e)

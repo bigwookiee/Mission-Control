@@ -24,7 +24,8 @@
 #include <avr/power.h>
 #include <PinChangeInt.h>
 #include <AutoPilot.h>
-
+#include <AltHold_service.h>
+#include <Heading_service.h>
 /*
 struct drone_state
 {
@@ -51,8 +52,10 @@ volatile uint16_t       ali_in_shared, ele_in_shared, thr_in_shared, rud_in_shar
 
 waypoint                *head_waypoint;
 drone_state             *P_state;
-double                  throttle_position;  //throttle settings
-double                  rudder_position;        //rudder settings
+double                  c_alt,throttle_position,s_alt;  //throttle settings
+                                                        //c_alt is current alt, s_alt is setpoint for PID
+double                  c_head,rudder_position,s_head;  //rudder settings
+                                                        //c_head is current heading, s_head is setpoint for PID
 byte                    RangeTime_1cm;
 int                     groundRangeTime;
 Servo                   throttle, rudder, aileron, elevator, aux;
@@ -67,8 +70,9 @@ Adafruit_L3GD20_Unified       gyro  = Adafruit_L3GD20_Unified(20);
 Adafruit_10DOF                dof   = Adafruit_10DOF();
 
 /* Global PID Variables */
-PID altPID(&P_state->sonar_alt, &throttle_position, &P_state->hold_alt, 2, 5, 1, DIRECT);
-PID headingPID(&P_state->current_head, &rudder_position,&P_state->hold_head, 2, 5, 1, DIRECT);
+PID altPID(&P_state->sonar_alt, &throttle_position, &P_state->hold_alt, 1, .05, .25, DIRECT);
+PID headingPID(&c_head, &rudder_position, &s_head, Kp, Ki, Kd, DIRECT);
+//PID headingPID(&P_state->current_head, &rudder_position, &P_state->hold_head, 1, .05, .25, DIRECT);
 
 /* Global NeoPixels */
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, LED_PIN, NEO_GRB + NEO_KHZ800);
@@ -89,6 +93,10 @@ Takeoff_service takeoff_service(xapi, lcd_service);
 Land_service land_service(xapi, lcd_service);
 DoMove_service doMove_service(xapi, lcd_service);
 Arm_service arm_service(xapi, lcd_service);
+AltHold_service altHold_service(xapi, lcd_service);
+Heading_service heading_service(xapi, lcd_service);
+
+
 //Heartbeat_service heartbeat_service(xapi, lcd_service);
 //Serial_service serial_service = Serial_service(Serial1, xapi, lcd_service);
 //uint8_t msg1[] =   "I FEEL GREAT";
@@ -122,6 +130,8 @@ void loop()
   land_service.land_service_latch();
   doMove_service.DoMove_service_latch();
   arm_service.arm_service_latch();
+  altHold_service.altHold_service_latch();
+  heading_service.heading_service_latch();
   //heartbeat_service.heartbeat_service_latch();
   //serial_service.serial_service_latch();  
 }
@@ -283,36 +293,43 @@ void pid_loop(){
   sensors_event_t acc_event;
   sensors_event_t mag_event;
   sensors_vec_t   orientation;
+
   //int thr_min, thr_max;  // 
  
   //thr_min = throttle_position - thr_out_range;
   //thr_max = throttle_position + thr_out_range;
   //altPID.SetOutputLimits(thr_min,thr_max);
  
+  //Serial.print("In PID! ");
+ 
   if (bit_autopilot_flags & ALTHOLD_FLAG)
   { 
-    Serial.print("I am taking off! alt to hold:");
-    Serial.print(P_state->hold_alt);
-    Serial.print(" current alt: ");
-    Serial.println(P_state->current_alt);
     P_state->sonar_alt = ground_range.ping_median(GROUND_SONAR_ITERATION);
     P_state->sonar_alt = (int)(P_state->sonar_alt / RangeTime_1cm) - CALIBRATION_ERROR;
-
+    
     if (P_state->sonar_alt < 500)
       P_state->current_alt = P_state->ground_alt + P_state->sonar_alt;
     else
       P_state->current_alt = cmAlt();
-    //Serial.print("Alt: ");
+    
+    Serial.print("I am taking off! alt to hold at:");
+    Serial.print(P_state->hold_alt);
+    Serial.print(", current alt: ");
+    Serial.print(P_state->current_alt);
+    Serial.print(", Sonar: ");
+    Serial.println(P_state->sonar_alt);
     
     altPID.Compute();
-    //Serial.print((int)throttle_position);
+    Serial.print((int)throttle_position);
     throttle.writeMicroseconds((int)throttle_position);
   }
 
   if (bit_autopilot_flags & HEADING_FLAG)
   {
+    //Serial.println("In hold heading! ");  
     acc.getEvent(&acc_event);
-    /*if(dof.accelGetOrientation(&acc_event, &orientation))
+    //dof.accelGetOrientation(&acc_event, &orientation);
+    if(dof.accelGetOrientation(&acc_event, &orientation))
     {
       Serial.print(F("Roll: "));
       Serial.print(orientation.roll);
@@ -320,29 +337,34 @@ void pid_loop(){
       Serial.print(F("Pitch: "));
       Serial.print(orientation.pitch);
       Serial.print(F("; "));
-    }*/
-    
-    
+    }
+        
     mag.getEvent(&mag_event);
-    /*if (dof.magGetOrientation(SENSOR_AXIS_Z, &mag_event, &orientation))
+    //dof.magGetOrientation(SENSOR_AXIS_Z, &mag_event, &orientation);
+    if (dof.magGetOrientation(SENSOR_AXIS_Z, &mag_event, &orientation))
     {
-      /* 'orientation' should have valid .heading data now /
-      Serial.print("AutoPilot ON !!!!!! ");
+      /* 'orientation' should have valid .heading data now */
+      //Serial.print("AutoPilot ON !!!!!! ");
       Serial.print(F("Heading: "));
       Serial.print(orientation.heading);
-      Serial.println(F("; "));
-    }*/
+      Serial.print(F("; "));
+    }
      
      P_state->current_head = orientation.heading;
-     
+     c_head = P_state->current_head;  // The pid libary dose not like &P_state
+     s_head = P_state->hold_head;     // for some reason.  Some thing to do with
+                                      //  C++ vs C
      headingPID.Compute();
-     //Serial.println((int)rudder_position);
-       rudder.writeMicroseconds((int)rudder_position);
+     Serial.print((int)rudder_position);
+     rudder.writeMicroseconds((int)rudder_position);
+
+     Serial.print("current Head: ");Serial.print(P_state->current_head); 
+     Serial.print(", hold: "); Serial.print(P_state->hold_head);
+     Serial.print(", alt_hold: "); Serial.println(P_state->hold_alt);
   }
 }
 
 /************************************** RX PASS ************************************/
-
 
 void RX_pass(){
 
@@ -388,28 +410,35 @@ void RX_pass(){
     if(elevator.readMicroseconds() != ele_in)
       elevator.writeMicroseconds(ele_in);
       
-  if(bit_update_flags & THR_FLAG)
+  if((bit_update_flags & THR_FLAG) && (!(bit_autopilot_flags & ALTHOLD_FLAG) 
+      || !(bit_autopilot_flags & TOGGLE_AUTOPILOT))) 
     if(throttle.readMicroseconds() != thr_in)
+    {
       throttle.writeMicroseconds(thr_in);
-      
-  if((bit_update_flags & RUD_FLAG) && !(bit_autopilot_flags & HEADING_FLAG))
+      //Serial.print("thr:");
+      //Serial.println(thr_in);
+    }
+  
+  //Serial.print(bit_autopilot_flags, BIN); Serial.println (" ");
+  
+  if((bit_update_flags & RUD_FLAG) && (!(bit_autopilot_flags & HEADING_FLAG) 
+      || !(bit_autopilot_flags & TOGGLE_AUTOPILOT))) 
   {
-    //Serial.print("Manual ");
+    //Serial.println("Manual");
     if(rudder.readMicroseconds() != rud_in)
       rudder.writeMicroseconds(rud_in);
-  }
+    }
   
   if(bit_update_flags & AUX_FLAG)
     if(aux_in > 1500)
     {
-      
-      //Serial.println(" IN IF");
-      bit_autopilot_flags |= HEADING_FLAG;
+      bit_autopilot_flags |= TOGGLE_AUTOPILOT;
+      //Serial.print("In if "); Serial.println(bit_autopilot_flags, BIN);
     }  
     else
     { 
-      bit_autopilot_flags &= ~(HEADING_FLAG); 
-      //Serial.println("IN Else");
+      bit_autopilot_flags &= ~(TOGGLE_AUTOPILOT); 
+      //Serial.print("In else "); Serial.println(bit_autopilot_flags, BIN);
     }
       
   bit_update_flags = 0;
@@ -422,11 +451,11 @@ void RX_pass(){
   Serial.print("ele:");
   Serial.print(ele_in);
   Serial.print("|");
-  
-  Serial.print("thr:");
-  Serial.print(thr_in);
-  Serial.print("|");
-
+  */
+  //Serial.print("thr:");
+  //Serial.println(thr_in);
+  //Serial.print("|");
+/*
   Serial.print("rud:");
   Serial.print(rud_in);
   Serial.print("|");
@@ -448,7 +477,7 @@ void AutoPilot_setup() {
   Serial.begin(115200);  
   Serial2.begin(9600);
   Serial3.begin(9600);
-  Serial.println("int drone");
+  Serial.println("Initialising drone");
       
   if(!acc.begin())
   {
@@ -481,7 +510,7 @@ void AutoPilot_setup() {
   RangeTime_1cm = time_1cm();
   
   headingPID.SetMode(AUTOMATIC);
-  headingPID.SetOutputLimits(1000, 2000);
+  headingPID.SetOutputLimits(1350, 1650);
   rudder_position = 1500; 
   
   setup_pins(); 
@@ -502,6 +531,8 @@ void AutoPilot_setup() {
   Serial.print("|");
   Serial.println(P_state->current_head);
 
+  bit_autopilot_flags |= HEADING_FLAG;
+
   delay (1500);
 }
 
@@ -512,7 +543,9 @@ void AutoPilot(){
     
   //ground_range_value = ground_range.ping_median(GROUND_SONAR_ITERATION);
   //ground_range_value = (int)ground_range_value / RangeTime_1cm;
- pid_loop();
+ if (bit_autopilot_flags & TOGGLE_AUTOPILOT)
+   pid_loop();
+   
  RX_pass();
  
  //Serial.println(bit_autopilot_flags, HEX);
@@ -523,11 +556,10 @@ void AutoPilot(){
  
  
  if (bit_autopilot_flags & ARM_FLAG)
-   if (!(bit_autopilot_flags & (1 << IS_ARMED_FLAG_POSITION)))
+   if (!(bit_autopilot_flags & IS_ARMED_FLAG))
    {
-     Serial.println("I am armed ");
+     //Serial.println("I am armed ");
      arm();
-     
      bit_autopilot_flags |= IS_ARMED_FLAG;
    }
  
@@ -537,11 +569,11 @@ void AutoPilot(){
  //bit_autopilot_flags &= ~128;
  
  if (!(bit_autopilot_flags & ARM_FLAG))
-   if ((bit_autopilot_flags & (1 << IS_ARMED_FLAG_POSITION)))
+   if (bit_autopilot_flags & IS_ARMED_FLAG)
    {
      disarm();
      bit_autopilot_flags &= ~IS_ARMED_FLAG;
-     Serial.println("I am disarmed");   
+     //Serial.println("I am disarmed");   
    }
  
  //Serial.println(bit_autopilot_flags, HEX);
@@ -602,7 +634,7 @@ drone_state * drone_state_new()
     p->current_head = orientation.heading;
     p->hold_head    = HOLD_HEADING;
     p->current_alt  = cmAlt();
-    p->hold_alt     = cmAlt() + HOLD_ALTITUDE;
+    p->hold_alt     = HOLD_ALTITUDE;
     p->ground_alt   = p->current_alt;
     p->sonar_alt    = 0;
   }

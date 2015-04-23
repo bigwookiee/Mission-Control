@@ -78,7 +78,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 32);
             this.button3.TabIndex = 2;
-            this.button3.Text = "Debug 2";
+            this.button3.Text = "AltHold On";
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.debug2);
             // 
@@ -148,7 +148,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(75, 32);
             this.button8.TabIndex = 7;
-            this.button8.Text = "Debug 7";
+            this.button8.Text = "AltHold Off";
             this.button8.UseVisualStyleBackColor = false;
             this.button8.Click += new System.EventHandler(this.debug7);
             // 
@@ -162,7 +162,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(75, 32);
             this.button9.TabIndex = 6;
-            this.button9.Text = "Debug 6";
+            this.button9.Text = "Heading 105";
             this.button9.UseVisualStyleBackColor = false;
             this.button9.Click += new System.EventHandler(this.debug6);
             // 
