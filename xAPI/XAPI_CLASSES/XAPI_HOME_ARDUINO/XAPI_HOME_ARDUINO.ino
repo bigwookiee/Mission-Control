@@ -6,9 +6,12 @@
 #include <Universal.h>
 #include <Util.h>
 #include <Single_buff.h>
+/*
 #include <Arm_service.h>
 #include <Heartbeat_service.h>
-
+#include <AltHold_service.h>
+#include <Heading_service.h>
+*/
 //0013a200
 //40a1446d
 
@@ -18,8 +21,8 @@ Xapi xapi = Xapi(Serial);
 //Serial_service serial_service = Serial_service(Serial1, xapi);
 LCD_service lcd_service (xapi);
 Serial_service serial_service = Serial_service(Serial1, xapi, lcd_service);
-Arm_service arm_service(xapi, lcd_service);
-Heartbeat_service heartbeat_service(xapi, lcd_service);
+//Arm_service arm_service(xapi, lcd_service);
+//Heartbeat_service heartbeat_service(xapi, lcd_service);
 uint8_t msg1[] =   "I FEEL GREAT";
 uint8_t msg2[] =   "COMMODORE 64";
 uint8_t _clear[] = "                ";
@@ -45,8 +48,8 @@ void loop()
   xapi.xapi_latch();
   lcd_service.lcd_service_latch();
   serial_service.serial_service_latch();
-  arm_service.arm_service_latch();
-  heartbeat_service.heartbeat_service_latch();
+  //arm_service.arm_service_latch();
+  //heartbeat_service.heartbeat_service_latch();
   //delay(4000);
 }
 
