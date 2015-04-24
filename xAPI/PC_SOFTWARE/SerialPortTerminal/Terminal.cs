@@ -789,6 +789,36 @@ namespace SerialPortTerminal
         }
 
 
+
+        //*******************************************************************
+        // Public routine for sending TUN headingHold message
+        // drone packet intended for use by GUI
+        // Args: int setHold
+        //           (0: enable longitude hold, 1: disable longitude hold,
+        //            2: enable latitude hold, 3: disable latitude hold)
+        // Author: Taylor Trabun
+        public void Send_headingHold_message(int setHold)
+        {
+
+            // storage for the packet
+            string packet;
+
+            //string raw_text = input.Replace("\0", string.Empty);
+
+
+
+            // create the packet
+            int returnSz = m_util.create_headingHold_TUN_packet((int)TUN_types.TUN_TYPE_EXTERNAL_HEADING_HOLD, setHold, out packet);
+            //int returnSz = m_util.create_LCD_TUN_packet((int)TUN_types.TUN_TYPE_LOCAL_LCD_MSG, raw_text, out packet);
+            // must remove null bytes from string
+            string result = packet.Replace("\0", string.Empty);
+            // Send the user's text straight out the port
+            comport.Write(result);
+
+            // display the packet
+            Log(LogMsgType.Outgoing, result + "\n");
+        }
+
         //*******************************************************************
         // Public routine for sending TUN set heading message with heading int 
         // drone packet intended for use by GUI

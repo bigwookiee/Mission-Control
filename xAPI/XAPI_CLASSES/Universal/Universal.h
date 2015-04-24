@@ -173,6 +173,9 @@
 //for set altitude hold
 #define TUN_TYPE_LOCAL_ALT_HOLD 0x94
 #define TUN_TYPE_EXTERNAL_ALT_HOLD 0x95
+//for set heading hold
+#define TUN_TYPE_LOCAL_HEADING_HOLD 0x96
+#define TUN_TYPE_EXTERNAL_HEADING_HOLD 0x97
 
 //***********************************************
 //***********************************************

@@ -26,6 +26,7 @@
 #include <AutoPilot.h>
 #include <AltHold_service.h>
 #include <Heading_service.h>
+#include <HeadingHold_service.h>
 /*
 struct drone_state
 {
@@ -95,7 +96,7 @@ DoMove_service doMove_service(xapi, lcd_service);
 Arm_service arm_service(xapi, lcd_service);
 AltHold_service altHold_service(xapi, lcd_service);
 Heading_service heading_service(xapi, lcd_service);
-
+HeadingHold_service headingHold_service(xapi, lcd_service);
 
 //Heartbeat_service heartbeat_service(xapi, lcd_service);
 //Serial_service serial_service = Serial_service(Serial1, xapi, lcd_service);
@@ -132,6 +133,7 @@ void loop()
   arm_service.arm_service_latch();
   altHold_service.altHold_service_latch();
   heading_service.heading_service_latch();
+  headingHold_service.headingHold_service_latch();
   //heartbeat_service.heartbeat_service_latch();
   //serial_service.serial_service_latch();  
 }

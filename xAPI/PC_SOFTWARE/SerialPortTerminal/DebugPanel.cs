@@ -34,15 +34,15 @@ namespace SerialPortTerminal
         {
             parentSerialTerminal.Send_altHold_message(true);
         }
-
+        // set HeadingHold hold longitude
         private void debug3(object sender, EventArgs e)
         {
-
+            parentSerialTerminal.Send_headingHold_message(0);
         }
-
+        //set HeadingHold hold latitude
         private void debug4(object sender, EventArgs e)
         {
-
+            parentSerialTerminal.Send_headingHold_message(2);
         }
         //arm button code - sends arm packet
         // Author: Taylor Trabun
@@ -60,15 +60,15 @@ namespace SerialPortTerminal
         {
             parentSerialTerminal.Send_altHold_message(false);
         }
-
+        //headingHold disable longitude hold
         private void debug8(object sender, EventArgs e)
         {
-
+            parentSerialTerminal.Send_headingHold_message(1);
         }
-
+        //headingHold disable latitude hold
         private void debug9(object sender, EventArgs e)
         {
-
+            parentSerialTerminal.Send_headingHold_message(3);
         }
 
     }
