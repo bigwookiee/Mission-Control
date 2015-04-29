@@ -26,10 +26,10 @@
 #include <AutoPilot.h>
 #include <AltHold_service.h>
 #include <Heading_service.h>
-
+<<<<<<< HEAD
 #include <SPI.h>
 #include <SD.h>
-
+=======
 #include <HeadingHold_service.h>
 /*
 struct drone_state
@@ -48,7 +48,7 @@ struct drone_state
   uint16_t   loiter_time;  // Time on station when drone arives.
 };*/
 
-
+>>>>>>> 570963040406222b2c9b7e609e55a161e05fe906
 
 /* Global Variables */
           uint8_t       bit_autopilot_flags;  // Used to keep track of auto pilot enabled subsytems.
@@ -137,6 +137,16 @@ void loop()
   //system_active();
   //process_buttons();
   AutoPilot();
+<<<<<<< HEAD
+  //xapi.xapi_latch();
+  //lcd_service.lcd_service_latch();
+  //takeoff_service.takeoff_service_latch();
+  //land_service.land_service_latch();
+  //doMove_service.DoMove_service_latch();
+  //arm_service.arm_service_latch();
+  //altHold_service.altHold_service_latch();
+  //heading_service.heading_service_latch();
+=======
   xapi.xapi_latch();
   lcd_service.lcd_service_latch();
   takeoff_service.takeoff_service_latch();
