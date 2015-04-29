@@ -92,7 +92,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 32);
             this.button4.TabIndex = 3;
-            this.button4.Text = "Debug 3";
+            this.button4.Text = "Longitude Hold";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.debug3);
             // 
@@ -106,7 +106,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 32);
             this.button5.TabIndex = 4;
-            this.button5.Text = "Debug 4";
+            this.button5.Text = "Latitude Hold";
             this.button5.UseVisualStyleBackColor = false;
             this.button5.Click += new System.EventHandler(this.debug4);
             // 
@@ -120,7 +120,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 32);
             this.button6.TabIndex = 9;
-            this.button6.Text = "Debug 9";
+            this.button6.Text = "Latitude No Hold";
             this.button6.UseVisualStyleBackColor = false;
             this.button6.Click += new System.EventHandler(this.debug9);
             // 
@@ -134,7 +134,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(75, 32);
             this.button7.TabIndex = 8;
-            this.button7.Text = "Debug 8";
+            this.button7.Text = "Longitude No Hold";
             this.button7.UseVisualStyleBackColor = false;
             this.button7.Click += new System.EventHandler(this.debug8);
             // 

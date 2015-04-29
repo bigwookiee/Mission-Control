@@ -370,6 +370,45 @@ namespace SerialPortTerminal
             return total_sz;
         }
 
+
+        // Helper function to create a HeadingHold Service TUN packet
+        // set hold (0: enable longitude hold, 1: disable longitude hold,
+        //           2: enable latitude hold, 3: disable latitude hold)
+        // Author: Taylor Trabun
+        public int create_headingHold_TUN_packet(int packet_type, int setHold, out string buff)
+        {
+            int total_sz = 0;
+
+
+            byte[] b_payload = new byte[2];
+            byte[] b_buff;
+            byte[] conv_buff;
+
+            int_to_hex(setHold, (int)MISC_values.MISC_8BIT_HEX_SZ, out conv_buff);
+            b_payload[0] = conv_buff[0];
+            b_payload[1] = conv_buff[1];
+            //b_payload[2] = conv_buff[2];
+            //b_payload[3] = conv_buff[3];
+            // do the normal call using bytes
+            //total_sz = construct_lcd_payload(x, y, msg, msg.Length, out b_payload, 4 + msg.Length);
+
+            Debug.WriteLine(LogMsgType.Outgoing, "packet payload:" + b_payload.Length + "\n");
+            Debug.WriteLine(LogMsgType.Outgoing, "return size:" + total_sz + "\n");
+            //total_sz = create_TUN_packet(packet_type, b_payload, out b_buff);
+            total_sz = create_TUN_packet(packet_type, b_payload, out b_buff);
+            Debug.WriteLine(LogMsgType.Outgoing, "packet:" + b_buff.Length + "\n");
+            Debug.WriteLine(LogMsgType.Outgoing, "return size:" + total_sz + "\n");
+
+            // convert the bytes to a string
+            buff = GetString(b_buff);
+            Debug.WriteLine(LogMsgType.Outgoing, "correct chcksm:" + get_TUN_checksum(buff) + "\n");
+            //Debug.WriteLine(LogMsgType.Outgoing, "packet as string:" + buff + "\n");
+
+
+            return total_sz;
+        }
+
+
         // Helper function to create a Heading Service TUN packet passing int
         // Author: Taylor Trabun
         public int create_heading_TUN_packet(int packet_type, int heading, out string buff)

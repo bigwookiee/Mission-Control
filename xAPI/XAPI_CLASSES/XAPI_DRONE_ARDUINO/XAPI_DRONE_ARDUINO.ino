@@ -26,8 +26,29 @@
 #include <AutoPilot.h>
 #include <AltHold_service.h>
 #include <Heading_service.h>
+<<<<<<< HEAD
 #include <SPI.h>
 #include <SD.h>
+=======
+#include <HeadingHold_service.h>
+/*
+struct drone_state
+{
+  double     current_head; // deg. The current heading.
+  double     hold_head;    // deg. The heading to hold, this is independend of
+                           //      course. 
+  double     current_alt;  // cm Above sea level(ASL). 
+  double     hold_alt;     // cm Altitude to hold above sea level(ASL). 
+  double     ground_alt;   // cm The ground level when armed(AGL) ie. ASL when armed.    
+  double     sonar_alt;    // cm The returned from range finder(AGL).
+  double     current_lon;  // Longitude
+  double     target_lon;   // Longitude I want to go to.
+  double     current_lat;  // Latatude
+  double     target_lat;   // Latatide I want to travil to.
+  uint16_t   loiter_time;  // Time on station when drone arives.
+};*/
+
+>>>>>>> 570963040406222b2c9b7e609e55a161e05fe906
 
 /* Global Variables */
           uint8_t       bit_autopilot_flags;  // Used to keep track of auto pilot enabled subsytems.
@@ -87,7 +108,7 @@ DoMove_service doMove_service(xapi, lcd_service);
 Arm_service arm_service(xapi, lcd_service);
 AltHold_service altHold_service(xapi, lcd_service);
 Heading_service heading_service(xapi, lcd_service);
-
+HeadingHold_service headingHold_service(xapi, lcd_service);
 
 //Heartbeat_service heartbeat_service(xapi, lcd_service);
 //Serial_service serial_service = Serial_service(Serial1, xapi, lcd_service);
@@ -116,6 +137,7 @@ void loop()
   //system_active();
   //process_buttons();
   AutoPilot();
+<<<<<<< HEAD
   //xapi.xapi_latch();
   //lcd_service.lcd_service_latch();
   //takeoff_service.takeoff_service_latch();
@@ -124,6 +146,17 @@ void loop()
   //arm_service.arm_service_latch();
   //altHold_service.altHold_service_latch();
   //heading_service.heading_service_latch();
+=======
+  xapi.xapi_latch();
+  lcd_service.lcd_service_latch();
+  takeoff_service.takeoff_service_latch();
+  land_service.land_service_latch();
+  doMove_service.DoMove_service_latch();
+  arm_service.arm_service_latch();
+  altHold_service.altHold_service_latch();
+  heading_service.heading_service_latch();
+  headingHold_service.headingHold_service_latch();
+>>>>>>> 570963040406222b2c9b7e609e55a161e05fe906
   //heartbeat_service.heartbeat_service_latch();
   //serial_service.serial_service_latch();  
 }

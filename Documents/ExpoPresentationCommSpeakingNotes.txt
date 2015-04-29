@@ -1,0 +1,33 @@
+Expo Presentation: Communications
+Presentation Notes
+
+Slide: Communication Designs
+	- On the left is the basic overview for how our communications work.
+		- Packet from home computer -> home arduino -> xBee modules ->
+			-> drone arduino and vice versa
+	- On the right is the design for how mission plan uploads will work
+		- Send start install packet
+		- Wait for ACK
+		- While instructions still need to be sent:
+			- Send instruction (Drone will store instruction)
+			- Wait for ACK
+		- Send end install packet
+		- Drone sends back ACK 
+			- (Future work: include md5 checksum of mission file to verify integrity)
+			
+	
+Slide: 	Communication Packet Types
+	- Table of planned packet types needed for project. All have a specific
+	  type that corresponds to a specifc service that will be running on the drone.
+		- When the drone sees a packet of a certain type, it knows to pass it to a specifc service
+			- Example: Takeoff packet received, goes to takeoff service, service parses and sends command to drone
+			
+			
+Slide: Services (Fully Implemented)
+	- List of drone specific services we have implemented into our comms system
+		- Can talk about what some of the services do
+		
+Slide: Future Services Required
+	- List of drone specific services that still need to be implemented
+		- Mission plan system needs to be integrated
+		- Can talk about how Heartbeat service will send drone status info back to home arduino and feed GUI info
