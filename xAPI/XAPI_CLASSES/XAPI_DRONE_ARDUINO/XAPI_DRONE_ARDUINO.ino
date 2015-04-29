@@ -26,29 +26,16 @@
 #include <AutoPilot.h>
 #include <AltHold_service.h>
 #include <Heading_service.h>
-/*
-struct drone_state
-{
-  double     current_head; // deg. The current heading.
-  double     hold_head;    // deg. The heading to hold, this is independend of
-                           //      course. 
-  double     current_alt;  // cm Above sea level(ASL). 
-  double     hold_alt;     // cm Altitude to hold above sea level(ASL). 
-  double     ground_alt;   // cm The ground level when armed(AGL) ie. ASL when armed.    
-  double     sonar_alt;    // cm The returned from range finder(AGL).
-  double     current_lon;  // Longitude
-  double     target_lon;   // Longitude I want to go to.
-  double     current_lat;  // Latatude
-  double     target_lat;   // Latatide I want to travil to.
-  uint16_t   loiter_time;  // Time on station when drone arives.
-};*/
-
+#include <SPI.h>
+#include <SD.h>
 
 /* Global Variables */
           uint8_t       bit_autopilot_flags;  // Used to keep track of auto pilot enabled subsytems.
 volatile  uint8_t       bit_update_flags_shared;  //Used for interups
 volatile uint16_t       ali_in_shared, ele_in_shared, thr_in_shared, rud_in_shared, aux_in_shared; //ISR shared inputs from RX
          uint32_t       ali_start, ele_start, thr_start, rud_start, aux_start; //Used to recored rising edge for ISR
+volatile uint32_t       rx_pulse_time; //Last time an rx pulse occured. Under full automation this would
+                                       // need to be set every 60 ms or so.
 
 waypoint                *head_waypoint;
 drone_state             *P_state;
@@ -62,6 +49,11 @@ Servo                   throttle, rudder, aileron, elevator, aux;
 byte                    armed;  //May move to bitUpdateFlagShared;
 NewPing                 ground_range(GROUND_PING_PIN, GROUND_ECHO_PIN, GROUND_MAX_SONAR_DISTANCE);
 
+
+const int chipSelect = 53;
+//String log_string;
+//byte write_to_log = 0;
+
 /* Global Sensor Variables */
 Adafruit_LSM303_Accel_Unified acc = Adafruit_LSM303_Accel_Unified(30301);
 Adafruit_LSM303_Mag_Unified   mag   = Adafruit_LSM303_Mag_Unified(30302);
@@ -70,9 +62,10 @@ Adafruit_L3GD20_Unified       gyro  = Adafruit_L3GD20_Unified(20);
 Adafruit_10DOF                dof   = Adafruit_10DOF();
 
 /* Global PID Variables */
-PID altPID(&P_state->sonar_alt, &throttle_position, &P_state->hold_alt, 1, .05, .25, DIRECT);
-PID headingPID(&c_head, &rudder_position, &s_head, Kp, Ki, Kd, DIRECT);
-//PID headingPID(&P_state->current_head, &rudder_position, &P_state->hold_head, 1, .05, .25, DIRECT);
+//PID altPID(&P_state->sonar_alt, &throttle_position, &P_state->hold_alt, 1, .05, .25, DIRECT);
+PID headingPID(&c_head, &rudder_position, &s_head, Kp, Ki, Kd, REVERSE);
+//PID headingPID(&c_head, &rudder_position, &s_head, Kp, Ki, Kd, DIRECT);
+
 
 /* Global NeoPixels */
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, LED_PIN, NEO_GRB + NEO_KHZ800);
@@ -80,9 +73,8 @@ Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, LED_PIN, NEO_GRB + NEO_K
 //0013a200
 //40a1446d
 
-//***********************************************
-//***********************************************
-
+/***********************************************
+/***********************************************\
 Xapi xapi = Xapi(Serial2);
 //Serial_service serial_service = Serial_service(Serial1, xapi);
 LCD_service lcd_service (xapi);
@@ -124,25 +116,29 @@ void loop()
   //system_active();
   //process_buttons();
   AutoPilot();
-  xapi.xapi_latch();
-  lcd_service.lcd_service_latch();
-  takeoff_service.takeoff_service_latch();
-  land_service.land_service_latch();
-  doMove_service.DoMove_service_latch();
-  arm_service.arm_service_latch();
-  altHold_service.altHold_service_latch();
-  heading_service.heading_service_latch();
+  //xapi.xapi_latch();
+  //lcd_service.lcd_service_latch();
+  //takeoff_service.takeoff_service_latch();
+  //land_service.land_service_latch();
+  //doMove_service.DoMove_service_latch();
+  //arm_service.arm_service_latch();
+  //altHold_service.altHold_service_latch();
+  //heading_service.heading_service_latch();
   //heartbeat_service.heartbeat_service_latch();
   //serial_service.serial_service_latch();  
 }
 
 
-
+/*************************** ISR ISR ISR ******************************/
 // ISR for Alierons
 void calcAlierons()
 {
+  
   if(digitalRead(RX_AILERONS) == HIGH)
+  {
+    rx_pulse_time = millis();  //Start of a new pluse sequence.
     ali_start = micros();
+  }
   else
   {
     ali_in_shared = (uint16_t) (micros() - ali_start);
@@ -156,7 +152,7 @@ void calcAlierons()
 }
 
 void calcElevator()
-{
+{ 
   if(digitalRead(RX_ELEVATOR) == HIGH)
     ele_start = micros();
   else
@@ -182,7 +178,7 @@ void calcThrottle()
 }
 
 void calcRudder()
-{
+{ 
   if(digitalRead(RX_RUDDER) == HIGH)
     rud_start = micros();
   else
@@ -312,60 +308,82 @@ void pid_loop(){
     else
       P_state->current_alt = cmAlt();
     
-    Serial.print("I am taking off! alt to hold at:");
-    Serial.print(P_state->hold_alt);
-    Serial.print(", current alt: ");
-    Serial.print(P_state->current_alt);
-    Serial.print(", Sonar: ");
-    Serial.println(P_state->sonar_alt);
+    //Serial.print("I am taking off! alt to hold at:");
+    //Serial.print(P_state->hold_alt);
+    //Serial.print(", current alt: ");
+    //Serial.print(P_state->current_alt);
+    //Serial.print(", Sonar: ");
+    //Serial.println(P_state->sonar_alt);
     
-    altPID.Compute();
-    Serial.print((int)throttle_position);
+//    altPID.Compute();
+    //Serial.print((int)throttle_position);
     throttle.writeMicroseconds((int)throttle_position);
   }
 
   if (bit_autopilot_flags & HEADING_FLAG)
   {
-    //Serial.println("In hold heading! ");  
-    acc.getEvent(&acc_event);
-    //dof.accelGetOrientation(&acc_event, &orientation);
-    if(dof.accelGetOrientation(&acc_event, &orientation))
-    {
-      Serial.print(F("Roll: "));
-      Serial.print(orientation.roll);
-      Serial.print(F("; "));
-      Serial.print(F("Pitch: "));
-      Serial.print(orientation.pitch);
-      Serial.print(F("; "));
-    }
-        
-    mag.getEvent(&mag_event);
-    //dof.magGetOrientation(SENSOR_AXIS_Z, &mag_event, &orientation);
-    if (dof.magGetOrientation(SENSOR_AXIS_Z, &mag_event, &orientation))
-    {
-      /* 'orientation' should have valid .heading data now */
-      //Serial.print("AutoPilot ON !!!!!! ");
-      Serial.print(F("Heading: "));
-      Serial.print(orientation.heading);
-      Serial.print(F("; "));
-    }
-     
-     P_state->current_head = orientation.heading;
+
+     P_state->current_head = avg_heading();
      c_head = P_state->current_head;  // The pid libary dose not like &P_state
      s_head = P_state->hold_head;     // for some reason.  Some thing to do with
                                       //  C++ vs C
-     headingPID.Compute();
-     Serial.print((int)rudder_position);
-     rudder.writeMicroseconds((int)rudder_position);
+     if  (((c_head+3) >= P_state->hold_head) && ((c_head-3)<= P_state->hold_head))
+       {
+//         Serial.print("in if");
+         rudder_position = 1500;
+       }
+     else
+       headingPID.Compute();
+       
+       rudder.writeMicroseconds((int)rudder_position); 
+      
+     
 
-     Serial.print("current Head: ");Serial.print(P_state->current_head); 
-     Serial.print(", hold: "); Serial.print(P_state->hold_head);
-     Serial.print(", alt_hold: "); Serial.println(P_state->hold_alt);
+     //Serial.print("current Head: ");Serial.print(P_state->current_head); 
+     //Serial.print(", hold: "); Serial.print(P_state->hold_head);
+     //Serial.print(", alt_hold: "); Serial.println(P_state->hold_alt);
+  }
+}
+
+/********************AVG HEADING  AVG HEADING AVG HEADING **************************/
+int avg_heading()
+{
+  sensors_event_t acc_event;
+  sensors_event_t mag_event;
+  sensors_vec_t   orientation;
+  static uint32_t last_time;
+  uint32_t now = millis();
+  uint32_t time_change = now - last_time;
+  uint16_t avg = 0;
+
+
+  if(time_change >= SAMPLE_TIME)
+  {
+    acc.getEvent(&acc_event);
+    mag.getEvent(&mag_event);
+    if (dof.magTiltCompensation(SENSOR_AXIS_Z, &mag_event, &acc_event))
+      if(dof.magGetOrientation(SENSOR_AXIS_Z, &mag_event, &orientation))
+      {
+        /* 'orientation' should have valid .heading data now /
+        log_string += "Current Heading: " + String(P_state->current_head) + ", ";
+        log_string += "hold Heading: " + String(P_state->hold_head) + ", ";
+        log_string += "Rudder: " + String((int)rudder_position) + ", ";
+        */
+        avg = (uint16_t)orientation.heading;
+        //write_to_log = 1;
+      }      
+    
+    
+    
+    Serial.print(F("Heading: "));
+    Serial.print(avg);
+    Serial.println(F("; "));
+    last_time;
+    return avg;
   }
 }
 
 /************************************** RX PASS ************************************/
-
 void RX_pass(){
 
   // local variables to hold a local copies of the channel inputs.  
@@ -411,64 +429,119 @@ void RX_pass(){
       elevator.writeMicroseconds(ele_in);
       
   if((bit_update_flags & THR_FLAG) && (!(bit_autopilot_flags & ALTHOLD_FLAG) 
-      || !(bit_autopilot_flags & TOGGLE_AUTOPILOT))) 
+      || !(bit_autopilot_flags & MASTER_AUTOPILOT))) 
     if(throttle.readMicroseconds() != thr_in)
     {
       throttle.writeMicroseconds(thr_in);
-      //Serial.print("thr:");
-      //Serial.println(thr_in);
+      Serial.print("thr:");
+      Serial.println(thr_in);
     }
   
   //Serial.print(bit_autopilot_flags, BIN); Serial.println (" ");
   
   if((bit_update_flags & RUD_FLAG) && (!(bit_autopilot_flags & HEADING_FLAG) 
-      || !(bit_autopilot_flags & TOGGLE_AUTOPILOT))) 
+      || !(bit_autopilot_flags & MASTER_AUTOPILOT))) 
   {
     //Serial.println("Manual");
     if(rudder.readMicroseconds() != rud_in)
       rudder.writeMicroseconds(rud_in);
+      Serial.print("rud:");
+      Serial.println(rud_in);
     }
   
   if(bit_update_flags & AUX_FLAG)
-    if(aux_in > 1500)
+    if(aux_in > 1650)
     {
-      bit_autopilot_flags |= TOGGLE_AUTOPILOT;
+      bit_autopilot_flags |= MASTER_AUTOPILOT;
       //Serial.print("In if "); Serial.println(bit_autopilot_flags, BIN);
     }  
     else
     { 
-      bit_autopilot_flags &= ~(TOGGLE_AUTOPILOT); 
+      bit_autopilot_flags &= ~(MASTER_AUTOPILOT); 
       //Serial.print("In else "); Serial.println(bit_autopilot_flags, BIN);
     }
       
   bit_update_flags = 0;
 
-  /*
-  Serial.print("ali:");
-  Serial.print(ali_in);
-  Serial.print("|");
-  
-  Serial.print("ele:");
-  Serial.print(ele_in);
-  Serial.print("|");
-  */
-  //Serial.print("thr:");
-  //Serial.println(thr_in);
-  //Serial.print("|");
-/*
-  Serial.print("rud:");
-  Serial.print(rud_in);
-  Serial.print("|");
-  
-  Serial.print("aux:");
-  Serial.print(aux_in);
-  Serial.print("|");
-  
-  Serial.print("HED:");
-  Serial.println(bit_autopilot_flags);
-  */
 }
 
+
+/***********************  DEBUG LEDS  **************************************/
+void debug_leds()
+{
+  
+  static uint32_t last_time;
+  uint32_t now = millis();
+  uint32_t time_change = now - last_time;
+  
+  //Serial.println (curent_time);
+  if (time_change >= LED_UPDATE_DELAY)
+  {
+    if(bit_autopilot_flags & MASTER_AUTOPILOT)
+    {
+      //Serial.println(" IN IF");
+      pixels.setPixelColor(0,pixels.Color(M_AUTOPIOT_ON));
+      pixels.setPixelColor(15,pixels.Color(M_AUTOPIOT_ON));
+    }
+    else
+    {
+      //Serial.println(" IN else");
+      pixels.setPixelColor(0,pixels.Color(L_SIDE));
+      pixels.setPixelColor(15,pixels.Color(R_SIDE));
+    }
+      
+    if(bit_autopilot_flags & HEADING_FLAG)
+    {
+     // Serial.println(" IN IF");
+      pixels.setPixelColor(1,pixels.Color(AUTOPILOT_HOLD_ON));
+      pixels.setPixelColor(14,pixels.Color(AUTOPILOT_HOLD_ON));
+    }
+    else
+    {
+      pixels.setPixelColor(1,pixels.Color(L_SIDE));
+      pixels.setPixelColor(14,pixels.Color(R_SIDE));
+    }
+    
+    if(bit_autopilot_flags & ALTHOLD_FLAG)
+    {
+     // Serial.println(" IN IF");
+      pixels.setPixelColor(2,pixels.Color(AUTOPILOT_HOLD_ON));
+      pixels.setPixelColor(13,pixels.Color(AUTOPILOT_HOLD_ON));
+    }
+    else
+    {
+      pixels.setPixelColor(2,pixels.Color(L_SIDE));
+      pixels.setPixelColor(13,pixels.Color(R_SIDE));
+    }
+    
+    if(bit_autopilot_flags & LATHOLD_FLAG)
+    {
+     // Serial.println(" IN IF");
+      pixels.setPixelColor(3,pixels.Color(AUTOPILOT_HOLD_ON));
+      pixels.setPixelColor(12,pixels.Color(AUTOPILOT_HOLD_ON));
+    }
+    else
+    {
+      pixels.setPixelColor(3,pixels.Color(L_SIDE));
+      pixels.setPixelColor(12,pixels.Color(R_SIDE));
+    }
+    
+    if(bit_autopilot_flags & LONGHOLD_FLAG)
+    {
+     // Serial.println(" IN IF");
+      pixels.setPixelColor(3,pixels.Color(AUTOPILOT_HOLD_ON));
+      pixels.setPixelColor(12,pixels.Color(AUTOPILOT_HOLD_ON));
+    }
+    else
+    {
+      pixels.setPixelColor(3,pixels.Color(L_SIDE));
+      pixels.setPixelColor(12,pixels.Color(R_SIDE));
+    }
+    
+    pixels.show();  
+    last_time = now;
+  }
+}
 
 
 /***********************  Setup  **************************************/
@@ -478,39 +551,53 @@ void AutoPilot_setup() {
   Serial2.begin(9600);
   Serial3.begin(9600);
   Serial.println("Initialising drone");
+  
+  //Serial.print("Initializing SD card...");
+
+  // see if the card is present and can be initialized:
+  //if (!SD.begin(chipSelect)) 
+  //{
+    //Serial.println("Card failed, or not present");
+    // don't do anything more:
+    //return;
+  //}
+  //Serial.println("card initialized.");
       
   if(!acc.begin())
   {
     /* There was a problem detecting the ADXL345 ... check your connections */
-    Serial.println(F("Ooops, no LSM303 detected ... Check your wiring!"));
+    //Serial.println(F("Ooops, no LSM303 detected ... Check your wiring!"));
     while(1);
   }
   if(!mag.begin())
   {
     /* There was a problem detecting the LSM303 ... check your connections */
-    Serial.println("Ooops, no LSM303 detected ... Check your wiring!");
+    //Serial.println("Ooops, no LSM303 detected ... Check your wiring!");
     while(1);
   }
   if(!bmp.begin())
   {
     /* There was a problem detecting the BMP085 ... check your connections */
-    Serial.print("Ooops, no BMP085 detected ... Check your wiring or I2C ADDR!");
+    //Serial.print("Ooops, no BMP085 detected ... Check your wiring or I2C ADDR!");
     while(1);
   }
   if(!gyro.begin())
   {
     /* There was a problem detecting the L3GD20 ... check your connections */
-    Serial.print("Ooops, no L3GD20 detected ... Check your wiring or I2C ADDR!");
+    //Serial.print("Ooops, no L3GD20 detected ... Check your wiring or I2C ADDR!");
     while(1);
   }
   
-  altPID.SetMode(AUTOMATIC);
-  altPID.SetOutputLimits(1000, 2000);
+  //altPID.SetMode(AUTOMATIC);
+  //altPID.SetOutputLimits(1000, 2000);
+  //altPID.SetSampleTime(SAMPLE_TIME);
+
   throttle_position = 1000;  
   RangeTime_1cm = time_1cm();
   
   headingPID.SetMode(AUTOMATIC);
   headingPID.SetOutputLimits(1350, 1650);
+  headingPID.SetSampleTime(SAMPLE_TIME);
   rudder_position = 1500; 
   
   setup_pins(); 
@@ -527,35 +614,49 @@ void AutoPilot_setup() {
 
   P_state = drone_state_new();
   
-  Serial.print(P_state->current_alt);
-  Serial.print("|");
-  Serial.println(P_state->current_head);
+  //Serial.print(P_state->current_alt);
+  //Serial.print("|");
+  //Serial.println(P_state->current_head);
 
   bit_autopilot_flags |= HEADING_FLAG;
+
+  rx_pulse_time = millis();
 
   delay (1500);
 }
 
+/*********************** WRITE LOG  WRITE LOG *********************
+void write_log()
+{
+  File data_file = SD.open("DataLog.txt",FILE_WRITE);
+  if (data_file)
+  {
+    data_file.println(log_string);
+    data_file.close();
+    Serial.println(log_string);
+  }
+  else
+    Serial.println("error opening " + LOG_NAME);
+} 
+
 
 /************************ AutoPilot ****************************/
-
 void AutoPilot(){  
-    
-  //ground_range_value = ground_range.ping_median(GROUND_SONAR_ITERATION);
-  //ground_range_value = (int)ground_range_value / RangeTime_1cm;
- if (bit_autopilot_flags & TOGGLE_AUTOPILOT)
+  if (DEBUG)
+  {
+    debug_leds(); 
+    //log_string = "";
+  }
+
+  rx_on();  
+  RX_pass();
+  if (bit_autopilot_flags & MASTER_AUTOPILOT)
    pid_loop();
-   
- RX_pass();
- 
+  
  //Serial.println(bit_autopilot_flags, HEX);
- //delay(1000);
- 
- //bit_autopilot_flags |= 128;
- 
- 
- 
- if (bit_autopilot_flags & ARM_FLAG)
+ //delay(1000);  
+
+  if (bit_autopilot_flags & ARM_FLAG)
    if (!(bit_autopilot_flags & IS_ARMED_FLAG))
    {
      //Serial.println("I am armed ");
@@ -575,33 +676,44 @@ void AutoPilot(){
      bit_autopilot_flags &= ~IS_ARMED_FLAG;
      //Serial.println("I am disarmed");   
    }
+   
+ if (bit_autopilot_flags & MASTER_AUTOPILOT)
+   if (!(bit_autopilot_flags & MASTER_ON_FLAG))
+   {
+     //Serial.println("I am armed ");
+     
+     bit_autopilot_flags |= MASTER_ON_FLAG;
+   }
  
  //Serial.println(bit_autopilot_flags, HEX);
  //delay(1000);
  
-  //remote_relay();
-  
-  //acc.getEvent(&event);
-  //Serial.print(" Acc Z: ");
-  //Serial.print(event.acceleration.z);
-
-  //gyro.getEvent(&event);
-  //Serial.print(" gyro Z: ");
-  //Serial.print(event.gyro.z);
-
-  //Serial.print(" Ping: ");
-  //Serial.print(ground_range_value);
-  //Serial.println(" cm");
-
-  //armed = arm();
-  
-  //delay (5000);
-  
-  //armed = disarm();
+ //bit_autopilot_flags &= ~128;
+ 
+ if (!(bit_autopilot_flags & MASTER_AUTOPILOT))
+   if (bit_autopilot_flags & MASTER_ON_FLAG)
+   {
+     aileron.writeMicroseconds(1500);
+     elevator.writeMicroseconds(1500);
+     throttle.writeMicroseconds(1000);
+     rudder.writeMicroseconds(1500);
+     bit_autopilot_flags &= ~MASTER_ON_FLAG;
+     delay(5000);
+       
+   }
+/*  if (write_to_log)
+    if(log_string != "")
+    {
+      write_log();
+      write_to_log = 0;
+    }*/
 }
 
-/* Pin secttion. */
-  void setup_pins(){
+/******************* Pin secttion. *************************/
+//Used in the pinchange libarry to see a change from the RX.
+
+void setup_pins()
+{  
   aileron.attach(AILERONS_PIN);
   elevator.attach(ELEVATOR_PIN);
   throttle.attach(THROTTLE_PIN);
@@ -614,6 +726,25 @@ void AutoPilot(){
   attachPinChangeInterrupt(RX_AUX     , calcAux     , CHANGE);
 }
 
+/*************************** RX_ON  RX_ON  RX_ON ********************/
+//  Insure the transmiter is truned on and sending out a pulse.
+void rx_on()
+{
+  Serial.println(millis()-rx_pulse_time);
+  if ((millis() - rx_pulse_time) > SAFE_PULSE    )  // Each pulse is at least 20 ms.  
+                                        // This allows for a few missed frames
+  {                                     // with out droping the dron out of the sky.
+     aileron.writeMicroseconds(1500);   // rx_pulse is set inside the ISR
+     elevator.writeMicroseconds(1500);
+     throttle.writeMicroseconds(1000);
+     rudder.writeMicroseconds(1500);
+     bit_autopilot_flags &= ~MASTER_ON_FLAG;
+     
+     Serial.println("No RX");
+     disarm();
+  }
+  Serial.println("did I die");
+}
 
 /*************************** drone_state ******************/
 drone_state * drone_state_new()
