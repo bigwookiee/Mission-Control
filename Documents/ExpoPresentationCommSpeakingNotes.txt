@@ -31,3 +31,11 @@ Slide: Future Services Required
 	- List of drone specific services that still need to be implemented
 		- Mission plan system needs to be integrated
 		- Can talk about how Heartbeat service will send drone status info back to home arduino and feed GUI info
+
+Slide: Instrument Panel
+	- Avionics Instrument Panel Library courtesy of Guillaume Chouteau which was found on CodeProject.org
+	- Data is gathered using a sensor on the drone. 
+	- String parsing extrapolates the data and then translates to a format readable by the instrument panel library.
+	- Currently monitors the pitch, roll and yaw. 
+	- The top instrument is horizon and the bottom is the heading.
+	
