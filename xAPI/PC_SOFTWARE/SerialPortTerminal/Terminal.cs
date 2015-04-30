@@ -56,7 +56,7 @@ namespace SerialPortTerminal
       GUIform GUIWin;
 
       //for Instrument Panel
-      DemoWinow InsturmentWin;
+      DemoWinow InstrumentWin;
 
     // for the XBee services
       Xbee_service xbee_service;
@@ -71,35 +71,38 @@ namespace SerialPortTerminal
     private bool KeyHandled = false;
 
 		private Settings settings = Settings.Default;
+   
+    //buffer for building a complete set of drone vitals data
+        private StringBuilder incoming_text_buffer = new StringBuilder(200);
     #endregion
 
     #region Constructor
-    public frmTerminal()
-    {
-			// Load user settings
-			settings.Reload();
+        public frmTerminal()
+        {
+            // Load user settings
+            settings.Reload();
 
-      // Build the form
-      InitializeComponent();
+            // Build the form
+            InitializeComponent();
 
-      // Restore the users settings
-      InitializeControlValues();
+            // Restore the users settings
+            InitializeControlValues();
 
-      // Enable/disable controls based on the current state
-      EnableControls();
+            // Enable/disable controls based on the current state
+            EnableControls();
 
-      m_util = new Util();
-      heads_up = new hud(this);
-      xbee_service = new Xbee_service();
+            m_util = new Util();
+            heads_up = new hud(this);
+            xbee_service = new Xbee_service();
 
 
-        // show the hud
-      heads_up.Show();
+            // show the hud
+            heads_up.Show();
 
-      // When data is recieved through the port, call this method
-      comport.DataReceived += new SerialDataReceivedEventHandler(port_DataReceived);
-			comport.PinChanged += new SerialPinChangedEventHandler(comport_PinChanged);
-    }
+            // When data is recieved through the port, call this method
+            comport.DataReceived += new SerialDataReceivedEventHandler(port_DataReceived);
+            comport.PinChanged += new SerialPinChangedEventHandler(comport_PinChanged);
+        }
 
 		void comport_PinChanged(object sender, SerialPinChangedEventArgs e)
 		{
@@ -214,6 +217,43 @@ namespace SerialPortTerminal
         sb.Append(Convert.ToString(b, 16).PadLeft(2, '0').PadRight(3, ' '));
       return sb.ToString().ToUpper();
     }
+
+    private void build_incoming_text(string data)
+    {
+        Int32 delim = 2;
+        string temp = incoming_text_buffer.Append(data).ToString();
+        if (temp.Contains(Environment.NewLine))
+        {
+            string[] each_msg = temp.Split(new string[] { Environment.NewLine }, delim, StringSplitOptions.None);
+           // Log(LogMsgType.Incoming, "&&&" + each_msg[0] + "\n");
+            update_instrument_panel(each_msg[0]);
+            incoming_text_buffer.Length = 0;
+            incoming_text_buffer.Append(each_msg[1]);
+        }
+
+    }
+    private void update_instrument_panel(string data) {
+        
+        if (data[0] == 'R')
+        {
+            string[] parser = data.Split(new Char[] { ';' }, 4);
+            string[] roll_string = parser[0].Split(new Char[] { ' ' }, 2);
+            string[] pitch_string = parser[1].Split(new Char[] { ' ' }, 3);
+            string[] heading_string = parser[2].Split(new Char[] { ' ' }, 3);
+            //  Log(LogMsgType.Incoming, "\n" + roll_string[1] + "/" + pitch_string[2] + "/" + heading_string[2] + "\n");
+            double roll_value = Convert.ToDouble(roll_string[1]);
+            double pitch_value = Convert.ToDouble(pitch_string[2]);
+            int heading_value = (int)Convert.ToDouble(heading_string[2]);
+
+            InstrumentWin.udpateHeading((heading_value+180)%360);
+            InstrumentWin.updatePitchRoll(pitch_value*(-1.0), roll_value);               
+        }
+        else
+        {
+            return;
+        }
+ 
+    }
     #endregion
 
     #region Local Properties
@@ -266,11 +306,11 @@ namespace SerialPortTerminal
 			bool error = false;
             /* The following code is for testing GUI without hardware */
             // Open GUI Window
-            //GUIWin = new GUIform(this);
-            //GUIWin.Show();
+            // GUIWin = new GUIform(this);
+            // GUIWin.Show();
             // Open Avionics Instrument Window
-            //InsturmentWin = new DemoWinow(this);
-            //InsturmentWin.Show();
+            //InstrumentWin = new DemoWinow(this);
+            //InstrumentWin.Show();
 
       // If the port is open, close it.
       if (comport.IsOpen) comport.Close();
@@ -304,8 +344,8 @@ namespace SerialPortTerminal
                     GUIWin = new GUIform(this);
                     GUIWin.Show();
 
-                    InsturmentWin = new DemoWinow(this);
-                    InsturmentWin.Show();
+                    InstrumentWin = new DemoWinow(this);
+                    InstrumentWin.Show();
 				}
       }
 
@@ -354,10 +394,12 @@ namespace SerialPortTerminal
             process_TUN_packet();
 
         }
-        
-        
-        // Display the text to the user in the terminal
-        Log(LogMsgType.Incoming, data);
+
+        build_incoming_text(data);
+          // Display the text to the user in the terminal
+        InstrumentWin.Invoke((Action)delegate { InstrumentWin.horizon_refresh(); });
+        InstrumentWin.Invoke((Action)delegate { InstrumentWin.heading_refresh(); }); 
+          Log(LogMsgType.Incoming, data);
       }
       else
       {

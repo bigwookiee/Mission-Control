@@ -108,9 +108,8 @@ namespace SerialPortTerminal
         public void SetAttitudeIndicatorParameters(double aircraftPitchAngle, double aircraftRollAngle)
         {
             PitchAngle = aircraftPitchAngle;
-            RollAngle = aircraftRollAngle * Math.PI / 180;
-
-            this.Refresh();
+            RollAngle = aircraftRollAngle *Math.PI / 180;
+            
         }
 
         #endregion

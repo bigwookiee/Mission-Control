@@ -107,7 +107,7 @@ namespace SerialPortTerminal
         {
             Heading = aircraftHeading;
 
-            this.Refresh();
+            //this.Refresh();
         }
 
         #endregion
