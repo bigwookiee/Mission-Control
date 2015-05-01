@@ -95,13 +95,13 @@ Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, LED_PIN, NEO_GRB + NEO_K
 //40a1446d
 
 /***********************************************
-/***********************************************\
+/***********************************************/
 Xapi xapi = Xapi(Serial2);
 //Serial_service serial_service = Serial_service(Serial1, xapi);
 LCD_service lcd_service (xapi);
 //************************************************
 // The next services pertain to drone instructions
-//************************************************
+//************************************************/
 Takeoff_service takeoff_service(xapi, lcd_service);
 Land_service land_service(xapi, lcd_service);
 DoMove_service doMove_service(xapi, lcd_service);
@@ -146,7 +146,6 @@ void loop()
   altHold_service.altHold_service_latch();
   heading_service.heading_service_latch();
   headingHold_service.headingHold_service_latch();
->>>>>>> 570963040406222b2c9b7e609e55a161e05fe906
   //heartbeat_service.heartbeat_service_latch();
   //serial_service.serial_service_latch();  
 }
@@ -398,9 +397,9 @@ int avg_heading()
     
     
     
-    Serial.print(F("Heading: "));
-    Serial.print(avg);
-    Serial.println(F("; "));
+ //   Serial.print(F("Heading: "));
+ //   Serial.print(avg);
+ //   Serial.println(F("; "));
     last_time;
     return avg;
   }
@@ -456,8 +455,8 @@ void RX_pass(){
     if(throttle.readMicroseconds() != thr_in)
     {
       throttle.writeMicroseconds(thr_in);
-      Serial.print("thr:");
-      Serial.println(thr_in);
+      //Serial.print("thr:");
+      //Serial.println(thr_in);
     }
   
   //Serial.print(bit_autopilot_flags, BIN); Serial.println (" ");
@@ -468,13 +467,14 @@ void RX_pass(){
     //Serial.println("Manual");
     if(rudder.readMicroseconds() != rud_in)
       rudder.writeMicroseconds(rud_in);
-      Serial.print("rud:");
-      Serial.println(rud_in);
+      //Serial.print("rud:");
+      //Serial.println(rud_in);
     }
   
   if(bit_update_flags & AUX_FLAG)
     if(aux_in > 1650)
     {
+        
       bit_autopilot_flags |= MASTER_AUTOPILOT;
       //Serial.print("In if "); Serial.println(bit_autopilot_flags, BIN);
     }  
@@ -561,7 +561,12 @@ void debug_leds()
       pixels.setPixelColor(12,pixels.Color(R_SIDE));
     }
     
-    pixels.show();  
+    pixels.show();
+    Serial.print("C_Head: ");Serial.print((int)P_state->current_head);
+    Serial.print(", H_Head: ");Serial.print((int)P_state->hold_head);
+    Serial.print(", C_Alt: ");Serial.print((uint32_t)P_state->current_alt);
+    Serial.print("cm, H_Alt: ");Serial.print((uint32_t)(P_state->hold_alt + P_state->ground_alt));
+    Serial.print("cm, Sonar_alt: ");Serial.print(P_state->sonar_alt);Serial.println("cm");
     last_time = now;
   }
 }
@@ -641,7 +646,7 @@ void AutoPilot_setup() {
   //Serial.print("|");
   //Serial.println(P_state->current_head);
 
-  bit_autopilot_flags |= HEADING_FLAG;
+  //bit_autopilot_flags |= HEADING_FLAG;
 
   rx_pulse_time = millis();
 
@@ -753,7 +758,7 @@ void setup_pins()
 //  Insure the transmiter is truned on and sending out a pulse.
 void rx_on()
 {
-  Serial.println(millis()-rx_pulse_time);
+  //Serial.println(millis()-rx_pulse_time);
   if ((millis() - rx_pulse_time) > SAFE_PULSE    )  // Each pulse is at least 20 ms.  
                                         // This allows for a few missed frames
   {                                     // with out droping the dron out of the sky.
@@ -766,7 +771,7 @@ void rx_on()
      Serial.println("No RX");
      disarm();
   }
-  Serial.println("did I die");
+  //Serial.println("did I die");
 }
 
 /*************************** drone_state ******************/

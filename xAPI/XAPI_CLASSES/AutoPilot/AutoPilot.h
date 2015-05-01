@@ -46,10 +46,13 @@ First attempted at berring hold.
 sensore expermentations.
 
 *******************************/
+/* Debug and log file settings. */
+//Change to a one to enable debug LEDs
+#define DEBUG	1
+#define LOG_NAME 04262015001
 
 /* GPS PINS */
 #define FIX   45  
-
 
 /*  INPUT RANGE */
 #define ZERO_THROTTLE  1000
@@ -60,8 +63,8 @@ sensore expermentations.
 #define ZERO_STICK               1500
 
 /* Defualt test hold data. */
-#define HOLD_HEADING  90
-#define HOLD_ALTITUDE 150
+#define HOLD_HEADING  270
+#define HOLD_ALTITUDE 50
 
 
 /* PWM pin assignments. */
@@ -78,9 +81,14 @@ sensore expermentations.
 #define RX_RUDDER     A12 
 #define RX_AUX        A11
 
+/* RX Max miss pulse length */
+// Used in rx_on() function.
+#define SAFE_PULSE    320
+
 /* RX center stick values */
 #define HIGH_CENTER_STICK 	1515
 #define LOW_CENTER_STICK 	1475
+
 /* Bitflag used in interups to indecate a 
 new signal on a channel.  
 
@@ -100,12 +108,16 @@ This ius a power of 2. valied numbers are
 0x01 0x02 0x04 0x08 0x10 0x20 0x40 0x80
 0b00000001 0b00000010 ... 0b10000000
 */
-#define HEADING_FLAG 	1
-#define ALTHOLD_FLAG 	2
-#define IS_ARMED_FLAG	64
-#define IS_ARMED_FLAG_POSITION 6
-#define ARM_FLAG     	128
-#define ARM_FLAG_POSITION 7
+
+#define HEADING_FLAG 	 1    //Set autopilot to hold a heading.
+#define ALTHOLD_FLAG 	 2    //
+#define LATHOLD_FLAG     4	  //
+#define LONGHOLD_FLAG    8    //
+
+#define ARM_FLAG     	 16    //
+#define IS_ARMED_FLAG	 32    //
+#define MASTER_ON_FLAG	 64	   //
+#define MASTER_AUTOPILOT 128   //Set by aux switch on remote.
 
 /* Sonar Setup */
 #define GROUND_PING_PIN           27 
@@ -115,24 +127,27 @@ This ius a power of 2. valied numbers are
 #define CALIBRATION_ERROR         9
 
 /*  PID Setup */
-#define thr_out_range 1.25
-#define Kp_add       0
-#define Ki_add       1
-#define Kd_add       2
+//#define thr_out_range 1.25
+#define Kp           40
+#define Ki           10
+#define Kd	         1
 #define auxset_add   3
 #define pidMode_add  4
+#define SAMPLE_TIME  100
 
 /*  LED Setup  */
-#define LED_PIN      23
-#define NUMPIXELS    16
-#define HALFPIXELS   8       // Devide the pixels in have to allow one side of deone to be a defrent color.
-#define L_SIDE       50,0,0  // For max intesity of red set 255,0,0
-#define R_SIDE       0,50,0  // For max green set to 0,255,0 
-
+#define LED_UPDATE_DELAY    100
+#define LED_PIN      		23
+#define NUMPIXELS    		16
+#define HALFPIXELS  		8           // Devide the pixels in have to allow one side of deone to be a defrent color.
+#define L_SIDE  	     	50,0,0      // For max intesity of red set 255,0,0
+#define R_SIDE	            0,50,0      // For max green set to 0,255,0 
+#define M_AUTOPIOT_ON   	50,50,50    // White
+#define AUTOPILOT_HOLD_ON	0,0,50      // Blue
 struct drone_state
 {
-  double     current_head; // deg. The current heading.
-  double     hold_head;   // deg. The heading to hold, this is independend of
+  int     current_head; // deg. The current heading.
+  int     hold_head;   // deg. The heading to hold, this is independend of
                            //      course. 
   double     current_alt;  // cm Above sea level(ASL). 
   double     hold_alt;     // cm Altitude to hold above sea level(ASL). 
