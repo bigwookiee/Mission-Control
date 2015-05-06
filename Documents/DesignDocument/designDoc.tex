@@ -156,5 +156,27 @@ We have a flight control section (light-blue) that shows the status of the drone
    		\caption{Graphical user interface mock-up design}
 	\end{figure}
 
+From this mock-up we began designing the actual GUI using Windows Forms in VisualStudio C#.  In this version, we decided to get rid of the communication terminal section in favor of a larger area for the map and altitude display.  We still need a communication terminal, so we instead used the Serial Terminal that already exists.  From the Serial Terminal, a GUI window can be opened when you successfully open a port to the arduino system. 
+
+In the upper-left section of our GUI window we have the flight planning panel.  Here you can add, subtract, edit and submit several instructions at a time.  We have also included two emergency buttons, one to stop the drone in place and hover and another to force the drone to land.  These are important in case the drone is about to harm itself or other people.
+
+The bottom left section shows our mission status for current instructions and the mission plan as a whole.
+Currently this has no function but in the future it will update as the drone transmits data back to the system.  Similarly, the map and altitude sections will also update as information is received from the drone.
+
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.75\textwidth]{guiWindow.png}
+		\caption{Implemented graphical user interface window}
+	\end{figure}
+
+Along the top we have a menu bar.  Under "View" we have several options to open other GUI panels.  The "Instrument Panel" option will pull up a window that displays status information received from the drone similar to that of an airplane dashboard.  The "Manual Controls" option will open a window that allows the user to send manual controls to the drone in real time.
+
+In our manual control panel we have eight arrow buttons.  These buttons can be activated via mouse-click or by using the corresponding keyboard shortcut shown on each button.  We also have an active indicator in the bottom left.  This indicator tells us whether or not the buttons are active, which occurs when the drone is armed.  If they are not active then the buttons will do nothing.  However, if they are active then keys will be highlighted as they are utilized and send instructions to the drone.  Currently when using the keyboard, instructions will be sent to the drone repeatedly as fast as the computer allows.  This needs to be updated to only send instructions every so often so we do not flood our connection to the drone.
+
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.75\textwidth]{MCWindow.png}
+		\caption{Implemented graphical user interface window}
+	\end{figure}
 
 \end{document}
