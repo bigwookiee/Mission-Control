@@ -2,17 +2,27 @@
 //#define AutoPilot_H
 
 /******************************
-Version 1.6  
-
-
-4/03/2015
-
 Supplemental quad copter Autopilot.
+Arthur David Klingenberg
+
 
  Contains a prototype controller algorithm
- to maintain an altitude hold. In this 
- version  only an ultrasonic rangefinder 
- is used to measure altitude. 
+ to implement an autopilot.
+
+4/25/2015
+Version 1.8  
+-- Final version for expo
+
+	added SD card loging
+	added diagnostic LEDs
+	reworked HOLD PID.
+	added waypoints
+	added drone stats.
+	added rx heatbeat to shut down
+	    drone if the signal is lost.
+	added throttle kill if master autopilot
+		is turned off to force drone to land.
+
 
 Important numbers for the kk2.1
 
@@ -27,11 +37,12 @@ X-bee is on com 2 (serial 02).
 GPS is on com 2 (serial 03).
 
 version history
-4/03/2015 1.6
-First attempted at berring hold.
+4/15/2015 1.7
+--First attempted at berring hold.
 
 
-
+4/3/2015 1.6
+--Compleatly scraped and replaced RX pass throught code.
 
 3/24/2015 1.5
 --added passthrought controll for rx.

@@ -31,24 +31,6 @@
 #include <SD.h>
 
 #include <HeadingHold_service.h>
-/*
-struct drone_state
-{
-  double     current_head; // deg. The current heading.
-  double     hold_head;    // deg. The heading to hold, this is independend of
-                           //      course. 
-  double     current_alt;  // cm Above sea level(ASL). 
-  double     hold_alt;     // cm Altitude to hold above sea level(ASL). 
-  double     ground_alt;   // cm The ground level when armed(AGL) ie. ASL when armed.    
-  double     sonar_alt;    // cm The returned from range finder(AGL).
-  double     current_lon;  // Longitude
-  double     target_lon;   // Longitude I want to go to.
-  double     current_lat;  // Latatude
-  double     target_lat;   // Latatide I want to travil to.
-  uint16_t   loiter_time;  // Time on station when drone arives.
-};*/
-
-
 
 /* Global Variables */
           uint8_t       bit_autopilot_flags;  // Used to keep track of auto pilot enabled subsytems.
@@ -67,13 +49,12 @@ double                  c_head,rudder_position,s_head;  //rudder settings
 byte                    RangeTime_1cm;
 int                     groundRangeTime;
 Servo                   throttle, rudder, aileron, elevator, aux;
-byte                    armed;  //May move to bitUpdateFlagShared;
 NewPing                 ground_range(GROUND_PING_PIN, GROUND_ECHO_PIN, GROUND_MAX_SONAR_DISTANCE);
 
-
+/* SD Card */
 const int chipSelect = 53;
-//String log_string;
-//byte write_to_log = 0;
+String log_string;
+byte write_to_log = 0;
 
 /* Global Sensor Variables */
 Adafruit_LSM303_Accel_Unified acc = Adafruit_LSM303_Accel_Unified(30301);
@@ -85,17 +66,14 @@ Adafruit_10DOF                dof   = Adafruit_10DOF();
 /* Global PID Variables */
 //PID altPID(&P_state->sonar_alt, &throttle_position, &P_state->hold_alt, 1, .05, .25, DIRECT);
 PID headingPID(&c_head, &rudder_position, &s_head, Kp, Ki, Kd, REVERSE);
-//PID headingPID(&c_head, &rudder_position, &s_head, Kp, Ki, Kd, DIRECT);
+//PID headingPID(&c_head, &rudder_position, &s_head, Kp, Ki, Kd, DIRECT); // TESTING PID DO NOT USE!!!
 
 
 /* Global NeoPixels */
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, LED_PIN, NEO_GRB + NEO_KHZ800);
 
-//0013a200
-//40a1446d
 
-/***********************************************
-/***********************************************/
+/*********************************************** XAPI XAPI XAPI ***********************************************/
 Xapi xapi = Xapi(Serial2);
 //Serial_service serial_service = Serial_service(Serial1, xapi);
 LCD_service lcd_service (xapi);
@@ -111,45 +89,6 @@ Heading_service heading_service(xapi, lcd_service);
 HeadingHold_service headingHold_service(xapi, lcd_service);
 
 //Heartbeat_service heartbeat_service(xapi, lcd_service);
-//Serial_service serial_service = Serial_service(Serial1, xapi, lcd_service);
-//uint8_t msg1[] =   "I FEEL GREAT";
-//uint8_t msg2[] =   "COMMODORE 64";
-//uint8_t _clear[] = "                ";
-
-//***********************************************
-//***********************************************/
-void setup()
-{
- //Serial2.begin(MISC_PC_SPEED);
- //Serial1.begin(MISC_PC_SPEED);
- 
- Serial.begin(115200); 
-
- AutoPilot_setup();  
-}
-
-//***********************************************
-//***********************************************
-void loop()
-{
- //Serial.print("I live"); 
-  
-  //system_active();
-  //process_buttons();
-  AutoPilot();
-  xapi.xapi_latch();
-  lcd_service.lcd_service_latch();
-  takeoff_service.takeoff_service_latch();
-  land_service.land_service_latch();
-  doMove_service.DoMove_service_latch();
-  arm_service.arm_service_latch();
-  altHold_service.altHold_service_latch();
-  heading_service.heading_service_latch();
-  headingHold_service.headingHold_service_latch();
-  //heartbeat_service.heartbeat_service_latch();
-  //serial_service.serial_service_latch();  
-}
-
 
 /*************************** ISR ISR ISR ******************************/
 // ISR for Alierons
@@ -173,6 +112,7 @@ void calcAlierons()
   
 }
 
+// ISR for elevator
 void calcElevator()
 { 
   if(digitalRead(RX_ELEVATOR) == HIGH)
@@ -188,6 +128,7 @@ void calcElevator()
   }
 }
 
+//ISR for throttle
 void calcThrottle()
 {
   if(digitalRead(RX_THROTTLE) == HIGH)
@@ -199,6 +140,7 @@ void calcThrottle()
   }
 }
 
+//ISR for rudder
 void calcRudder()
 { 
   if(digitalRead(RX_RUDDER) == HIGH)
@@ -214,6 +156,7 @@ void calcRudder()
   }  
 }
 
+//ISR for aux switch
 void calcAux()
 {
   if(digitalRead(RX_AUX) == HIGH)
@@ -225,88 +168,218 @@ void calcAux()
   }
 }
 
-/*  Zero out  the control x,y and rotational inputs. */
-void zero_stick(){
-  aileron.writeMicroseconds(ZERO_STICK);
-  elevator.writeMicroseconds(ZERO_STICK);
-  rudder.writeMicroseconds(ZERO_STICK);  
-}
-
-void zero_all_inputs(){
-  zero_stick();
-  set_thr(0);
-}
-
-/* Sets the throttle. Use a range of 0 to 100. */
-void set_thr (int val){ 
-  throttle.writeMicroseconds(map(val, 0, 100, ZERO_THROTTLE, FULL_THROTTLE));
-  //Serial.println(map(val, 0, 100, ZERO_THROTTLE, FULL_THROTTLE));  
-}
-
-/*  Set the ailerons. Use a range of -100 to 100. */
-void set_ail (int val) {
-  if (val == 0)
-    aileron.writeMicroseconds(ZERO_STICK);
-  else
-    aileron.writeMicroseconds(map(val, -100, 100, FULL_STICK_LEFT_FORWARD, FULL_STICK_RIGHT_BACK));
-}
-
-/*  Set the  elevator. Use a range of -100 to 100. */
-void set_elv (int val) {
-  if (val == 0)
-    elevator.writeMicroseconds(ZERO_STICK);
-  else
-     elevator.writeMicroseconds(map(val, -100, 100, FULL_STICK_LEFT_FORWARD, FULL_STICK_RIGHT_BACK));
-}
-
-/*  Set the  rudder. Use a range of -100 to 100. */
-void set_rud (int val) {
-  if (val == 0)
-    rudder.writeMicroseconds(ZERO_STICK);
-  else
-    rudder.writeMicroseconds(map(val, -100, 100, FULL_STICK_LEFT_FORWARD, FULL_STICK_RIGHT_BACK));
-}
-
-/* Arms the motors */
-byte arm()
+//*********************************************** SETUP SETUP SETUP ***********************************************/
+void setup()
 {
-  P_state->current_alt = cmAlt();
-  P_state->ground_alt  = cmAlt();
-  throttle.writeMicroseconds(1000);
-  aileron.writeMicroseconds(1100);
-  rudder.writeMicroseconds(1100);
-  delay(1000);
-  aileron.writeMicroseconds(1500);
-  rudder.writeMicroseconds(1500);
-    
-  return 1;
+ //Serial2.begin(MISC_PC_SPEED);
+ //Serial1.begin(MISC_PC_SPEED);
+ 
+ Serial.begin(115200); 
+
+ AutoPilot_setup();  
 }
 
-/* Disarms the motors */
-byte  disarm()
-{
-  throttle.writeMicroseconds(1000);
-  aileron.writeMicroseconds(1900);
-  rudder.writeMicroseconds(1900);
-  delay(1000);
-  aileron.writeMicroseconds(1500);
-  rudder.writeMicroseconds(1500);
-  return(0);
-}
+/***********************  Setup AutoPilot  Setup AutoPilot   Setup AutoPilot   **************************************/
 
-byte time_1cm(){
-  float temperature, time;
-  bmp.getTemperature(&temperature);
-  time = 2/((331.3 * sqrt(1 + temperature / 273.15))/10000);
+void AutoPilot_setup() {
+  Serial.begin(115200);  
+  Serial2.begin(9600);
+  Serial3.begin(9600);
+  Serial.println("Initialising drone");
   
-//  Serial.print(temperature);
-//  Serial.print(" C, time: ");
-//  Serial.println(time,6);
-  return time;
+  //Serial.print("Initializing SD card...");
+
+  // see if the card is present and can be initialized:
+  //if (!SD.begin(chipSelect)) 
+  //{
+    //Serial.println("Card failed, or not present");
+    // don't do anything more:
+    //return;
+  //}
+  //Serial.println("card initialized.");
+
+
+  /******* starts the sensors *****/      
+  if(!acc.begin())
+  {
+    /* There was a problem detecting the ADXL345 ... check your connections */
+    //Serial.println(F("Ooops, no LSM303 detected ... Check your wiring!"));
+    while(1);
+  }
+  if(!mag.begin())
+  {
+    /* There was a problem detecting the LSM303 ... check your connections */
+    //Serial.println("Ooops, no LSM303 detected ... Check your wiring!");
+    while(1);
+  }
+  if(!bmp.begin())
+  {
+    /* There was a problem detecting the BMP085 ... check your connections */
+    //Serial.print("Ooops, no BMP085 detected ... Check your wiring or I2C ADDR!");
+    while(1);
+  }
+  if(!gyro.begin())
+  {
+    /* There was a problem detecting the L3GD20 ... check your connections */
+    //Serial.print("Ooops, no L3GD20 detected ... Check your wiring or I2C ADDR!");
+    while(1);
+  }
+  
+  /**** Sets up the altuitude hold autopilot ****/
+  //altPID.SetMode(AUTOMATIC);
+  //altPID.SetOutputLimits(1000, 2000);
+  //altPID.SetSampleTime(SAMPLE_TIME);
+
+  throttle_position = 1000;  
+  RangeTime_1cm = time_1cm();
+  
+  /**** sets up the heading autopilot ***/
+  headingPID.SetMode(AUTOMATIC);
+  headingPID.SetOutputLimits(1350, 1650);
+  headingPID.SetSampleTime(SAMPLE_TIME);
+  rudder_position = 1500; 
+  
+  setup_pins(); 
+  zero_all_inputs();
+
+  /***** turns on nav lights *****/ 
+  pixels.begin();
+  for(int i=0;i<HALFPIXELS;i++)
+  {
+    pixels.setPixelColor(i,pixels.Color(L_SIDE));
+    pixels.setPixelColor(NUMPIXELS-1-i,pixels.Color(R_SIDE));
+  }
+  pixels.show();
+
+  P_state = drone_state_new(); //Inisalises the drone start state.
+  
+  //Serial.print(P_state->current_alt);
+  //Serial.print("|");
+  //Serial.println(P_state->current_head);
+
+  //bit_autopilot_flags |= HEADING_FLAG;
+
+  delay (1500);
+
+  rx_pulse_time = millis();   // Set up the timer for rx_heartbeat.  
+                              // TODO: Move to a ISR type timer.
+  
 }
 
-/*************************** PID LOOP **********************/
+/******************* Pin secttion     Pin secttion   Pin secttion ************************/
+//Used in the pinchange libarry to see a change from the RX.
+void setup_pins()
+{  
+  aileron.attach(AILERONS_PIN);
+  elevator.attach(ELEVATOR_PIN);
+  throttle.attach(THROTTLE_PIN);
+  rudder.attach(RUDDER_PIN);
+  
+  attachPinChangeInterrupt(RX_AILERONS, calcAlierons, CHANGE);
+  attachPinChangeInterrupt(RX_ELEVATOR, calcElevator, CHANGE);
+  attachPinChangeInterrupt(RX_THROTTLE, calcThrottle, CHANGE);
+  attachPinChangeInterrupt(RX_RUDDER  , calcRudder  , CHANGE);
+  attachPinChangeInterrupt(RX_AUX     , calcAux     , CHANGE);
+}
 
+//******************************************  LOOP LOOP LOOP *************************************************/
+void loop()
+{
+ //Serial.print("I live"); 
+  
+  //system_active();
+  //process_buttons();
+  AutoPilot();
+  xapi.xapi_latch();
+  lcd_service.lcd_service_latch();
+  takeoff_service.takeoff_service_latch();
+  land_service.land_service_latch();
+  doMove_service.DoMove_service_latch();
+  arm_service.arm_service_latch();
+  altHold_service.altHold_service_latch();
+  heading_service.heading_service_latch();
+  headingHold_service.headingHold_service_latch();
+  //heartbeat_service.heartbeat_service_latch();
+  //serial_service.serial_service_latch();  
+}
+
+/************************ AutoPilot ****************************/
+void AutoPilot(){  
+  if (DEBUG)
+  {
+    //debug_leds(); 
+    //log_string = "";
+  }
+
+    Serial.print("C_Head: ");Serial.print((int)P_state->current_head);
+    Serial.print(", H_Head: ");Serial.print((int)P_state->hold_head);
+    Serial.print(", C_Alt: ");Serial.print((uint32_t)P_state->current_alt);
+    Serial.print("cm, H_Alt: ");Serial.print((uint32_t)(P_state->hold_alt + P_state->ground_alt));
+    Serial.print("cm, Sonar_alt: ");Serial.print(P_state->sonar_alt);Serial.println("cm");
+
+  rx_on();  
+  RX_pass();
+  if (bit_autopilot_flags & MASTER_AUTOPILOT)
+   pid_loop();
+  
+ //Serial.println(bit_autopilot_flags, HEX);
+ //delay(1000);  
+
+  if (bit_autopilot_flags & ARM_FLAG)
+   if (!(bit_autopilot_flags & IS_ARMED_FLAG))
+   {
+     //Serial.println("I am armed ");
+     arm();
+     bit_autopilot_flags |= IS_ARMED_FLAG;
+   }
+ 
+ //Serial.println(bit_autopilot_flags, HEX);
+ //delay(1000);
+ 
+ //bit_autopilot_flags &= ~128;
+ 
+ if (!(bit_autopilot_flags & ARM_FLAG))
+   if (bit_autopilot_flags & IS_ARMED_FLAG)
+   {
+     disarm();
+     bit_autopilot_flags &= ~IS_ARMED_FLAG;
+     //Serial.println("I am disarmed");   
+   }
+   
+ if (bit_autopilot_flags & MASTER_AUTOPILOT)
+   if (!(bit_autopilot_flags & MASTER_ON_FLAG))
+   {
+     //Serial.println("I am armed ");
+     
+     bit_autopilot_flags |= MASTER_ON_FLAG;
+   }
+ 
+ //Serial.println(bit_autopilot_flags, HEX);
+ //delay(1000);
+ 
+ //bit_autopilot_flags &= ~128;
+ 
+ if (!(bit_autopilot_flags & MASTER_AUTOPILOT))
+   if (bit_autopilot_flags & MASTER_ON_FLAG)
+   {
+     aileron.writeMicroseconds(1500);
+     elevator.writeMicroseconds(1500);
+     throttle.writeMicroseconds(1000);
+     rudder.writeMicroseconds(1500);
+     bit_autopilot_flags &= ~MASTER_ON_FLAG;
+     delay(5000);
+       
+   }
+/*  if (write_to_log)
+    if(log_string != "")
+    {
+      write_log();
+      write_to_log = 0;
+    }*/
+}
+
+/***************************  PID-LOOP   PID-LOOP   PID-LOOP  **********************/
+//Autopilot routines.
 void pid_loop(){
   sensors_event_t acc_event;
   sensors_event_t mag_event;
@@ -320,7 +393,7 @@ void pid_loop(){
  
   //Serial.print("In PID! ");
  
-  if (bit_autopilot_flags & ALTHOLD_FLAG)
+  if (bit_autopilot_flags & ALTHOLD_FLAG)   //altutiude autopilot
   { 
     P_state->sonar_alt = ground_range.ping_median(GROUND_SONAR_ITERATION);
     P_state->sonar_alt = (int)(P_state->sonar_alt / RangeTime_1cm) - CALIBRATION_ERROR;
@@ -337,18 +410,19 @@ void pid_loop(){
     //Serial.print(", Sonar: ");
     //Serial.println(P_state->sonar_alt);
     
-//    altPID.Compute();
+    //altPID.Compute();  //<--------------------------------- Enable this line for
+                         //   to turn on altuitude hold.
     //Serial.print((int)throttle_position);
     throttle.writeMicroseconds((int)throttle_position);
   }
 
-  if (bit_autopilot_flags & HEADING_FLAG)
+  if (bit_autopilot_flags & HEADING_FLAG) // Heading autopilot
   {
 
      P_state->current_head = avg_heading();
      c_head = P_state->current_head;  // The pid libary dose not like &P_state
      s_head = P_state->hold_head;     // for some reason.  Some thing to do with
-                                      //  C++ vs C
+                                      //  C++ vs C.
      if  (((c_head+3) >= P_state->hold_head) && ((c_head-3)<= P_state->hold_head))
        {
 //         Serial.print("in if");
@@ -364,44 +438,6 @@ void pid_loop(){
      //Serial.print("current Head: ");Serial.print(P_state->current_head); 
      //Serial.print(", hold: "); Serial.print(P_state->hold_head);
      //Serial.print(", alt_hold: "); Serial.println(P_state->hold_alt);
-  }
-}
-
-/********************AVG HEADING  AVG HEADING AVG HEADING **************************/
-int avg_heading()
-{
-  sensors_event_t acc_event;
-  sensors_event_t mag_event;
-  sensors_vec_t   orientation;
-  static uint32_t last_time;
-  uint32_t now = millis();
-  uint32_t time_change = now - last_time;
-  uint16_t avg = 0;
-
-
-  if(time_change >= SAMPLE_TIME)
-  {
-    acc.getEvent(&acc_event);
-    mag.getEvent(&mag_event);
-    if (dof.magTiltCompensation(SENSOR_AXIS_Z, &mag_event, &acc_event))
-      if(dof.magGetOrientation(SENSOR_AXIS_Z, &mag_event, &orientation))
-      {
-        /* 'orientation' should have valid .heading data now /
-        log_string += "Current Heading: " + String(P_state->current_head) + ", ";
-        log_string += "hold Heading: " + String(P_state->hold_head) + ", ";
-        log_string += "Rudder: " + String((int)rudder_position) + ", ";
-        */
-        avg = (uint16_t)orientation.heading;
-        //write_to_log = 1;
-      }      
-    
-    
-    
- //   Serial.print(F("Heading: "));
- //   Serial.print(avg);
- //   Serial.println(F("; "));
-    last_time;
-    return avg;
   }
 }
 
@@ -488,8 +524,130 @@ void RX_pass(){
 
 }
 
+/*************************************** SOME AUX FUNCTIONS    SOME AUX FUNCTIONS ****************************/
+/*  Zero out  the control x,y and rotational inputs. */
+void zero_stick(){
+  aileron.writeMicroseconds(ZERO_STICK);
+  elevator.writeMicroseconds(ZERO_STICK);
+  rudder.writeMicroseconds(ZERO_STICK);  
+}
+
+void zero_all_inputs(){
+  zero_stick();
+  set_thr(0);
+}
+
+/* Sets the throttle. Use a range of 0 to 100. */
+void set_thr (int val){ 
+  throttle.writeMicroseconds(map(val, 0, 100, ZERO_THROTTLE, FULL_THROTTLE));
+  //Serial.println(map(val, 0, 100, ZERO_THROTTLE, FULL_THROTTLE));  
+}
+
+/*  Set the ailerons. Use a range of -100 to 100. */
+void set_ail (int val) {
+  if (val == 0)
+    aileron.writeMicroseconds(ZERO_STICK);
+  else
+    aileron.writeMicroseconds(map(val, -100, 100, FULL_STICK_LEFT_FORWARD, FULL_STICK_RIGHT_BACK));
+}
+
+/*  Set the  elevator. Use a range of -100 to 100. */
+void set_elv (int val) {
+  if (val == 0)
+    elevator.writeMicroseconds(ZERO_STICK);
+  else
+     elevator.writeMicroseconds(map(val, -100, 100, FULL_STICK_LEFT_FORWARD, FULL_STICK_RIGHT_BACK));
+}
+
+/*  Set the  rudder. Use a range of -100 to 100. */
+void set_rud (int val) {
+  if (val == 0)
+    rudder.writeMicroseconds(ZERO_STICK);
+  else
+    rudder.writeMicroseconds(map(val, -100, 100, FULL_STICK_LEFT_FORWARD, FULL_STICK_RIGHT_BACK));
+}
+
+/* Arms the motors */
+byte arm()
+{
+  P_state->current_alt = cmAlt();
+  P_state->ground_alt  = cmAlt();
+  throttle.writeMicroseconds(1000);
+  aileron.writeMicroseconds(1100);
+  rudder.writeMicroseconds(1100);
+  delay(1000);
+  aileron.writeMicroseconds(1500);
+  rudder.writeMicroseconds(1500);
+    
+  return 1;
+}
+
+/* Disarms the motors */
+byte  disarm()
+{
+  throttle.writeMicroseconds(1000);
+  aileron.writeMicroseconds(1900);
+  rudder.writeMicroseconds(1900);
+  delay(1000);
+  aileron.writeMicroseconds(1500);
+  rudder.writeMicroseconds(1500);
+  return(0);
+}
+
+// Spead of sound calculation for sonar pulse.
+byte time_1cm(){
+  float temperature, time;
+  bmp.getTemperature(&temperature);
+  time = 2/((331.3 * sqrt(1 + temperature / 273.15))/10000);
+  
+//  Serial.print(temperature);
+//  Serial.print(" C, time: ");
+//  Serial.println(time,6);
+  return time;
+}
+
+/********************AVG HEADING  AVG HEADING AVG HEADING **************************/
+int avg_heading()  // TODO:Needs to service by a timer.
+{
+  sensors_event_t acc_event;
+  sensors_event_t mag_event;
+  sensors_vec_t   orientation;
+  static uint32_t last_time;
+  uint32_t now = millis();
+  uint32_t time_change = now - last_time;
+  uint16_t avg = 0;
+
+
+  if(time_change >= SAMPLE_TIME)
+  {
+    acc.getEvent(&acc_event);
+    mag.getEvent(&mag_event);
+    if (dof.magTiltCompensation(SENSOR_AXIS_Z, &mag_event, &acc_event))
+      if(dof.magGetOrientation(SENSOR_AXIS_Z, &mag_event, &orientation))
+      {
+        /* 'orientation' should have valid .heading data now /
+        log_string += "Current Heading: " + String(P_state->current_head) + ", ";
+        log_string += "hold Heading: " + String(P_state->hold_head) + ", ";
+        log_string += "Rudder: " + String((int)rudder_position) + ", ";
+        */
+        avg = (uint16_t)orientation.heading;
+        //write_to_log = 1;
+      }      
+    
+    
+    
+ //   Serial.print(F("Heading: "));
+ //   Serial.print(avg);
+ //   Serial.println(F("; "));
+    last_time;
+    return avg;
+  }
+}
+
 
 /***********************  DEBUG LEDS  **************************************/
+// Cause a realy bad and ugly delay. This code renders the 
+// drone unrsposive and crash prone.  Only use in static ground tests.
 void debug_leds()
 {
   
@@ -562,98 +720,12 @@ void debug_leds()
     }
     
     pixels.show();
-    Serial.print("C_Head: ");Serial.print((int)P_state->current_head);
-    Serial.print(", H_Head: ");Serial.print((int)P_state->hold_head);
-    Serial.print(", C_Alt: ");Serial.print((uint32_t)P_state->current_alt);
-    Serial.print("cm, H_Alt: ");Serial.print((uint32_t)(P_state->hold_alt + P_state->ground_alt));
-    Serial.print("cm, Sonar_alt: ");Serial.print(P_state->sonar_alt);Serial.println("cm");
+    
     last_time = now;
   }
 }
 
-
-/***********************  Setup  **************************************/
-
-void AutoPilot_setup() {
-  Serial.begin(115200);  
-  Serial2.begin(9600);
-  Serial3.begin(9600);
-  Serial.println("Initialising drone");
-  
-  //Serial.print("Initializing SD card...");
-
-  // see if the card is present and can be initialized:
-  //if (!SD.begin(chipSelect)) 
-  //{
-    //Serial.println("Card failed, or not present");
-    // don't do anything more:
-    //return;
-  //}
-  //Serial.println("card initialized.");
-      
-  if(!acc.begin())
-  {
-    /* There was a problem detecting the ADXL345 ... check your connections */
-    //Serial.println(F("Ooops, no LSM303 detected ... Check your wiring!"));
-    while(1);
-  }
-  if(!mag.begin())
-  {
-    /* There was a problem detecting the LSM303 ... check your connections */
-    //Serial.println("Ooops, no LSM303 detected ... Check your wiring!");
-    while(1);
-  }
-  if(!bmp.begin())
-  {
-    /* There was a problem detecting the BMP085 ... check your connections */
-    //Serial.print("Ooops, no BMP085 detected ... Check your wiring or I2C ADDR!");
-    while(1);
-  }
-  if(!gyro.begin())
-  {
-    /* There was a problem detecting the L3GD20 ... check your connections */
-    //Serial.print("Ooops, no L3GD20 detected ... Check your wiring or I2C ADDR!");
-    while(1);
-  }
-  
-  //altPID.SetMode(AUTOMATIC);
-  //altPID.SetOutputLimits(1000, 2000);
-  //altPID.SetSampleTime(SAMPLE_TIME);
-
-  throttle_position = 1000;  
-  RangeTime_1cm = time_1cm();
-  
-  headingPID.SetMode(AUTOMATIC);
-  headingPID.SetOutputLimits(1350, 1650);
-  headingPID.SetSampleTime(SAMPLE_TIME);
-  rudder_position = 1500; 
-  
-  setup_pins(); 
-  zero_all_inputs();
-  //throttle.writeMicroseconds(throttle_position);
-  
-  pixels.begin();
-  for(int i=0;i<HALFPIXELS;i++)
-  {
-    pixels.setPixelColor(i,pixels.Color(L_SIDE));
-    pixels.setPixelColor(NUMPIXELS-1-i,pixels.Color(R_SIDE));
-  }
-  pixels.show();
-
-  P_state = drone_state_new();
-  
-  //Serial.print(P_state->current_alt);
-  //Serial.print("|");
-  //Serial.println(P_state->current_head);
-
-  //bit_autopilot_flags |= HEADING_FLAG;
-
-  rx_pulse_time = millis();
-
-  delay (1500);
-}
-
-/*********************** WRITE LOG  WRITE LOG *********************
+/*********************** WRITE LOG  WRITE LOG *********************/
 void write_log()
 {
   File data_file = SD.open("DataLog.txt",FILE_WRITE);
@@ -667,92 +739,6 @@ void write_log()
     Serial.println("error opening " + LOG_NAME);
 } 
 
-
-/************************ AutoPilot ****************************/
-void AutoPilot(){  
-  if (DEBUG)
-  {
-    debug_leds(); 
-    //log_string = "";
-  }
-
-  rx_on();  
-  RX_pass();
-  if (bit_autopilot_flags & MASTER_AUTOPILOT)
-   pid_loop();
-  
- //Serial.println(bit_autopilot_flags, HEX);
- //delay(1000);  
-
-  if (bit_autopilot_flags & ARM_FLAG)
-   if (!(bit_autopilot_flags & IS_ARMED_FLAG))
-   {
-     //Serial.println("I am armed ");
-     arm();
-     bit_autopilot_flags |= IS_ARMED_FLAG;
-   }
- 
- //Serial.println(bit_autopilot_flags, HEX);
- //delay(1000);
- 
- //bit_autopilot_flags &= ~128;
- 
- if (!(bit_autopilot_flags & ARM_FLAG))
-   if (bit_autopilot_flags & IS_ARMED_FLAG)
-   {
-     disarm();
-     bit_autopilot_flags &= ~IS_ARMED_FLAG;
-     //Serial.println("I am disarmed");   
-   }
-   
- if (bit_autopilot_flags & MASTER_AUTOPILOT)
-   if (!(bit_autopilot_flags & MASTER_ON_FLAG))
-   {
-     //Serial.println("I am armed ");
-     
-     bit_autopilot_flags |= MASTER_ON_FLAG;
-   }
- 
- //Serial.println(bit_autopilot_flags, HEX);
- //delay(1000);
- 
- //bit_autopilot_flags &= ~128;
- 
- if (!(bit_autopilot_flags & MASTER_AUTOPILOT))
-   if (bit_autopilot_flags & MASTER_ON_FLAG)
-   {
-     aileron.writeMicroseconds(1500);
-     elevator.writeMicroseconds(1500);
-     throttle.writeMicroseconds(1000);
-     rudder.writeMicroseconds(1500);
-     bit_autopilot_flags &= ~MASTER_ON_FLAG;
-     delay(5000);
-       
-   }
-/*  if (write_to_log)
-    if(log_string != "")
-    {
-      write_log();
-      write_to_log = 0;
-    }*/
-}
-
-/******************* Pin secttion. *************************/
-//Used in the pinchange libarry to see a change from the RX.
-
-void setup_pins()
-{  
-  aileron.attach(AILERONS_PIN);
-  elevator.attach(ELEVATOR_PIN);
-  throttle.attach(THROTTLE_PIN);
-  rudder.attach(RUDDER_PIN);
-  
-  attachPinChangeInterrupt(RX_AILERONS, calcAlierons, CHANGE);
-  attachPinChangeInterrupt(RX_ELEVATOR, calcElevator, CHANGE);
-  attachPinChangeInterrupt(RX_THROTTLE, calcThrottle, CHANGE);
-  attachPinChangeInterrupt(RX_RUDDER  , calcRudder  , CHANGE);
-  attachPinChangeInterrupt(RX_AUX     , calcAux     , CHANGE);
-}
 
 /*************************** RX_ON  RX_ON  RX_ON ********************/
 //  Insure the transmiter is truned on and sending out a pulse.
@@ -829,7 +815,7 @@ uint32_t cmAlt()
   return bmp.pressureToAltitude(SENSORS_PRESSURE_SEALEVELHPA,bmp_event.pressure)*100;
 }
 
-/*
+/********************** Truble shooting Leave comminted out unless needed  ************************************
 void displaySensorDetails(void)
 {
   sensor_t sensor;
