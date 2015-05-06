@@ -152,10 +152,10 @@ We have a flight control section (light-blue) that shows the status of the drone
 	\begin{figure}[h!]
 
   		\centering
-    	\includegraphics[width=0.75\textwidth]{guiMockup.png}
+    	\includegraphics[width=0.5\textwidth]{guiMockup.png}
    		\caption{Graphical user interface mock-up design}
 	\end{figure}
-
+\pagebreak
 From this mock-up we began designing the actual GUI using Windows Forms in VisualStudio C#.  In this version, we decided to get rid of the communication terminal section in favor of a larger area for the map and altitude display.  We still need a communication terminal, so we instead used the Serial Terminal that already exists.  From the Serial Terminal, a GUI window can be opened when you successfully open a port to the arduino system. 
 
 In the upper-left section of our GUI window we have the flight planning panel.  Here you can add, subtract, edit and submit several instructions at a time.  We have also included two emergency buttons, one to stop the drone in place and hover and another to force the drone to land.  These are important in case the drone is about to harm itself or other people.
@@ -176,7 +176,7 @@ In our manual control panel we have eight arrow buttons.  These buttons can be a
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[width=0.75\textwidth]{MCWindow.png}
-		\caption{Implemented graphical user interface window}
+		\caption{Manual control window for GUI}
 	\end{figure}
 
 \end{document}
