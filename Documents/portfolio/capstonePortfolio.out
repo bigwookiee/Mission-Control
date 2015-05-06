@@ -24,19 +24,38 @@
 \BOOKMARK [3][-]{subsubsection.4.7.1}{short}{subsection.4.7}% 24
 \BOOKMARK [2][-]{subsection.4.8}{Nov. 20, 2014}{section.4}% 25
 \BOOKMARK [3][-]{subsubsection.4.8.1}{short}{subsection.4.8}% 26
-\BOOKMARK [1][-]{section.5}{Code}{}% 27
-\BOOKMARK [2][-]{subsection.5.1}{Supplemental quad copter autopilot V1.4}{section.5}% 28
-\BOOKMARK [1][-]{section.6}{Design Presentation}{}% 29
-\BOOKMARK [2][-]{subsection.6.1}{Nov 13, 2014}{section.6}% 30
-\BOOKMARK [1][-]{section.7}{Design Document}{}% 31
-\BOOKMARK [2][-]{subsection.7.1}{Introduction}{section.7}% 32
-\BOOKMARK [2][-]{subsection.7.2}{Drone Design}{section.7}% 33
-\BOOKMARK [2][-]{subsection.7.3}{Communication Design}{section.7}% 34
-\BOOKMARK [3][-]{subsubsection.7.3.1}{Communication Overview}{subsection.7.3}% 35
-\BOOKMARK [3][-]{subsubsection.7.3.2}{Hardware Components}{subsection.7.3}% 36
-\BOOKMARK [3][-]{subsubsection.7.3.3}{XAPI}{subsection.7.3}% 37
-\BOOKMARK [2][-]{subsection.7.4}{Graphical User Interface Design}{section.7}% 38
-\BOOKMARK [1][-]{section*.4}{Appendices}{}% 39
-\BOOKMARK [1][-]{appendix.A}{Miscellaneous UML Charts}{}% 40
-\BOOKMARK [1][-]{appendix.B}{ATMEL\251 Microcontrollers}{}% 41
-\BOOKMARK [1][-]{appendix.C}{Technical Drawings}{}% 42
+\BOOKMARK [2][-]{subsection.4.9}{Jan. 22, 2015}{section.4}% 27
+\BOOKMARK [3][-]{subsubsection.4.9.1}{short}{subsection.4.9}% 28
+\BOOKMARK [2][-]{subsection.4.10}{Jan. 27, 2015}{section.4}% 29
+\BOOKMARK [3][-]{subsubsection.4.10.1}{short}{subsection.4.10}% 30
+\BOOKMARK [2][-]{subsection.4.11}{Feb. 3, 2015}{section.4}% 31
+\BOOKMARK [3][-]{subsubsection.4.11.1}{short}{subsection.4.11}% 32
+\BOOKMARK [2][-]{subsection.4.12}{Feb. 17, 2015}{section.4}% 33
+\BOOKMARK [3][-]{subsubsection.4.12.1}{short}{subsection.4.12}% 34
+\BOOKMARK [2][-]{subsection.4.13}{March 5, 2015}{section.4}% 35
+\BOOKMARK [3][-]{subsubsection.4.13.1}{short}{subsection.4.13}% 36
+\BOOKMARK [1][-]{section.5}{Code}{}% 37
+\BOOKMARK [2][-]{subsection.5.1}{Supplemental quad copter autopilot V1.4}{section.5}% 38
+\BOOKMARK [2][-]{subsection.5.2}{Home Arduino Firmware}{section.5}% 39
+\BOOKMARK [2][-]{subsection.5.3}{xAPI Services}{section.5}% 40
+\BOOKMARK [3][-]{subsubsection.5.3.1}{Do Move Service}{subsection.5.3}% 41
+\BOOKMARK [3][-]{subsubsection.5.3.2}{Heading Service}{subsection.5.3}% 42
+\BOOKMARK [3][-]{subsubsection.5.3.3}{Heading Hold Service}{subsection.5.3}% 43
+\BOOKMARK [3][-]{subsubsection.5.3.4}{Heartbeat Service}{subsection.5.3}% 44
+\BOOKMARK [3][-]{subsubsection.5.3.5}{Land Service}{subsection.5.3}% 45
+\BOOKMARK [3][-]{subsubsection.5.3.6}{Takeoff Service}{subsection.5.3}% 46
+\BOOKMARK [3][-]{subsubsection.5.3.7}{Serial Service \(Modified from Brandon's Version\)}{subsection.5.3}% 47
+\BOOKMARK [1][-]{section.6}{Design Presentation}{}% 48
+\BOOKMARK [2][-]{subsection.6.1}{Nov 13, 2014}{section.6}% 49
+\BOOKMARK [1][-]{section.7}{Design Document}{}% 50
+\BOOKMARK [2][-]{subsection.7.1}{Introduction}{section.7}% 51
+\BOOKMARK [2][-]{subsection.7.2}{Drone Design}{section.7}% 52
+\BOOKMARK [2][-]{subsection.7.3}{Communication Design}{section.7}% 53
+\BOOKMARK [3][-]{subsubsection.7.3.1}{Communication Overview}{subsection.7.3}% 54
+\BOOKMARK [3][-]{subsubsection.7.3.2}{Hardware Components}{subsection.7.3}% 55
+\BOOKMARK [3][-]{subsubsection.7.3.3}{XAPI}{subsection.7.3}% 56
+\BOOKMARK [2][-]{subsection.7.4}{Graphical User Interface Design}{section.7}% 57
+\BOOKMARK [1][-]{section*.4}{Appendices}{}% 58
+\BOOKMARK [1][-]{appendix.A}{Miscellaneous UML Charts}{}% 59
+\BOOKMARK [1][-]{appendix.B}{ATMEL\251 Microcontrollers}{}% 60
+\BOOKMARK [1][-]{appendix.C}{Technical Drawings}{}% 61
